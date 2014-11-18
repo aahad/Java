@@ -1,0 +1,131 @@
+
+// This is the help file of DemoApplet class which involves demonstrating GUI + EVENT HANDLING
+// mechanism. It will give you the basic idea that how can you code this application. Good luck!   
+/* <applet code="DemoApplet" width=250 height=300>
+   </applet>
+*/
+
+
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+
+interface IGeometryConstants {
+    /* in this interface we will define integar values for square, circle & ellipse. Then we
+       will define an array of shapenames. Similarly we will define int values for small, 
+       medium and large, and then declare it's respective array. 
+    int SQUARE  = 0;
+    int CIRCLE  = 1;
+    int ELLIPSE = 2;
+    String[] shapeNames = {"Square", "Circle", "Ellipse"};
+
+    int SMALL  = 0;
+    int MEDIUM = 1;
+    int LARGE  = 2;
+    String[] sizeNames = {"Small", "Medium", "Large"};
+}
+
+public class DemoApplet extends Applet implements IGeometryConstants {
+
+    // Panel for shape. Here we just declare their references
+        Panel         shapePanel;
+        CheckboxGroup shapeCBG;
+        Checkbox      squareCB;
+        Checkbox      circleCB;
+        Checkbox      ellipseCB;
+
+    // Panel for x,y coordinates. Here we just declare their references
+    // Panel for size and fill
+    // Panel for shape, coordinates, size and fill. Here we just declare their references 
+    // Panel for Message display, draw button and canvas but just their references.
+    
+
+    public void init() {
+
+        makeShapePanel();
+        makeXYPanel();
+        makeSizePanel();
+        makeLeftPanel();
+        makeRightPanel();
+
+        addListeners();
+
+        add(leftPanel);
+        add(rightPanel);
+
+    }
+
+    // Panel for shape
+    void makeShapePanel() {
+        // here i am giving you the implementation of this method only
+        shapePanel = new Panel();
+
+        shapeCBG   = new CheckboxGroup();
+
+        squareCB   = new Checkbox(shapeNames[SQUARE],  shapeCBG, true);
+        circleCB   = new Checkbox(shapeNames[CIRCLE],  shapeCBG, false);
+        ellipseCB  = new Checkbox(shapeNames[ELLIPSE], shapeCBG, false);
+
+        shapePanel.setLayout(new FlowLayout());
+        shapePanel.add(squareCB);
+        shapePanel.add(circleCB);
+        shapePanel.add(ellipseCB);
+    }
+
+    // Panel for x,y coordinates
+    void makeXYPanel() {
+     // implement this method by yourself       
+     }
+
+    // Panel for size and fill
+    void makeSizePanel() {
+    // implement this method by yourself 
+    }
+
+    // Panel for shape, coordinates, size and fill
+    void makeLeftPanel() {
+            
+    }
+
+    // Panel for Message display, draw button, and canvas
+    void makeRightPanel() {
+        
+     }
+
+    // Add the listeners.
+    void addListeners() { 
+                // implement this method by yourself       
+                        
+
+                // Get the coordinates                                
+                
+                // Get the size                                       
+                // Get & Check for legal integer value in the text field
+                // Draw the figure with given parameteres 
+            
+
+/** Canvas for doing the drawing */
+class DrawRegion extends Canvas implements IGeometryConstants {    
+
+    // Values needed for drawing the shape
+        public DrawRegion() {
+        setSize(150,150);
+        setBackground(Color.white);
+    }
+
+    // Set the values and repaint the drawing region.
+    
+    // Do the drawing of the shape
+    public void paint(Graphics g) {                                
+
+        switch (shape) {
+            case SQUARE:
+                
+            case CIRCLE:
+                
+            case ELLIPSE:
+                
+        }
+    }
+}

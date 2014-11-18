@@ -1,0 +1,284 @@
+listing 1
+// Demonstrate StringTokenizer.
+import java.util.StringTokenizer;
+
+class STDemo {
+  static String in = "title=Java: The Complete Reference;" +
+    "author=Naughton and Schildt;" +
+    "publisher=Osborne/McGraw-Hill;" +
+    "copyright=1999";
+
+  public static void main(String args[]) {
+    StringTokenizer st = new StringTokenizer(in, "=;");
+
+    while(st.hasMoreTokens()) {
+      String key = st.nextToken();
+      String val = st.nextToken();
+      System.out.println(key + "\t" + val);
+    }
+  }
+}
+
+listing 2
+// BitSet Demonstration.
+import java.util.BitSet;
+
+class BitSetDemo {
+  public static void main(String args[]) {
+    BitSet bits1 = new BitSet(16);
+    BitSet bits2 = new BitSet(16);
+
+    // set some bits
+    for(int i=0; i<16; i++) {
+      if((i%2) == 0) bits1.set(i);
+      if((i%5) != 0) bits2.set(i);
+    }
+
+    System.out.println("Initial pattern in bits1: ");
+    System.out.println(bits1);
+    System.out.println("\nInitial pattern in bits2: ");
+    System.out.println(bits2);
+
+    // AND bits
+    bits2.and(bits1);
+    System.out.println("\nbits2 AND bits1: ");
+    System.out.println(bits2);
+
+    // OR bits
+    bits2.or(bits1);
+    System.out.println("\nbits2 OR bits1: ");
+    System.out.println(bits2);
+
+    // XOR bits
+    bits2.xor(bits1);
+    System.out.println("\nbits2 XOR bits1: ");
+    System.out.println(bits2);
+  }
+}
+
+listing 3
+// Show date and time using only Date methods.
+import java.util.Date;
+
+class DateDemo {
+  public static void main(String args[]) {
+    // Instantiate a Date object
+    Date date = new Date();
+    
+    // display time and date using toString()
+    System.out.println(date);
+
+    // Display number of milliseconds since midnight, January 1, 1970 GMT
+    long msec = date.getTime();
+    System.out.println("Milliseconds since Jan. 1, 1970 GMT = " + msec);
+  }
+}
+
+listing 4
+// Demonstrate Calendar
+import java.util.Calendar;
+
+class CalendarDemo {
+  public static void main(String args[]) {
+    String months[] = {
+             "Jan", "Feb", "Mar", "Apr", 
+             "May", "Jun", "Jul", "Aug",
+             "Sep", "Oct", "Nov", "Dec"};
+
+    // Create a calendar initialized with the
+    // current date and time in the default
+    // locale and timezone.
+    Calendar calendar = Calendar.getInstance();
+
+    // Display current time and date information.
+    System.out.print("Date: ");
+    System.out.print(months[calendar.get(Calendar.MONTH)]);
+    System.out.print(" " + calendar.get(Calendar.DATE) + " ");
+    System.out.println(calendar.get(Calendar.YEAR));
+
+    System.out.print("Time: ");
+    System.out.print(calendar.get(Calendar.HOUR) + ":");
+    System.out.print(calendar.get(Calendar.MINUTE) + ":");
+    System.out.println(calendar.get(Calendar.SECOND));
+
+    // Set the time and date information and display it.
+    calendar.set(Calendar.HOUR, 10);
+    calendar.set(Calendar.MINUTE, 29);
+    calendar.set(Calendar.SECOND, 22);
+
+    System.out.print("Updated time: ");
+    System.out.print(calendar.get(Calendar.HOUR) + ":");
+    System.out.print(calendar.get(Calendar.MINUTE) + ":");
+    System.out.println(calendar.get(Calendar.SECOND));
+  }
+}
+
+listing 5
+// Demonstrate GregorianCalendar
+import java.util.*;
+
+class GregorianCalendarDemo {
+  public static void main(String args[]) {
+    String months[] = {
+             "Jan", "Feb", "Mar", "Apr", 
+             "May", "Jun", "Jul", "Aug",
+             "Sep", "Oct", "Nov", "Dec"};
+    int year;
+
+    // Create a Gregorian calendar initialized 
+    // with the current date and time in the
+    // default locale and timezone.
+    GregorianCalendar gcalendar = new GregorianCalendar();
+
+    // Display current time and date information.
+    System.out.print("Date: ");
+    System.out.print(months[gcalendar.get(Calendar.MONTH)]);
+    System.out.print(" " + gcalendar.get(Calendar.DATE) + " ");
+    System.out.println(year = gcalendar.get(Calendar.YEAR));
+
+    System.out.print("Time: ");
+    System.out.print(gcalendar.get(Calendar.HOUR) + ":");
+    System.out.print(gcalendar.get(Calendar.MINUTE) + ":");
+    System.out.println(gcalendar.get(Calendar.SECOND));
+
+    // Test if the current year is a leap year
+    if(gcalendar.isLeapYear(year)) {
+      System.out.println("The current year is a leap year");
+    }
+    else {
+      System.out.println("The current year is not a leap year");
+    }
+  }
+}
+
+listing 6
+// Demonstrate random Gaussian values.
+import java.util.Random;
+
+class RandDemo {
+  public static void main(String args[]) {
+    Random r = new Random();
+    double val;
+    double sum = 0;
+    int bell[] = new int[10];
+
+    for(int i=0; i<100; i++) {
+      val = r.nextGaussian();
+      sum += val;
+      double t = -2;
+      for(int x=0; x<10; x++, t += 0.5)
+        if(val < t) {
+          bell[x]++;
+          break;
+        }
+    }
+    System.out.println("Average of values: " +
+                        (sum/100));
+
+    // display bell curve, sideways
+    for(int i=0; i<10; i++) {
+      for(int x=bell[i]; x>0; x--)
+        System.out.print("*");
+      System.out.println();
+    }
+  }
+}
+
+listing 7
+/* Demonstrate the Observable class and the
+   Observer interface.
+*/
+
+import java.util.*;
+
+// This is the observing class.
+class Watcher implements Observer {
+  public void update(Observable obj, Object arg) {
+    System.out.println("update() called, count is " +
+                       ((Integer)arg).intValue());
+  }
+}
+
+// This is the class being observed.
+class BeingWatched extends Observable {
+  void counter(int period) {
+    for( ; period >=0; period--) {
+      setChanged();
+      notifyObservers(new Integer(period));
+      try {
+        Thread.sleep(100);
+      } catch(InterruptedException e) {
+        System.out.println("Sleep interrupted");
+      }
+    }
+  }
+
+}
+
+class ObserverDemo {
+  public static void main(String args[]) {
+    BeingWatched observed = new BeingWatched();
+    Watcher observing = new Watcher();
+
+    /* Add the observing to the list of observers for
+       observed object.  */
+    observed.addObserver(observing);
+
+    observed.counter(10);
+  }
+}
+
+listing 8
+/* An object may be observed by two or more
+   observers.
+*/
+
+import java.util.*;
+
+// This is the first observing class.
+class Watcher1 implements Observer {
+  public void update(Observable obj, Object arg) {
+    System.out.println("update() called, count is " +
+                       ((Integer)arg).intValue());
+  }
+}
+
+// This is the second observing class.
+class Watcher2 implements Observer {
+  public void update(Observable obj, Object arg) {
+    // Ring bell when done
+    if(((Integer)arg).intValue() == 0)
+      System.out.println("Done" + '\7');
+  }
+}
+
+// This is the class being observed.
+class BeingWatched extends Observable {
+  void counter(int period) {
+    for( ; period >=0; period--) {
+      setChanged();
+      notifyObservers(new Integer(period));
+      try {
+        Thread.sleep(100);
+      } catch(InterruptedException e) {
+        System.out.println("Sleep interrupted");
+      }
+    }
+  }
+}
+
+class TwoObservers {
+  public static void main(String args[]) {
+    BeingWatched observed = new BeingWatched();
+    Watcher1 observing1 = new Watcher1();
+    Watcher2 observing2 = new Watcher2();
+
+    // add both observers
+    observed.addObserver(observing1);
+    observed.addObserver(observing2);
+
+    observed.counter(10);
+  }
+}
+
+

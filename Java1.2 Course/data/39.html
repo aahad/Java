@@ -1,0 +1,247 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 39</h2>
+
+<h3>Thursday, June 14th, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Designing Beans: </b>
+
+Bean is serializable and has set and get methods.
+
+* Introspection
+* Component Design Patterns
+* Beans Design Patterns
+
+Properties of Beans:
+1) Simple
+   Design Patterns:
+    public T getN();
+    public void setN(T arg);
+    N --> name of property
+    T --> type of property
+    Example:
+    *********	N --> Text
+    * Text  *	T --> String
+    *********	bb.setText("Push me");  <-- setting label of a button bb
+
+2) boolean
+   Design Patterns:
+    public boolean isN();
+    public boolean getN();
+    public void setN(boolean value);
+    N --> Name of property
+    T --> Type of property
+    eg. setState() and getState() for checkbox
+
+3) Indexed
+   Design Patterns:
+    public T getN(int index);
+    public void setN(int index, T value);
+    public T[] getN();
+    public void setN(T values[]);
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Compiling a Bean: </b>
+
+Example:
+<i>// A simple Bean.
+package minepack;
+import java.awt.*;
+import java.awt.event.*;
+public class Colors extends Canvas {
+  transient private Color color;  // cannot be serialized, cannot go on an output stream
+  private boolean rectangular;  // adds rectangular to the properties palette in Beans
+  public Colors() {
+    addMouseListener(new MouseAdapter() {
+      public void mousePressed(MouseEvent me) {
+        change();
+      }
+    });
+    rectangular = false;
+    setSize(200, 100);
+    change();
+  }
+  public boolean getRectangular() {
+    return rectangular;
+  }
+  public void setRectangular(boolean flag) {
+    this.rectangular = flag;
+    repaint();
+  }
+  public void change() {
+    color = randomColor();
+    repaint();
+  }
+  private Color randomColor() {
+    int r = (int)(255*Math.random());
+    int g = (int)(255*Math.random());
+    int b = (int)(255*Math.random());
+    return new Color(r, g, b);
+  }
+  public void paint(Graphics g) {
+    Dimension d = getSize();
+    int h = d.height;
+    int w = d.width;
+    g.setColor(color);
+    if(rectangular) {
+      g.fillRect(0, 0, w-1, h-1);
+    }
+    else {
+      g.fillOval(0, 0, w-1, h-1);
+    }
+  }
+}</i>
+
+
+Type the following at the dos prompt:
+javac -d . Colors.java   <-- this creates a folder named minepack with the compiled files
+
+Following is the code for the manifest file Colors.tmp for the above code:
+<i>Main.class: minepack.Colors
+Name: minepack/Colors.class
+Java-Bean: True
+</i>
+
+NOTE:
+* .mft is also used for the extension of a manifest file
+* You will use multiple "Name: ...." lines to specify paths to other files, eg. images folder
+* The manifest file has to be saved in the same folder as the manipack folder, NOT INSIDE THE
+  minepack FOLDER.
+
+Use the following command to create the jar file:
+jar cfm colors.jar Colors.tmp minepack\*.*
+c --> create
+f --> file
+m --> manifest
+
+You will now get the file Colors.jar, this file can be loaded into the Beanbox and used.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>jar command: </b>
+
+Usage: jar {ctxu}[vfm0M] [jar-file] [manifest-file] [-C dir] files ...
+Options:
+    -c  create new archive
+    -t  list table of contents for archive
+    -x  extract named (or all) files from archive
+    -u  update existing archive
+    -v  generate verbose output on standard output
+    -f  specify archive file name
+    -m  include manifest information from specified manifest file
+    -0  store only; use no ZIP compression
+    -M  do not create a manifest file for the entries
+    -i  generate index information for the specified jar files
+    -C  change to the specified directory and include the following file
+If any file is a directory then it is processed recursively.
+The manifest file name and the archive file name needs to be specified
+in the same order the 'm' and 'f' flags are specified.
+
+Example 1: to archive two class files into an archive called classes.jar:
+       jar cvf classes.jar Foo.class Bar.class
+Example 2: use an existing manifest file 'mymanifest' and archive all the
+           files in the foo/ directory into 'classes.jar':
+       jar cvfm classes.jar mymanifest -C foo/ .
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Beaninfo file: </b>
+
+This file specifys the properties a developer wants the user to see.
+
+The following methods exist by default in Beaninfo:
+* PropertyDescriptor[] getPropertyDescriptors()
+* EventSetDescriptor[] getEventSetDescriptors()
+* MethodDescriptor[] getMethodDescriptors()
+
+eg. PropertyDescriptor(String property, class beanclass)
+
+Example:
+The info file for the bean file we used in the above example, Colors.class, will 
+be as follows:
+<i>// A Bean information class.
+package minepack;
+import java.beans.*;
+public class ColorsBeanInfo extends SimpleBeanInfo { // SimpleBeanInfo described in java.beans
+  public PropertyDescriptor[] getPropertyDescriptors() {
+    try {
+      PropertyDescriptor rectangular = new
+         PropertyDescriptor("rectangular", Colors.class);
+      PropertyDescriptor pd[] = {rectangular};
+      return pd;
+    }
+    catch(Exception e) {
+    }
+    return null;
+  }
+}</i>
+
+Now create a new manifest file with the following code:
+<i>Main.class: minepack.Colors
+Name: minepack/ColorsBeanInfo.class
+Name: minepack/Colors.class
+Java-Bean: True
+</i>
+
+Now run the following commands:
+javac -d . Colors.java 
+javac -d . ColorsBeanInfo.java 
+jar cfm colors.jar Colors.tmp minepack\*.*
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

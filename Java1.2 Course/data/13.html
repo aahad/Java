@@ -1,0 +1,324 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 13</h2>
+
+<h3>Thursday, March 29th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>throw keyword: </b>
+
+NOTE: This is not the same as throws.
+
+Used to be able to use am exception for controlling the program flow. For Example
+if you asked the user to enter an alphabetic value but he enters a numeric value.
+Using exceptions you can now tell the program to print an error message and ask for
+input again.
+
+ArithmeticException e = new ArithmeticException("myexec");
+throw e;
+
+A better way to throw an exception is:
+throw new ArithmeticException();  <-- This creates and throws the exception 
+
+printStackTrace();
+
+
+Example1:
+<i>class ThrowDemo {
+  static void demoproc() {
+    try {
+      throw new NullPointerException("demo");
+    } catch(NullPointerException e) {
+      System.out.println("Caught inside demoproc.");
+      throw e; // re-throw the exception
+    }
+  }
+
+  public static void main(String args[]) {
+    try {
+      demoproc();
+    } catch(NullPointerException e) {
+      System.out.println("Recaught: " + e);
+    }
+  }
+}</i>
+
+Output1:
+Caught inside demoproc.
+Recaught: java.lang.NullPointerException: demo
+
+
+Example2:
+<i>class temp {
+  static void demoproc() {
+    try {
+      throw new NullPointerException("demo");
+    } catch(NullPointerException e) {
+      System.out.println("Caught inside demoproc.");
+//      throw e; // re-throw the exception
+      throw new ArithmeticException();
+    }
+//    System.out.println("Back in demoproc");
+  }
+
+  public static void main(String args[]) {
+    try {
+      demoproc();
+
+    } catch(ArithmeticException e) {
+      System.out.println("Recaught: " + e);
+    }
+  }
+}</i>
+
+Output2:
+Caught inside demoproc.
+Recaught: java.lang.ArithmeticException
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>throws keyword: </b>
+
+modifier returntype methodname(arguments) throws exceptions {
+	-------------
+	-------------  <-- Method body
+}
+
+The programmer of a method writes what exceptions will be thrown by his method.
+So now it is up to you to prepare for the exceptions if you are using this method.
+
+
+Example1:
+<i>class ThrowsDemo {
+  static void throwOne() throws IllegalAccessException {
+    System.out.println("Inside throwOne.");
+    throw new IllegalAccessException("demo");
+  }
+  public static void main(String args[]) {
+    try {
+      throwOne();
+    } catch (IllegalAccessException e) {
+      System.out.println("Caught " + e);
+    }
+  }
+}</i>
+
+Output1:
+Inside throwOne.
+Caught java.lang.IllegalAccessException: demo
+
+Lets say that the throwOne method was programmed by someone else, and you want 
+to use it in your class. If you are calling it from your main method and you see
+that this method will throw the IllegalAccessException, you will have to put the
+method call for throwOne in a try/catch block and will have to define the 
+IllegalAccessException catch body here.
+
+NOTE: If throws is specified, whether the exception occurs or not, you will be
+forced to define a catch body for it.
+
+
+Example2:
+<i>class temp {
+  static void throwOne() { 		// throws is not defined
+    System.out.println("Inside throwOne.");
+    throw new IllegalAccessException("demo");
+  }
+  public static void main(String args[]) {
+    try {
+      throwOne();
+    } catch (IllegalAccessException e) {
+      System.out.println("Caught " + e);
+    }
+  }
+}</i>
+
+Output2:
+temp.java:4: unreported exception java.lang.IllegalAccessException; must be caught 
+or declared to be thrown
+    throw new IllegalAccessException("demo");
+    ^
+temp.java:9: exception java.lang.IllegalAccessException is never thrown in body
+of corresponding try statement
+    } catch (IllegalAccessException e) {
+      ^
+2 errors
+
+Therefore, if you use the throw keyword, you HAVE TO DEFINE a catch block for the
+exception within the same method. 
+
+To fix the above problem (without using throws) you will have to define a try/catch
+block in the throwOne method as follows:
+
+<i>class temp {
+  static void throwOne() {
+    System.out.println("Inside throwOne.");
+    try {
+      throw new IllegalAccessException("thrown in throwOne");
+    } catch (IllegalAccessException e) {
+      System.out.println("Caught in throwOne " + e);
+    }
+  }
+  public static void main(String args[]) {
+    try {
+      throwOne();
+      throw new IllegalAccessException("thrown in main");
+    } catch (IllegalAccessException e) {
+      System.out.println("Caught in main " + e);
+    }
+  }
+}</i>
+
+Output:
+Inside throwOne.
+Caught in throwOne java.lang.IllegalAccessException: thrown in throwOne
+Caught in main java.lang.IllegalAccessException: thrown in main
+
+
+NOTE: You can also just give a catch block for the parent class of the exception
+being generated:
+<i>class temp {
+  static void throwOne() throws ArithmeticException {
+    System.out.println("Inside throwOne.");
+    throw new ArithmeticException("demo");
+  }
+  public static void main(String args[]) {
+    try {
+      throwOne();
+    } catch (Exception e) {	   // Exception is the parent class of all exceptions
+      System.out.println("Caught " + e);
+    }
+  }
+}</i>
+
+Output:
+Inside throwOne.
+Caught java.lang.ArithmeticException: demo
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>finally keyword: </b>
+
+When something has to be executed whether there is an exception or not, we use 
+the keyword finally to describe these commands. finally is an optional keyword.
+A try block requires either a catch or finally block.
+
+try {
+   -----
+   -----
+} catch (----) {
+   -----
+   -----
+} finally {
+   -----
+   -----
+}
+
+Even when the try/catch block is nested, just keep one thing in mind. No matter
+what happens, when the cursor is leaving the inner-most try/catch/finally block,
+its local finally block will run first.
+
+try {
+   -----
+   -----
+   try {
+      -----
+      -----
+   } catch (----) {
+      -----
+      -----
+   } finally { // this will run first
+      -----
+      -----
+   }
+} catch (----) {
+   -----
+   -----
+} finally { // this will run after
+   -----
+   -----
+}
+
+
+Finally cannot run in a couple of cases only:
+* exception is thrown in finally using try/catch block
+* System.exit is called before finally
+* computer (or process) shuts down pre-maturely
+
+
+Example1:
+<i>class FinallyDemo {
+  // Through an exception out of the method.
+  static void procA() {
+    try {
+      System.out.println("inside procA");
+      throw new RuntimeException("demo");
+    } finally {
+      System.out.println("procA's finally");
+    }
+  }
+
+  // Return from within a try block.
+  static void procB() {
+    try {
+      System.out.println("inside procB");
+      return;
+      // System.out.println("this is NOT printed, compile error, but finally still runs");
+    } finally {
+      System.out.println("procB's finally");
+    }
+  }
+
+  // Execute a try block normally.
+  static void procC() {
+    try {
+      System.out.println("inside procC");
+    } finally {
+      System.out.println("procC's finally");
+    }
+  }
+
+  public static void main(String args[]) {
+    try {
+      procA();
+    } catch (Exception e) {
+      System.out.println("Exception caught");
+    }
+    procB();
+    procC();
+  }
+}</i>
+
+Output1:
+inside procA
+procA's finally
+Exception caught
+inside procB
+procB's finally
+inside procC
+procC's finally
+
+</pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 24</h2>
+
+<h3>Thursday, April 26th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>String and StringBuffer: </b>
+
+Strings are usually defined as arrays in other languages, but in Java it is a
+separate entity by itself, with its own methods.
+
+String 		<-- These are fixed or non-changable
+StringBuffer 	<-- immutable, This is used when you want to change the value
+
+Example:
+String ss = new String("abc"); <-- Now you cannot change the value of ss.
+char[] ch = {'a', 'b', 'c'};
+String ss2 = new String(ch);  <-- moving char into String, ie. "abc"
+String ss3 = new String(ch, 0, 2); <-- "ab", ie. start at array element # 0, # of elements is 2
+String ss4 = new String(ch, 1, 2); <-- "bc"
+byte[] bb = {65, 66, 67, 68};
+String ss5 = new String(bb); <-- "ABCD", ie. 65, 66, 67, 68 are considered ascii
+String ss6 = new String(bb, 1, 3); <-- "BCD"
+String ss6 = ss6 + "EF";  <-- new object created and now ss6 is "BCDEF"
+String ss7 = "abc" + "de";  <-- "abcde"
+String ss8 = "abc" + 24;  <-- this will call the Integer class which will turn 24 to String
+			      Thus it will become "abc24"
+
+You can define the toString() method in your program instead of using the default constructor
+defined in the Object class. Example:
+public String toString() {
+	String ss = "The toSTring method has been called");
+	return ss;
+}
+
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>String methods: </b>
+
+Most of the methods in the String class are non-static. charAt() is also non-static.
+
+<b>char charAt(int index) </b>
+String ss = "abc";
+char cc = ss.charAt(1);  <-- this makes cc 'b', ie. element 1 of ss
+
+<b>void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin)</b>
+String ss = "Aamir Saleem";
+char[] cc;
+ss.getChars(0, 5, cc, 2);
+
+<b>byte[] getBytes() </b>
+Convert this String into bytes according to the platform's default character encoding, 
+storing the result into a new byte array.
+
+<b>boolean equals(Object anObject) </b>
+Compares the data within the object, instead of the Object address as in obj1==obj2
+String ss = "Amin";
+String ss2 = "Amin";
+boolean bb1 = (ss==ss2);   <-- this returns false, because the addresses are different
+boolean bb2 = ss.equals(ss2);  <-- this will return true
+
+NOTE: For Object comparisons using the Object equals() method and using the equality ==
+operator is the same. It will just check if the references are pointing to the same
+address.
+
+
+<b>boolean equalsIgnoreCase(String anotherString) </b>
+To ignore the case of the value.
+String ss = "Amin";
+boolean bb1 = ss.equals("aMiN");  <-- this returns false, different case
+boolean bb2 = ss.equalsIgnoreCase("aMiN"); <-- This will return true
+
+<b>boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len) </b>
+Tests if two string regions are equal. A region is </pre>
+<table border=1 width=250>
+<tr><td>A</td><td>s</td><td>i</td><td>f</td><td>&nbsp</td><td>A</td><td>m</td><td>a</td><td>n</td></tr>
+<tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+</table>
+<pre>String st1 = "Asif Ahmed";
+String st2 = "Asif";
+st1.regionMathes(0, st2, 0, 4);
+
+Example1:
+st1 = "Jehanzeb moIN Abdul";
+st2 = "Moin";
+st1.regionMatches(true, 9, st2, 0, 4);
+
+
+<b>boolean startsWith(String prefix, int toffset) </b>
+Tests if this string starts with the specified prefix beginning a specified index.
+st1 = "Foobar"
+st1.startsWith("Foo")
+st1.startsWith("oba", 2)
+
+<b>boolean endsWith(String suffix) </b>
+Tests if this string ends with the specified suffix.
+st1 = "foobar"
+st1.endsWith("bar")
+
+<b>int indexOf() - overloaded</b>
+Returns the index within this string of the first occurrence of the specified character.
+Returns location of argument.
+st1 = "It is the table"
+st2 = "the"
+int i1 = st1.indexOf(st2);  <-- this will return 6
+
+Other overloaded versions are:
+int indexOf(int ch) 
+int indexOf(int ch, int fromIndex) 
+int indexOf(String str) 
+int indexOf(String str, int fromIndex) 
+
+
+<b>int lastIndexOf() - overloaded</b>
+Returns the index within this string of the last occurrence of the specified character.
+Returns location of argument counting from the end.
+st1 = "It is the table"
+st2 = "the"
+int i1 = st1.lastIndexOf(st2);  <-- this will return 6
+
+Other overloaded versions are:
+int lastIndexOf(int ch) 
+int lastIndexOf(int ch, int fromIndex) 
+int lastIndexOf(String str) 
+int lastIndexOf(String str, int fromIndex) 
+
+NOTE: If either one of the above 2 returns -1, it means that "the" does not exist in st1.
+
+</pre>
+
+</body>
+</html>

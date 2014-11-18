@@ -1,0 +1,137 @@
+class A {
+  int i, j;
+
+  A(int a, int b) {
+    i = a;
+    j = b;
+  }
+
+  // display i and j
+  void show() {
+    System.out.println("i and j: " + i + " " + j);
+  }
+}
+
+// Create a subclass by extending class A.
+class B extends A {
+  int k;
+
+  B(int a, int b, int c) {
+    super(a, b);
+    k = c;
+  }
+
+  // overload show()
+  void show(String msg) {
+    System.out.println(msg + k);
+  }
+}
+  
+class Override {
+  public static void main(String args[]) {
+    B subOb = new B(1, 2, 3);
+
+    subOb.show("This is k: "); // this calls show() in B
+    subOb.show(); // this calls show() in A
+  }
+}
+
+listing 16
+// Dynamic Method Dispatch
+class A {
+   void callme() {
+     System.out.println("Inside A's callme method");
+  }
+}
+
+class B extends A {
+  // override callme()
+  void callme() {
+    System.out.println("Inside B's callme method");
+  }
+}
+
+class C extends A {
+  // override callme()
+  void callme() {
+    System.out.println("Inside C's callme method");
+  }
+}
+
+class Dispatch {
+  public static void main(String args[]) {
+    A a = new A(); // object of type A
+    B b = new B(); // object of type B
+    C c = new C(); // object of type C
+    A r; // obtain a reference of type A    
+
+    r = a; // r refers to an A object
+    r.callme(); // calls A's version of callme
+
+    r = b; // r refers to a B object
+    r.callme(); // calls B's version of callme
+
+    r = c; // r refers to a C object
+    r.callme(); // calls C's version of callme
+  }
+}
+
+listing 17
+// Using run-time polymorphism.
+class Figure {
+  double dim1;
+  double dim2; 
+
+  Figure(double a, double b) {
+    dim1 = a;
+    dim2 = b;
+  }
+
+  double area() {
+    System.out.println("Area for Figure is undefined.");
+    return 0;
+  }
+}
+
+class Rectangle extends Figure {
+  Rectangle(double a, double b) {
+    super(a, b);
+  }
+
+  // override area for rectangle
+  double area() {
+    System.out.println("Inside Area for Rectangle.");
+    return dim1 * dim2;
+  }
+}
+
+class Triangle extends Figure {
+  Triangle(double a, double b) {
+    super(a, b);
+  }
+
+  // override area for right triangle
+  double area() {
+    System.out.println("Inside Area for Triangle.");
+    return dim1 * dim2 / 2;
+  }
+}
+
+class FindAreas {
+  public static void main(String args[]) {
+    Figure f = new Figure(10, 10);
+    Rectangle r = new Rectangle(9, 5);
+    Triangle t = new Triangle(10, 8);
+    
+    Figure figref;
+
+    figref = r;
+    System.out.println("Area is " + figref.area());
+    
+    figref = t;
+    System.out.println("Area is " + figref.area());
+    
+    figref = f;
+    System.out.println("Area is " + figref.area());
+  }
+}

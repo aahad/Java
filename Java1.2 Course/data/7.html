@@ -1,0 +1,231 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 7</h2>
+
+<h3>Tuesday, March 13th, 2001</h3>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>method: </b>
+
+They are defined in a class 
+
+
+ ______________method signature_________
+|					|
+|					|
+modifier returntype methodname(arguments) throws exceptions {
+	-------------
+	-------------  <-- Method body
+}
+
+
+Example:
+public static void main(String args[])  {  }
+
+void <-- means that nothing will be returned
+
+Constructor never returns anything.
+
+NOTE: Main method is static because
+1) non-static requires an object to work
+2) since there is no object creation before the main method, if the main
+   method were non-static, there would be no way to use it.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Creating an Object: </b>
+
+Syntax:
+ClassName ObjectName = new ClassName();
+
+ClassName() <---- creates a parameter-less constructor 
+
+An Object can be used to call a non-static (and static) method from a static method.
+By itself a static method (eg. the main method) cannot call a non-static method.
+
+You can multiple objects in the same class, calling the same method.
+
+Example:
+<i>class temp {
+
+ public static void main(String args[]) {
+   temp obj1 = new temp(); // creating object with the class temp reference
+   obj1.method1(); // calling non-static using obj1 from static
+   obj1.method3(); // calling non-static using obj1 which in turn calls method1
+
+   method2(); // calling static method2 from static main
+   temp.method2(); // calling method2 using class temp reference
+   obj1.method2(); // calling method2 using object obj1 reference
+
+   temp obj2 = new temp(); // creating a second object
+   obj2.method1(); // calling non-static using obj2 from static
+   obj2.method3(); // calling non-static using obj2 which in turn calls method1
+   obj2.method2(); // calling method2 using object obj2 reference
+ }
+
+ void method1(){
+   System.out.println("This is Method 1 which is a non-static method");
+   System.out.println("To call non-static method from static, we used an object");
+ }
+
+ static void method2(){
+   System.out.println("This is Method 2 which is a static method");
+ }
+
+ void method3(){
+   method1(); // Calling non-static from non-static
+   this.method1(); // calling method1 using 'this' keyword
+   method2(); // Calling static from non-static
+   this.method2(); // calling method2 using 'this' keyword
+ }
+
+ static void method4(){
+   // obj1 and obj2 are defined only for the main method
+   temp obj3 = new temp(); // creating new object because cannot use obj1 or obj2
+   obj3.method1(); // calling non-static from static using obj1 defined in main
+   // NOTE: we could have used obj1 or obj2 instead of obj3
+
+   method2(); // Calling static from static
+   temp.method2(); // calling method2 using class temp reference
+   obj3.method2(); // calling method2 using object obj3 reference
+ }
+
+}</i>
+
+
+Output:
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 1 which is a non-static method
+To call non-static method from static, we used an object
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+This is Method 2 which is a static method
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>method arguments: </b>
+
+ie. passing values to a method
+
+Example:
+<i>class temp{
+
+ public static void main(String [] argu){
+	int i = 10;
+	int j = 20;
+
+	temp d1 = new temp();
+	d1.method1(i,j);
+
+	System.out.println("Value of i is " + i);
+	System.out.println("Value of j is " + j);
+ }
+
+ void method1(int a, int b){
+	a++;
+	b++;
+	System.out.println("value of a is " + a);
+	System.out.println("Value of b is " + b);
+ }
+
+}</i>
+
+
+Output:
+value of a is 11
+Value of b is 21
+Value of i is 10
+Value of j is 20
+
+
+Example2:
+<i>class PassedValue {
+ public static void main(String args[]) {
+  int i = 100;
+  modifyMethod(i);
+  System.out.println(i);
+ }
+ static void modifyMethod(int i) {
+  i = i * 2;
+ }
+}</i>
+
+Output:
+100
+
+
+Example3:
+<i>// Simple Types are passed by value.
+class Test {
+  void meth(int i, int j) {
+    i *= 2;
+    j /= 2;
+
+    System.out.println("Value of i is " + i);
+    System.out.println("Value of j is " + j);
+  }
+}
+
+class CallByValue {
+  public static void main(String args[]) {
+    Test ob = new Test();
+    int a = 15, b = 20;
+    
+    System.out.println("a and b before call: " +
+                       a + " " + b);
+
+    ob.meth(a, b); 
+
+    System.out.println("a and b after call: " +
+                       a + " " + b);
+  }
+}</i>
+
+Output:
+a and b before call: 15 20
+Value of i is 30
+Value of j is 10
+a and b after call: 15 20
+
+
+</pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 29</h2>
+
+<h3>Thursday, May 10th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+<b>
+     Component  -----> button, label, textfield, textArea
+	 |
+     Container
+     /	    \
+  Window   Panel
+   /	      \
+Frame	     Applet </b>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Label class: </b>
+
+public class Label extends Component
+
+Its a passive class, it does not generate an event
+
+3 constructors:
+Label()
+Label(String text) 
+Label(String text, int alignment) 
+
+eg. Label("name", Label.CENTER);
+
+ 
+void addNotify() 
+Creates the peer for this label. 
+
+int getAlignment() 
+Gets the current alignment of this label. 
+
+String getText() 
+Gets the text of this label. 
+
+protected  String paramString() 
+Returns the parameter string representing the state of this label. 
+
+void setAlignment(int alignment) 
+Sets the alignment for this label to the specified alignment. 
+
+void setText(String text) 
+Sets the text for this label to the specified text. 
+
+
+Example1:
+<i>// Demonstrate Labels
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="LabelDemo" width=300 height=200&gt
+&lt/applet&gt
+*/
+
+public class LabelDemo extends Applet {
+  public void init() {
+    Label one = new Label("One");
+    Label two = new Label("Two");
+    Label three = new Label("Three");
+
+    // add labels to applet window
+    add(one);
+    add(two);
+    add(three);
+  }
+}</i>
+
+Output1:
+<applet code="LabelDemo" width=300 height=50></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Button Class: </b>
+
+public class Button extends Component
+
+Contructors:
+Button() 
+Button(String label) 
+
+Example:
+Button bt = new Button("label");
+bt.addActionListener(this);           
+
+
+getLabel() 
+Gets the label of this button.
+
+getActionCommand() 
+Returns the command name of the action event fired by this button.
+
+NOTE: When Action command is not defined, the label is automatically assigned to it.
+
+
+Example1:
+<i>// Demonstrate Buttons 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="ButtonDemo" width=250 height=150&gt
+  &lt/applet&gt
+*/
+
+public class ButtonDemo extends Applet implements ActionListener {
+  String msg = "";
+  Button yes, no, maybe;
+
+  public void init() {
+    yes = new Button("Yes");
+    no = new Button("No");
+    maybe = new Button("Undecided");
+
+    add(yes);
+    add(no);
+    add(maybe);
+
+    yes.addActionListener(this);
+    no.addActionListener(this);
+    maybe.addActionListener(this);
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    String str = ae.getActionCommand();
+    if(str.equals("Yes")) {
+      msg = "You pressed Yes.";
+    }
+    else if(str.equals("No")) {
+      msg = "You pressed No.";
+    }
+    else {
+      msg = "You pressed Undecided.";
+    }
+    repaint();
+  }
+
+  public void paint(Graphics g) {
+     g.drawString(msg, 6, 100);
+  }
+}</i>
+
+Output:
+<applet code="ButtonDemo" width=250 height=150></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Checkbox Class: </b>
+
+java.lang.Object
+  |
+  +--java.awt.Component
+        |
+        +--java.awt.Checkbox
+
+public class Checkbox extends Component implements ItemSelectable
+
+<img src=images/29_1.gif>
+
+NOTE: Radio Buttons are just grouped checkboxes
+
+
+Example:
+<i>// Demonstrate check boxes. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="CheckboxDemo" width=250 height=200&gt
+  &lt/applet&gt
+*/
+
+public class CheckboxDemo extends Applet implements ItemListener {
+  String msg = "";
+  Checkbox Win98, winNT, solaris, mac;
+
+  public void init() {
+    Win98 = new Checkbox("Windows 98", null, true);
+    winNT = new Checkbox("Windows NT");
+    solaris = new Checkbox("Solaris");
+    mac = new Checkbox("MacOS");
+
+    add(Win98);
+    add(winNT);
+    add(solaris);
+    add(mac);
+
+    Win98.addItemListener(this);
+    winNT.addItemListener(this);
+    solaris.addItemListener(this);
+    mac.addItemListener(this);
+  }
+
+  public void itemStateChanged(ItemEvent ie) {
+    repaint();
+  }
+
+  // Display current state of the check boxes.
+  public void paint(Graphics g) {
+    msg = "Current state: ";
+    g.drawString(msg, 6, 80);
+    msg = "  Windows 98: " + Win98.getState();
+    g.drawString(msg, 6, 100);
+    msg = "  Windows NT: " + winNT.getState();
+    g.drawString(msg, 6, 120);
+    msg = "  Solaris: " + solaris.getState();
+    g.drawString(msg, 6, 140);
+    msg = "  MacOS: " + mac.getState();
+    g.drawString(msg, 6, 160);
+  }
+}</i>
+
+Output:
+<applet code="CheckboxDemo" width=250 height=200></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Radio buttons - CheckboxGroup class: </b>
+
+Example:
+<i>// Demonstrate check box group. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="CBGroup" width=500 height=110&gt
+  &lt/applet&gt
+*/
+
+public class CBGroup extends Applet implements ItemListener {
+  String msg = "";
+  Checkbox Win98, winNT, solaris, mac;
+  CheckboxGroup cbg;
+
+  public void init() {
+    cbg = new CheckboxGroup();
+    Win98 = new Checkbox("Windows 98", cbg, true);
+    winNT = new Checkbox("Windows NT", cbg, false);
+    solaris = new Checkbox("Solaris", cbg, false);
+    mac = new Checkbox("MacOS", cbg, false);
+
+    add(Win98);
+    add(winNT);
+    add(solaris);
+    add(mac);
+
+    Win98.addItemListener(this);
+    winNT.addItemListener(this);
+    solaris.addItemListener(this);
+    mac.addItemListener(this);
+  }
+
+  public void itemStateChanged(ItemEvent ie) {
+    repaint();
+  }
+
+  // Display current state of the check boxes.
+  public void paint(Graphics g) {
+    msg = "Current selection: ";
+    msg += cbg.getSelectedCheckbox().getLabel();
+    g.drawString(msg, 6, 100);
+  }
+}</i>
+
+Output:
+<applet code="CBGroup" width=500 height=110></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Choice class: </b>
+
+Like a drop down menu, does not allow multiple selections
+
+<img src=images/29_2.gif>
+
+In a drop down menu you have more than one options to choose from. Here each one
+of the items in the menu has an index value associated with it in interger format.
+
+
+void add(String item) 
+Adds an item to this Choice menu. 
+
+void addItemListener(ItemListener l) 
+Adds the specified item listener to receive item events from this Choice menu. 
+
+String getItem(int index) 
+Gets the string at the specified index in this Choice menu. 
+
+int getSelectedIndex() 
+Returns the index of the currently selected item. 
+
+String getSelectedItem() 
+Gets a representation of the current choice as a string. 
+
+Object[] getSelectedObjects() 
+Returns an array (length 1) containing the currently selected item. 
+
+void insert(String item, int index) 
+Inserts the item into this choice at the specified position. 
+
+void select(String str) 
+Sets the selected item in this Choice menu to be the item whose name is equal to the 
+specified string. 
+
+
+Example:
+<i>// Demonstrate Choice lists. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="ChoiceDemo" width=300 height=180&gt
+  &lt/applet&gt
+*/
+
+public class ChoiceDemo extends Applet implements ItemListener {
+  Choice os, browser;
+  String msg = "";
+
+  public void init() {
+    os = new Choice();
+    browser = new Choice();
+
+    // add items to os list
+    os.add("Windows 98");
+    os.add("Windows NT");
+    os.add("Solaris");
+    os.add("MacOS");
+
+    // add items to browser list
+    browser.add("Netscape 1.1");
+    browser.add("Netscape 2.x");
+    browser.add("Netscape 3.x");
+    browser.add("Netscape 4.x");
+
+    browser.add("Internet Explorer 2.0");
+    browser.add("Internet Explorer 3.0");
+    browser.add("Internet Explorer 4.0");
+
+    browser.add("Lynx 2.4");
+
+    browser.select("Netscape 4.x");
+
+    // add choice lists to window
+    add(os);
+    add(browser);
+
+    // register to receive item events
+    os.addItemListener(this);
+    browser.addItemListener(this);
+  }
+
+  public void itemStateChanged(ItemEvent ie) {
+    repaint();
+  }
+
+  // Display current selections.
+  public void paint(Graphics g) {
+    msg = "Current OS: ";
+    msg += os.getSelectedItem();
+    g.drawString(msg, 6, 120);
+    msg = "Current Browser: ";
+    msg += browser.getSelectedItem();
+    g.drawString(msg, 6, 140);
+  }
+}</i>
+
+Output:
+<applet code="ChoiceDemo" width=300 height=180></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+</body>
+</html>

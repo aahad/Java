@@ -1,0 +1,311 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 10</h2>
+
+<h3>Thursday, March 22nd, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Selection & iteration statements: </b>
+
+*************************************
+Selection Statements: 
+If, If-else, switch, ternary operators
+
+*************************************
+Iteration statements (loops): 
+for, while, do while
+
+  Basic Loop structure:
+
+	Initialize the counter
+	   
+	test the counter?
+	
+	 If yes then:
+	  Execute loop body
+	  change counter
+	  return to test
+
+	 If no then:
+	  end
+
+*************************************
+Jumping: 
+break, continue
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Selection - if-else statement/ladder: </b>
+
+if (boolean condition) {  	<--- If the condition is true
+	--------
+	--------
+}
+else if (boolean condition) {  	<--- This is called an if-else ladder
+	---------
+	---------
+}
+else {
+	---------
+	---------
+}
+
+
+NOTE: The braces are not needed but should be used as it is a convention
+eg. if (a>5)
+	System.out.println("a is greater than 5");
+
+Example:
+<i>// Demonstrate if-else-if statements.
+class IfElse {
+  public static void main(String args[]) {
+    int month = 4; // April
+    String season;
+
+    if(month == 12 || month == 1 || month == 2) 
+      season = "Winter";
+    else if(month == 3 || month == 4 || month == 5)
+      season = "Spring";
+    else if(month == 6 || month == 7 || month == 8)
+      season = "Summer";
+    else if(month == 9 || month == 10 || month == 11)
+      season = "Autumn";
+    else 
+      season = "Bogus Month";
+
+    System.out.println("April is in the " + season + ".");
+  }
+}</i>
+
+Output:
+April is in the Spring.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Selection - Case-Switch: </b>
+
+switch (int arg) {
+	case arg1: {  	<--- If arg = arg1 then this runs
+	 -----
+	}
+	case arg2: {
+	 -----
+	}
+	default: {
+	 -----
+	}
+}
+
+
+NOTE: 'arg' cannot be String, double. 'arg' has to be int.
+(Something to do with automatic promotion)
+
+Problems:
+lets say that arg=arg1, the body for arg1 will be executed and then
+also the arg2 and default bodies (or if there is any other case) 
+will be executed. You will need to write break; at the end of the 
+case definition.
+
+Also you can only compare variables like 'if arg1=arg2' and never 
+'if arg1>arg2'
+
+
+Example:
+<i>// An improved version of the season program.
+class Switch {
+    public static void main(String args[]) {
+        int month = 4;
+        String season;
+        switch (month) {
+          case 12: 
+          case 1: 
+          case 2:{  // same body for case 12, 1, 2
+            season = "Winter";
+            break;
+	  }
+          case 3: 
+          case 4: 
+          case 5: // will run without braces
+            season = "Spring";
+            break; // Without this break, season will end up being summer
+          case 6: 
+          case 7: 
+          case 8:
+            season = "Summer";
+            break;
+          case 9: 
+          case 10: 
+          case 11:
+            season = "Autumn";
+            break;
+          default:
+            season = "Bogus Month";
+        }
+        System.out.println("April is in the " + season + ".");
+    }
+}</i>
+
+Output:
+April is in the Spring.
+
+NOTE: If you have duplicate cases, eg. 'case 2:' and then again 'case 2:'
+then you will get the error 'Switch.java:10: duplicate case label'
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Iteration (loop) - while: </b>
+
+int i = 1; // Initialization
+while (i<10) { // Condition
+  ------
+  ------
+  i++; // Iteration
+}
+
+
+Example:
+<i>// Demonstrate the while loop.
+class While {
+  public static void main(String args[]) {
+    int n = 10;
+
+    while(n > 0) {
+      System.out.println("tick " + n);
+      n--;
+    }
+  }
+}</i>
+
+Output:
+tick 10
+tick 9
+tick 8
+tick 7
+tick 6
+tick 5
+tick 4
+tick 3
+tick 2
+tick 1
+
+
+Example2:
+int i = 1;
+int j = 10;
+
+while ( i++ < j-- ) {
+  ------
+  ------ // no iteration within body
+}
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Iterations - do-while loops : </b>
+
+Syntax:
+do {
+  -----  <--- body of loop, WILL RUN AT LEAST ONCE
+  -----
+} while (boolean condition);
+
+NOTE: Since the body is described before the condition, the body of the
+do loop will run at least once. In a while loop, condition is checked 
+first and then the body is executed.
+
+
+int i = 10;
+do {
+  -----
+  -----
+} while (i-- > 0);
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Iterations - for loops: </b>
+
+Syntax:
+for ( initial_state; boolean_condition; iteration) {
+  -----
+  -----
+}
+
+
+Example:
+for (int i=0; i<10; i++) {
+  -----
+}
+NOTE: In the above example i is only defined for the duration of the loop.
+
+
+int i;
+for (i=0; i<10; i++) {
+  -----
+}
+NOTE: Now i can be used outside the loop as well
+
+
+for (int i=0, j=10; i>10; i++, j--) {
+  -----
+}
+NOTE: Initializing 2 variables in the same loop.
+
+
+Example:
+<i>// Test for primes.
+class FindPrime {
+  public static void main(String args[]) {
+    int num;
+    boolean isPrime = true;
+
+    num = 14;
+    for(int i=2; i < num/2; i++) {
+      if((num % i) == 0) {
+        isPrime = false;
+        break;
+      }
+    }
+    if(isPrime) System.out.println("Prime");
+    else System.out.println("Not Prime");
+  }
+}</i>
+
+Output:
+Not Prime
+</pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 16</h2>
+
+<h3>Saturday, April 7th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Casting: </b>
+
+<b>Example1:
+		Object
+		  |
+		  |
+		Fruit
+		  |
+		  |
+		Citrus
+	implements squeezable
+	      /	  |   \
+	     /	  |    \
+	 lemon Tangelo  Grapefruit
+</b>
+<i>class fruit {}
+class citrus extends fruit implements squeezable {}
+interface squeezable {}
+
+class lemon extends citrus {}
+class tangelo extends citrus {}
+class grapefruit extends citrus {}
+
+public class temp {
+  public static void main (String [] args) {
+	grapefruit g1, g;
+	citrus c;
+	tangelo tang;
+	g = new grapefruit();
+	c = g;
+	g1 = (grapefruit)c;  // casting of parent into child
+	tang = (tangelo)c; // this causes error at runtime
+  }
+}</i>
+
+<b>Output1</b> - occurs at runtime, compiles without error:
+Exception in thread "main" java.lang.ClassCastException: grapefruit
+        at temp.main(temp.java:17)
+
+NOTE: Since c is pointing to grapefruit. When you write tang = (tangelo)c; 
+you are trying to force c to make tang to point to tangelo which is not
+possible. This is over-seen by 
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>extends vs implements: </b>
+
+extends is more powerful than implements. Even in the previous example, you can
+say that fruit deserves to be a more parent class than squeezable. BUt we can 
+also say that both can be the parent of citrus. But since Java does not allow
+multiple parents, we choose between the two and make fruit (which seems to be 
+more powerful parent) the parent and squeezable the interface.
+
+For defining multiple interfaces you can define it as:
+... implements squeezable, squishable ...
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Casting to fool compiler: </b>
+
+Example1:
+<i>class fruit {}
+class citrus extends fruit implements squeezable {}
+interface squeezable {}
+
+class lemon extends citrus {}
+class tangelo extends citrus {}
+class grapefruit extends citrus {}
+
+public class temp {
+  public static void main (String [] args) {
+	grapefruit g1, g;
+	squeezable sq;
+	g = new grapefruit(); // g was initialized
+	sq = g; // Base class for sq is now grapefruit but compiler does not notice
+	g1 = (grapefruit)sq; // casting is only needed to fool compiler
+	/* This casting is not needed for runtime, but since compiler
+	   will not run without it, we don't have a choice. The 	   
+	   compiler looks at the line squeezable sq; and gets confused.	*/
+  }
+}
+</i>
+
+This program runs perfectly without errors.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Garbage Collection: </b>
+
+GarbageCollector (GC) controls memory allocation. 
+
+Thread is an object created by the OS. It is created to do a particular task.
+A couple of threads work together to perform a bigger task.
+
+Java assigns priority to every thread created. Priority can be minimum, normal
+or maximum. We will talk about this later when studying threads.
+
+When we run a Java program, the main thread is created. The main thread is 
+what imports default and user-defined packages. The main method then creates
+a Garbage Collector. Garbage Collector has minimum priority whereas the main
+method has normal priority.
+
+Garbage collector is created automatically, it works by itself. We cannot control
+it, it does what it wants to, or at least what it is supposed to do. 
+
+NOTE: The 2 threads that are created automatically whenever a Java program is 
+executed are the main thread and the garbage collector thread. Both these 
+threads work assyncronously (not meaning that they work together but that they
+work according to a fixed and dedined pattern).
+
+The garbage collector monitors objects in use. It indicates which objects are not
+in use. If the object cannot prove the validity of its use in the program, the
+garbage collector thinks that the object is just taking up resources for no reason.
+Then the GC destroys the object using it finalize method. Although thi smight mean
+that it is important for every class then to have a finalize method but this is not
+the case. The finalize method is defined for the base class Object, which is used
+by the GC to destroy the object.
+
+<img src=images/16_1.gif>
+
+When the object is no longer reachable from the rest of your program, the GC 
+destroys the object from memory.
+
+NOTE: Please understand that <b>THE OBJECT IS DESTROYED</b>, not the reference. The
+reference may be shifted to another object. 
+
+The method that initializes the GC thread is:
+java.lang.System.gc();
+
+class decription
+class loader
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 14</h2>
+
+<h3>Saturday, March 31st, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>unchecked and checked exceptions: </b>
+
+Errors caused due to JVM problems cannot be controlled by programmer.
+These are called unchecked exceptions. These are outside the control
+of the programmer.
+
+Checked exceptions are ones that a programmer can control.
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Our first complex Java Program: </b>
+
+This program shows usage of user-defined exceptions, taking input from user,
+System.out.flush
+
+Input from users is a three step process:
+1. taking low-level input stream (System.in) 
+2. giving it to a filter (InputStreamReader) 
+3. passing it on to the high-level stream BufferedReader which saves into kbd.
+
+<i>import java.io.*;
+
+public class ExceptionTest {
+ public static void main(String args[]) {
+  boolean finished = false;
+  do {
+   try {
+    processUserInput();
+   }catch (VowelException x) {
+    System.out.println("A vowel exception occurred.");
+   }catch (BlankException x) {
+    System.out.println("A blank exception occurred.");
+   }catch (ExitException x) {
+    System.out.println("An exit exception occurred.");
+    finished = true;
+   }finally {
+    System.out.println("This is the finally clause.\n");
+   }
+  } while(!finished);
+ }
+ static void processUserInput() throws VowelException, BlankException,
+   ExitException {
+  System.out.print("Enter a character: ");
+  System.out.flush();  // flushes memory
+  char ch;
+  try {
+   BufferedReader kbd = 
+    new BufferedReader(new InputStreamReader(System.in));
+   String line = kbd.readLine();
+   if(line.length() == 0) ch = ' ';
+   else ch=Character.toUpperCase(line.charAt(0));
+  } catch (IOException x) {
+   System.out.println("An IOException occurred.");
+   return;
+  }
+  switch(ch) {
+   case 'A':
+   case 'E':
+   case 'I':
+   case 'O':
+   case 'U':
+    throw new VowelException();
+   case ' ':
+    throw new BlankException();
+   case 'X':
+    throw new ExitException();
+  }
+ }
+}
+class VowelException extends Exception {}
+class BlankException extends Exception {}
+class ExitException extends Exception {}
+</i>
+
+<b>Output:</b>
+<i>Enter a character: a
+A vowel exception occurred.
+This is the finally clause.
+
+Enter a character: b
+This is the finally clause.
+
+Enter a character: c
+This is the finally clause.
+
+Enter a character: i
+A vowel exception occurred.
+This is the finally clause.
+
+Enter a character:
+A blank exception occurred.
+This is the finally clause.
+
+Enter a character: x
+An exit exception occurred.
+This is the finally clause.
+
+</i>
+
+
+This program asks for input, and keeps looping until user enters x or X.
+Entering A, E, I, O, U will cause the user-defined VowelException exception.
+Entering ' ' ie a blank will cause the user-defined BlankException exception.
+Entering X will cause the user-defined ExitException exception which exits the program.
+
+Entering either small a, e, i, o, u, x does not matter either because the 
+program uses toUpperCase method in the Character Wrapper class to convert
+all input to its upper case.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Conversion and Casting: </b>
+
+In primitives when you move one primitive type into another, if it happens automatically
+then it is called conversion, and if programmer has to force it then it is called 
+casting.
+
+byte --> short --> int --> long --> float --> double
+		    /\
+		    ||
+		   char 
+
+long is 64 bit and float is 32 bit but the conversion is possible because of the higher 
+priority of float due to its precision.
+
+boolean cannot be converted or casted.
+
+Example1:
+<i>byte b = 10;
+short s = 20;
+method(b, s);
+
+void method (int i, int j) {  <--- b, s are implicitly converted to integers
+  ----
+  ----
+}</i>
+
+
+</pre>
+
+
+</body>
+</html>

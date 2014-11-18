@@ -1,0 +1,241 @@
+listing 11
+// Use left-aligned flow layout. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  <applet code="FlowLayoutDemo" width=250 height=200>
+  </applet>
+*/
+
+public class FlowLayoutDemo extends Applet
+  implements ItemListener {
+
+  String msg = "";
+  Checkbox Win98, winNT, solaris, mac;
+
+  public void init() {
+    // set left-aligned flow layout
+    setLayout(new FlowLayout(FlowLayout.LEFT));
+
+    Win98 = new Checkbox("Windows 98", null, true);
+    winNT = new Checkbox("Windows NT");
+    solaris = new Checkbox("Solaris");
+    mac = new Checkbox("MacOS");
+
+    add(Win98);
+    add(winNT);
+    add(solaris);
+    add(mac);
+
+    // register to receive item events
+    Win98.addItemListener(this);
+    winNT.addItemListener(this);
+    solaris.addItemListener(this);
+    mac.addItemListener(this);
+  }
+
+  // Repaint when status of a check box changes.
+  public void itemStateChanged(ItemEvent ie) {
+    repaint();
+  }
+
+  // Display current state of the checkboxes.
+  public void paint(Graphics g) {
+    msg = "Current state: ";
+    g.drawString(msg, 6, 80);
+    msg = "  Windows 98: " + Win98.getState();
+    g.drawString(msg, 6, 100);
+    msg = "  Windows NT: " + winNT.getState();
+    g.drawString(msg, 6, 120);
+    msg = "  Solaris: " + solaris.getState();
+    g.drawString(msg, 6, 140);
+    msg = "  Mac: " + mac.getState();
+    g.drawString(msg, 6, 160);
+  }
+}
+
+listing 12
+// Demonstrate BorderLayout.
+import java.awt.*;
+import java.applet.*;
+import java.util.*;
+/*
+<applet code="BorderLayoutDemo" width=400 height=200>
+</applet>
+*/
+
+public class BorderLayoutDemo extends Applet {
+  public void init() {
+    setLayout(new BorderLayout());
+
+    add(new Button("This is across the top."),
+        BorderLayout.NORTH);
+    add(new Label("The footer message might go here."),
+        BorderLayout.SOUTH);
+    add(new Button("Right"), BorderLayout.EAST);
+    add(new Button("Left"), BorderLayout.WEST);
+
+    String msg = "The reasonable man adapts " +
+      "himself to the world;\n" +
+      "the unreasonable one persists in " +
+      "trying to adapt the world to himself.\n" +
+      "Therefore all progress depends " +
+      "on the unreasonable man.\n\n" +
+      "        - George Bernard Shaw\n\n";
+
+    add(new TextArea(msg), BorderLayout.CENTER);
+  }
+}
+
+
+listing 13
+// Demonstrate BorderLayout with insets. 
+import java.awt.*;
+import java.applet.*;
+import java.util.*;
+/*
+<applet code="InsetsDemo" width=400 height=200>
+</applet>
+*/
+
+public class InsetsDemo extends Applet {
+  public void init() {
+    // set background color so insets can be easily seen
+    setBackground(Color.cyan);
+
+    setLayout(new BorderLayout());
+
+    add(new Button("This is across the top."),
+        BorderLayout.NORTH);
+    add(new Label("The footer message might go here."),
+        BorderLayout.SOUTH);
+    add(new Button("Right"), BorderLayout.EAST);
+    add(new Button("Left"), BorderLayout.WEST);
+
+    String msg = "The reasonable man adapts " +
+      "himself to the world;\n" +
+      "the unreasonable one persists in " +
+      "trying to adapt the world to himself.\n" +
+      "Therefore all progress depends " +
+      "on the unreasonable man.\n\n" +
+      "        - George Bernard Shaw\n\n";
+
+    add(new TextArea(msg), BorderLayout.CENTER);
+  }
+
+  // add insets
+  public Insets getInsets() {
+    return new Insets(10, 10, 10, 10);
+  }
+}
+
+listing 14
+// Demonstrate GridLayout
+import java.awt.*;
+import java.applet.*;
+/*
+<applet code="GridLayoutDemo" width=300 height=200>
+</applet>
+*/
+
+public class GridLayoutDemo extends Applet {
+  static final int n = 4;
+  public void init() {
+    setLayout(new GridLayout(n, n));
+
+    setFont(new Font("SansSerif", Font.BOLD, 24));
+
+    for(int i = 0; i < n; i++) {
+      for(int j = 0; j < n; j++) {
+        int k = i * n + j;
+        if(k > 0)
+          add(new Button("" + k));
+      }
+    }
+  }
+}
+
+listing 15
+// Demonstrate CardLayout. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  <applet code="CardLayoutDemo" width=300 height=100>
+  </applet>
+*/
+
+public class CardLayoutDemo extends Applet
+  implements ActionListener, MouseListener {
+
+  Checkbox Win98, winNT, solaris, mac;
+  Panel osCards;
+  CardLayout cardLO;
+  Button Win, Other;
+
+  public void init() {
+    Win = new Button("Windows");
+    Other = new Button("Other");
+    add(Win);
+    add(Other);
+
+    cardLO = new CardLayout();
+    osCards = new Panel();
+    osCards.setLayout(cardLO); // set panel layout to card layout
+
+    Win98 = new Checkbox("Windows 98", null, true);
+    winNT = new Checkbox("Windows NT");
+    solaris = new Checkbox("Solaris");
+    mac = new Checkbox("MacOS");
+
+    // add Windows check boxes to a panel
+    Panel winPan = new Panel();
+    winPan.add(Win98);
+    winPan.add(winNT);
+
+    // Add other OS check boxes to a panel
+    Panel otherPan = new Panel();
+    otherPan.add(solaris);
+    otherPan.add(mac);
+
+    // add panels to card deck panel
+    osCards.add(winPan, "Windows");
+    osCards.add(otherPan, "Other");
+
+    // add cards to main applet panel
+    add(osCards);
+
+    // register to receive action events
+    Win.addActionListener(this);
+    Other.addActionListener(this);
+
+    // register mouse events
+    addMouseListener(this);
+  }
+
+  // Cycle through panels.
+  public void mousePressed(MouseEvent me) {
+    cardLO.next(osCards);
+  }
+
+  // Provide empty implementations for the other MouseListener methods.
+  public void mouseClicked(MouseEvent me) {
+  }
+  public void mouseEntered(MouseEvent me) {
+  }
+  public void mouseExited(MouseEvent me) {
+  }
+  public void mouseReleased(MouseEvent me) {
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    if(ae.getSource() == Win) {
+      cardLO.show(osCards, "Windows");
+    }
+    else {
+      cardLO.show(osCards, "Other");
+    }
+  }
+}
+

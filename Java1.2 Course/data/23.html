@@ -1,0 +1,120 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 23</h2>
+
+<h3>Tuesday, April 24th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Wrapper Classes: </b>
+
+Classes used to convert primitives into Objects.
+
+<b>Primitives	Wrappers</b>
+----------------------------
+boolean		Boolean
+char		Character
+----------------------------
+byte		Byte
+short		Short
+int		Integer		<---- Extends Number class
+double		Double
+float		Float
+----------------------------
+
+Lets look at the API for the Integer class:
+/DOCS/API/java/lang/Integer.html
+
+Integer extends the abstract class Number, therefore you will find the bodies for 
+all of the Number abstract classes here. 
+
+Example:
+Integer intobj1 = new Integer("100");  	<-- creates an Integer object "100"
+int ival = intobj1.intValue();		<-- creates int using Integer method intValue()
+Integer intobj2 = new Integer("200");
+int icom = intobj1.compareTo(intobj2);  <-- returns +1 if 1>2, 0 if 1=2, -1 if 1<2
+
+NOTE:
+intobj1 <-- is the invoking object
+intobj2 <-- is the argument object
+
+To use a static method of a class you will have to use its reference to use the method, 
+ie. abs() is a static method for the Math class, to use it you will have to write Math.abs()
+
+
+Example2:
+<i>import java.io.*;
+
+class ParseDemo {
+  public static void main(String args[]) 
+    throws IOException
+  {
+    // create a BufferedReader using System.in
+    BufferedReader br = new
+      BufferedReader(new InputStreamReader(System.in));
+    String str;
+    int i;
+    int sum=0;
+    
+    System.out.println("Enter numbers, 0 to quit.");
+    do {
+      str = br.readLine();
+      try {
+        i = Integer.parseInt(str);
+      } catch(NumberFormatException e) {
+        System.out.println("Invalid format");
+        i = 0;
+      }
+      sum += i;
+      System.out.println("Current sum is: " + sum);
+    } while(i != 0);
+  }
+}</i>
+
+Output:
+Enter numbers, 0 to quit.
+3
+Current sum is: 3
+5
+Current sum is: 8
+0.0
+Invalid format
+Current sum is: 8
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Math Class: </b>
+
+Object, Thread, System, Math, String, StringBuffer classes are very important
+for the SCJP Certification Exam.
+
+* Math class has no constructor.
+* It is a final class, ie. it can have no child
+
+Its API is at: /DOCS/API/JAVA/LANG/Math.html
+
+NOTE: For the trignometric funstions, angles have to be in radians.
+Therefore, cos45<sup>o</sup> will be written as cos(Math.PI/4.0)
+
+Use toDegrees() and toRadians for converting from one form to another.
+
+round() returns long or int
+rint() also rounds a double, but returns a double value. 
+
+</pre>
+
+</body>
+</html>

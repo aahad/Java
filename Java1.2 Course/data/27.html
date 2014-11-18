@@ -1,0 +1,275 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 27</h2>
+
+<h3>Saturday, May 5th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Applet threads: </b>
+
+Inside JVM: On SUn's site, read this to find the internal workings of JVM
+
+In an applet program, we have not called any of the methods defined, yet they run.
+An applet does not create a main or GC thread. It creates a GUI thread which calls
+the init() method first and then the paint() method is called.
+
+An applet refreshes every 0.1 seconds. The paint method is activated every time the applet
+refreshes itself. This is called spontaneous printing.
+
+If we want to control the print() method rather than the applet calling it automatically,
+we cannot do that. Instead we call the repaint() method which in turn calls the paint()
+method. repaint() belongs to AWT. We can also use update().
+
+Example1:
+<i>/* A simple banner applet.
+
+   This applet creates a thread that scrolls
+   the message contained in msg right to left
+   across the applet's window.
+*/
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="SimpleBanner" width=300 height=50&gt
+&lt/applet&gt
+*/
+
+public class SimpleBanner extends Applet implements Runnable {
+  String msg = " A Simple Moving Banner.";
+  Thread t = null;
+  int state;
+  boolean stopFlag;
+
+  // Set colors and initialize thread.
+  public void init() {
+    setBackground(Color.cyan);
+    setForeground(Color.red);
+  }
+
+  // Start thread
+  public void start() {
+    t = new Thread(this);
+    stopFlag = false;
+    t.start();
+  }
+
+  // Entry point for the thread that runs the banner.
+  public void run() {
+    char ch;
+
+    // Display banner 
+    for( ; ; ) {
+      try {
+        repaint();
+        Thread.sleep(250);
+        ch = msg.charAt(0);
+        msg = msg.substring(1, msg.length());
+        msg += ch;
+        if(stopFlag)
+          break;
+      } catch(InterruptedException e) {}
+    }
+  }
+
+  // Pause the banner.
+  public void stop() {
+    stopFlag = true;
+    t = null;
+  }
+
+  // Display the banner.
+  public void paint(Graphics g) {
+    g.drawString(msg, 50, 30);
+  }
+}</i>
+
+Output:
+<applet code="SimpleBanner" width=300 height=50></applet>
+
+NOTE: To print something in the browser window status bar use the showStatus() method.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Applet parameters: </b>
+
+&ltApplet
+  codebase = codebaseURL
+  code = appletfile 		<font color=red><-- required</font>
+  alt = alternate text
+  name = applet instance name
+  width = pixels		<font color=red><-- required</font>
+  height = pixels		<font color=red><-- required</font>
+  align = alignment
+  vspace = pixels
+  hspace = pixels
+&gt
+&ltparam name=attributeName value=attributeValue&gt
+&lt/applet&gt
+
+
+Example1:
+<i>// Use Parameters
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="ParamDemo" width=300 height=80&gt
+&ltparam name=fontName value=Courier&gt
+&ltparam name=fontSize value=14&gt
+&ltparam name=leading value=2&gt
+&ltparam name=accountEnabled value=true&gt
+&lt/applet&gt
+*/
+
+public class ParamDemo extends Applet{
+  String fontName;
+  int fontSize;
+  float leading;
+  boolean active;
+
+  // Initialize the string to be displayed.
+  public void start() {
+    String param;
+
+    fontName = getParameter("fontName");
+    if(fontName == null)
+      fontName = "Not Found";
+
+    param = getParameter("fontSize");
+    try {
+      if(param != null) // if not found
+        fontSize = Integer.parseInt(param);
+      else
+        fontSize = 0;
+    } catch(NumberFormatException e) {
+      fontSize = -1;
+    }
+
+    param = getParameter("leading");
+    try {
+      if(param != null) // if not found
+        leading = Float.valueOf(param).floatValue();
+      else
+        leading = 0;
+    } catch(NumberFormatException e) {
+      leading = -1;
+    }
+
+    param = getParameter("accountEnabled");
+    if(param != null)
+      active = Boolean.valueOf(param).booleanValue();
+  }
+
+  // Display parameters.
+  public void paint(Graphics g) {
+    g.drawString("Font name: " + fontName, 0, 10);
+    g.drawString("Font size: " + fontSize, 0, 26);
+    g.drawString("Leading: " + leading, 0, 42);
+    g.drawString("Account Active: " + active, 0, 58);
+  }
+}</i>
+
+Output:
+<applet code="ParamDemo" width=300 height=80>
+<param name=fontName value=Courier>
+<param name=fontSize value=14>
+<param name=leading value=2>
+<param name=accountEnabled value=true>
+</applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Event Handling: </b>
+
+* Source
+    what can produce an event. The attributes, properties or behavior of the source 
+    changes. Examples buttons, components. These are GUI components.
+
+* Event
+    The changes in the source produces an event. These are classes.
+    java.awt.event
+
+* Listener
+    To keep track of the events being generated, a listener pays attention to what 
+    is happening to the source. These are interfaces.
+
+
+Unicasting 	- When there is one listener watching one source only
+Multi-casting	- One listener, multiple sources
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Event Handling models: </b>
+
+Inheritance Model
+=================
+  For older versions of Java. AWT has a hirarchy model. The good thing is that if the
+  source itself handles the event, its all good. But if the source cannot handle 
+  its event it passes it to its parent, and then to its parent and so on until it is
+  handled. This wastes a lot of time.
+
+
+Delegation Model
+================
+  For Java 2 and later. When an event is handled, its base type is checked and then 
+  it is passed on to a handler that was specifically written to handle this type of
+  event.
+
+Example:
+If you have a problem with your eyes, you will not want to go to a physician, who
+will sends you to a therapist who send you to a dentist. If you aresmart you will 
+go directly to an eye specialist.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Using AWT: </b>
+
+Button bb = new Button("  blah  ");
+source.addXlistener(listener)
+
+class myApplet extends Applet implements ActionListener {
+   public void actionPerformed(ActionEvent e) {  <-- Invoked when an action occurs
+	----
+	----
+   }
+}
+
+
+Class ActionEvent
+java.lang.Object
+  |
+  +--java.util.EventObject
+        |
+        +--java.awt.AWTEvent
+              |
+              +--java.awt.event.ActionEvent
+
+
+</pre>
+
+</body>
+</html>

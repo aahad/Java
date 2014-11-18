@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 2</h2>
+
+
+<h3>Saturday, Feb 24th, 2001</h3>
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Primitives Types</b>
+
+Bit - its the minimum size used to store info
+
+Non-floating
+* byte 	- 8 bit, -128 to 127, ie. -2^7 to (2^7 -1)
+* short - 16 bit, -2^15 to (2^15 - 1)
+* int 	- 32 bit 
+* long 	- 64 bit
+
+Floating
+* float	- 32 bit
+* double - 64 bit
+
+Character
+* char - 16 bit, 0 to (2^16 - 1)
+
+Boolean
+* boolean - true or false 1 bit
+
+Normal numbers are BASE 10, ie 0, 1, 2 .... 9, 10, 11 ...... 20
+BASE 8 is 0, 1, 2 ...... 7, 11 .... 17
+In Java it is written as 'int i = 0144' 
+which is normally written as 144<sub>8</sub>
+
+BASE 16 is written as 0x150 or 0X150 ie 'zero x'
+336<sub>10</sub> is written as 150<sub>16</sub> in BASE 16
+This is used in graphics programming.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Comments</b>
+
+Single Line
+// __________________
+
+Multiple Line
+/* __________________
+___________________*/
+
+This creates an HTML document
+/** __________
+____________*/
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Basic Rules</b>
+
+Lines should end in ';'
+b = b * 2;
+
+Java names have to be Unicode
+Unicode is a 16 bit naming which can allow other laguages than english for programming
+
+Using $ in front of a variable is allowed, eg. $object but it is not recommended
+because when using classes within classes it can cause problems
+
+'-' are not allowed
+'_' are allowed, but cannot start name with it
+
+Identifier cannot be a keyword, 
+ie. Around 30 to 35  keywords that Java has reserved for itself
+Some keywords have been discarded, like goto, const but they 
+still cannot be used
+
+To concatenate 2 identifiers 
+System.out.print( ID1 + " " + ID2 );
+
+2 + 2 = 4
+2 + "2" = 22   <--- This is called Overloading
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Literals</b>
+
+Whenever a value is moved inside an Identifier, its called a Literal
+eg. int i = 2
+
+int ---- primitive type
+i ---- Identifier
+2 ---- Literal
+
+The way we interpret this is that 
+"the Literal 2 moves into the Identifier i", ie. 2 --> i
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Casting</b>
+
+<strike>float ff = 3.1676;</strike>
+double dd = 3.1676;
+3.1676 is read as a 64 bit number so you can't save it in a float
+To save it to a float use: float ff = 3.1676f;
+
+NOTE: Whenever you give a decimal value to JAVA it stores it as 64 bit
+      Now since float is 32 bit you can't save the decimal value to a float
+      So to save a decimal value to a float you have to use a CAST method
+      ie. typing an 'f' at the end of the word .... 3.1676f
+      This is called CASTING.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Character Literals</b>
+
+Syntax:
+char c = 'a';
+
+char c = 65;  <---- This will input the ASCII value of 65 (which is 'a') into c
+
+<i>class charnum {
+  public static void main(String args[]) {
+    char ch1 = 'a';
+    char ch2 = 'b';
+    char ch3 = (char)(ch1 + ch2);
+    System.out.print(ch3);
+  }
+}</i>
+
+This adds the ascii values of a & b and returns the character that denotes
+the ending ascii value.
+
+In JAVA there is no string variable type. A string is an object.
+Therefore there is no easy way to concatenate two character identifiers.
+
+
+<i>class charnum {
+  public static void main(String args[]) {
+    char ch1 = 'a';
+    char ch2 = 'b';
+    System.out.print(ch1 + ch2);
+  }
+}</i>
+
+This will return the ascii NUMBER value of ascii(a) + ascii(b)
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Escape Sequence</b>
+
+\t --- tab
+\d ---
+\u --- unicode
+\n --- new line also \R
+\f --- 
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Boolean Literals</b>
+
+Syntax:
+boolean tt = true;
+boolean ff = false;
+
+</pre>
+
+</body>
+</html>

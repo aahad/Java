@@ -1,0 +1,231 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 19</h2>
+
+<h3>Saturday, April 14th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Recursion: </b>
+
+A method calling itself, hence forming a loop, is known as recursion.
+
+Example1:
+<i>public class TestFibonacci {
+  public static void main(String[] args) {
+    System.out.println("Fibonacci number of index 7 is "+fib(7));
+  }
+  public static int fib(int n) {
+   if ((n == 1) || (n == 2))
+     return 1 ;
+   else 
+     return (fib(n-1) + fib(n-2)); 
+  }
+}</i>
+
+Output:
+Fibonacci number of index 7 is 13
+
+NOTE: Fibonacci is the name of a series which works as follows:
+f(n) = f(n-1) + f(n-2)
+ie. 1, 1, 2, 3, 5, 8, 13, 21
+f(1)=1, f(2)=1, f(3)=2, f(4)=3, f(5)=5, f(6)=8, f(7)=13
+
+The above program uses recursion to execute the series. fib() calls itself multiple
+times again and again until it reaches n=1 or n=2 where the return value is 1. This
+is known as the stopping condition.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Inner classes: </b>
+
+A class defined inside the scope of another class.
+
+class Outer{
+ public static void main(String[] args) {
+  Inner inner = new Inner();//line 1
+ }
+ class Inner {
+   Inner() {
+    System.out.println("Inside Inner class");
+   }
+ }
+}
+
+When you compile a program with 5 individual classes, 5 separate .class are formed.
+Each .class file is issued its own individual memory resource. But if you create 
+4 inner classes within a fifth class, 5 classes are generated, but when executed
+they will all use the same resource, ie. only one resource object is created.
+
+This is used usually in applets and event handling. Use in applets is understandable
+because the fewer classes there are to download, the easier it is for a web user.
+
+NOTE: Its legal to create an inner class within an already inner class, but it is 
+not good practice.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Types of Inner classes: </b>
+
+Non-static:
+Inner class that belongs to an object of the outer class
+
+Static:
+Inner class that belong directly to its outer class
+
+Local inner classes: 
+Defined within a method. Cannot be assigned static or non-static.
+Its just written as a regular class.
+
+Anonymous Inner Class:
+Inner classes with no names. These are generated at run-time. 
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Non-Static Inner Class: </b>
+
+Example:
+<i>class Outer {
+ public static void main(String[] args) {
+  Outer outer = new Outer();
+  Inner inner = outer.new Inner(); 
+  // inner class needs outer class object for creation, referred to as Outer$Inner.class
+ }
+ class Inner {
+   Inner() {
+    System.out.println("Inside Inner class");
+   }
+ }
+}</i>
+
+Output:
+Inside Inner class
+Inside Meth1
+Inside Meth2
+
+2 .class files are formed, Outer.class and Outer$Inner.class, but both use the same 
+memory resource.
+
+To create the Inner class object we can also use: 
+Inner inner = new Outer().new Inner();
+
+Also we can do the following:
+Outer() {
+ new Inner();
+}
+class Inner {
+ Inner() {
+  //
+  }
+}
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Static Inner classes: </b>
+
+Example:
+<i>class Outer {
+ public static void main(String[] args) {
+  Inner inner = new Inner(); // static creating static
+ }
+
+ static class Inner { // static object
+   Inner() {
+    System.out.println("Inside Inner class");
+    meth1(); // static calling static
+
+    Outer outer = new Outer(); // creating object for outer class
+    outer.meth2(); // object of outer class calling non-static of outer
+   }
+ }
+
+ static void meth1() {
+	System.out.println("Inside Meth1");
+ }
+
+ void meth2() {
+	System.out.println("Inside Meth2");
+ }
+
+}</i>
+
+Output:
+Inside Inner class
+Inside Meth1
+Inside Meth2
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Local Inner classes: </b>
+
+Inner class defined within a method. The scope of this class is as long as the method
+is running. It is niether static nor non-static.
+
+For a local class to read variable values from either its outer method or outer class,
+the variable must be defined as 'final'. Also if you are to call the constructor of 
+the local class, it can only be invoked after the local class has been identified. 
+If you tried to call the local class's constructor before its body is defined, it will 
+look for the class elsewhere.
+
+Example:
+<i>class Outer {
+ final static int i = 2;
+ public static void main(String[] args){
+  final String s = "some local string";
+
+  class Local {
+   Local() {
+    System.out.println(s);
+    System.out.println(i);
+   }
+  }
+
+  Local local = new Local();
+
+ }
+}</i>
+
+Output:
+some local string
+2
+
+2 files are created: Outer.class, Outer$1$Local.class
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,4145 @@
+
+Exam Results: 
+Date: Sat Jan 13 11:38:52 GMT+05:00 2001
+
+
+
+
+******** SUMMARY ********
+
+Score = 52%
+
+
+Sorry, you didn't achieve a pass grade - try again
+
+
+
+****************************************************
+
+Question #1  ****** CORRECT *****
+============
+
+True or False.
+
+A scrollbar will appear in a TextField if more text is typed than can be displayed within the TextField.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+False
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+False
+
+
+
+
+Explanation
+-------------------
+Only a TextArea has this property. TextFields do not display scroll bars.
+
+
+
+
+
+
+
+****************************************************
+
+Question #2  Incorrect
+============
+
+Which of the following classes override the equals() method.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+String
+
+
+
+Possible Answer 2:
+Integer
+
+
+
+Possible Answer 3:
+Double
+
+
+
+Possible Answer 4:
+Date
+
+
+
+Possible Answer 5:
+File
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+String
+
+
+Answer 2:
+Integer
+
+
+Answer 3:
+Double
+
+
+Answer 4:
+Date
+
+
+Answer 5:
+File
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+String
+
+
+Answer 2:
+Integer
+
+
+Answer 3:
+Double
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #3  ****** CORRECT *****
+============
+
+True or False.
+
+The StringBuffer class inherits from the String class.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+False
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+False
+
+
+
+
+Explanation
+-------------------
+Refer to JDK documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #4  Incorrect
+============
+
+Consider the following:
+
+class A extends Integer{
+     int x = 0;
+}
+
+Select all valid statements.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The code will compile correctly.
+
+
+
+Possible Answer 2:
+The code will not compile because Integer is final and cannot be subclassed.
+
+
+
+Possible Answer 3:
+The code will not compile because class A has no methods or constructor.
+
+
+
+Possible Answer 4:
+The code will compile correctly, but will throw an ArithmeticException at runtime.
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+The code will not compile because Integer is final and cannot be subclassed.
+
+
+
+Selected Answers...
+-------------------
+Answer 2:
+The code will not compile because Integer is final and cannot be subclassed.
+
+
+Answer 3:
+The code will not compile because class A has no methods or constructor.
+
+
+
+
+Explanation
+-------------------
+Answer 3 is incorrect. A class does not need a method or constructors to exist.
+
+Answer 4 is a meaningless comment.
+
+
+
+
+
+
+
+****************************************************
+
+Question #5  Incorrect
+============
+
+Which of the following are valid methods for the Math class.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+random()
+
+
+
+Possible Answer 2:
+Random()
+
+
+
+Possible Answer 3:
+toDegrees()
+
+
+
+Possible Answer 4:
+square()
+
+
+
+Possible Answer 5:
+sqr()
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+random()
+
+
+Answer 3:
+toDegrees()
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+random()
+
+
+Answer 3:
+toDegrees()
+
+
+Answer 4:
+square()
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK documentation.
+
+Random() is incorrect, because all methods begin with a lower case letter (standard style guide for Java programming).
+square() and sqr() do not exist, since the same functionality can be provided by pow().
+
+
+
+
+
+
+
+****************************************************
+
+Question #6  ****** CORRECT *****
+============
+
+Which of the following operations will cause an ActionEvent to be generated.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Clicking a checkbox.
+
+
+
+Possible Answer 2:
+Selecting an option from a Choice box.
+
+
+
+Possible Answer 3:
+Scrolling a scroll bar.
+
+
+
+Possible Answer 4:
+Clicking a button.
+
+
+
+Possible Answer 5:
+Hitting ENTER when typing in a text field.
+
+
+
+Correct Answers...
+-----------------
+Answer 4:
+Clicking a button.
+
+
+Answer 5:
+Hitting ENTER when typing in a text field.
+
+
+
+Selected Answers...
+-------------------
+Answer 4:
+Clicking a button.
+
+
+Answer 5:
+Hitting ENTER when typing in a text field.
+
+
+
+
+Explanation
+-------------------
+ActionEvents are generated when the user performs the following operations:
+
+- double-clicking a list item
+- selecting an menu item
+- pressing ENTER when typing in a text field
+- clicking on a button
+
+Therefore, Answers 4 and 5 are correct.
+
+Answer 1 and 2 are incorrect, because these operations generate an ItemEvent.
+
+Answer 3 is incorrect, because this operation generates an AdjustmentEvent.
+
+
+
+
+
+
+
+****************************************************
+
+Question #7  ****** CORRECT *****
+============
+
+Given an object myListener (whose class implements the ActionListener interface), which of the following are valid ways to enable myListener to receive all action events from component smallButton?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+smallButton.add(myListener);
+
+
+
+Possible Answer 2:
+smallButton.addListener(myListener);
+
+
+
+Possible Answer 3:
+smallButton.addActionListener(myListener);
+
+
+
+Possible Answer 4:
+smallButton.addItem(myListener);
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+smallButton.addActionListener(myListener);
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+smallButton.addActionListener(myListener);
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.  The standard way to add a listener is to call addXXXListener, where XXX is the type of listener (Mouse, Action, etc).
+
+
+
+
+
+
+
+****************************************************
+
+Question #8  ****** CORRECT *****
+============
+
+What is the output from the following piece of code:
+
+loop1:
+     for(int i = 0; i < 3; i++){
+         loop2:
+             for(int j = 0; j < 3; j++){
+                 if (i == j){
+                     break loop2;
+                 }
+                 System.out.print("i = " + i + " j = " + j + " ");
+             }
+     }
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+i = 1
+j = 0
+
+
+
+Possible Answer 2:
+i = 1
+j = 0
+i = 2
+j = 1
+
+
+
+Possible Answer 3:
+i = 0
+j = 1
+i = 0
+j = 2
+i = 1
+j = 0
+i = 2
+j = 0
+i = 2
+j = 1
+
+
+
+Possible Answer 4:
+i = 1
+j = 0
+i = 2
+j = 0
+i = 2
+j = 1
+
+
+
+Possible Answer 5:
+i = 1 j = 0 i = 2 j = 0 i = 2 j = 1
+
+
+
+Correct Answer...
+-----------------
+Answer 5:
+i = 1 j = 0 i = 2 j = 0 i = 2 j = 1
+
+
+
+Selected Answer...
+-------------------
+Answer 5:
+i = 1 j = 0 i = 2 j = 0 i = 2 j = 1
+
+
+
+
+Explanation
+-------------------
+The statement "break loop2;" causes the currently executing loop to terminate and control is passed back to the outer loop.
+
+Note that Answer 5 is correct, because the code for printing is:
+
+        System.out.print()
+
+rather than the more usual
+
+        System.out.println()
+
+In the real exam, be careful of this type of question, where the focus is on one area (the "break" statement in this case), but you incorrectly make assumptions about the remainder of the code segment!
+
+
+
+
+
+
+
+****************************************************
+
+Question #9  Incorrect
+============
+
+What is displayed when the following piece of code is executed:
+
+1. String val = null;
+2. int x = Integer.parseInt(val);
+3.
+4. System.out.println(x);
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+0
+
+
+
+Possible Answer 2:
+null
+
+
+
+Possible Answer 3:
+A NumberFormatException is thrown at line 2.
+
+
+
+Possible Answer 4:
+Nothing is displayed
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+A NumberFormatException is thrown at line 2.
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+null
+
+
+
+
+Explanation
+-------------------
+An exception is thrown because the string is null, and can therefore not be parsed into an integer.
+
+
+
+
+
+
+
+****************************************************
+
+Question #10  ****** CORRECT *****
+============
+
+True or False.
+
+The class String has a concat() method, while the StringBuffer class has an append() method.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Refer to JDK documentation
+
+
+
+
+
+
+
+****************************************************
+
+Question #11  ****** CORRECT *****
+============
+
+Which of the following statements are valid, given the following variable declarations:  boolean a; boolean b; int c;
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+(a | b)
+
+
+
+Possible Answer 2:
+(a || a)
+
+
+
+Possible Answer 3:
+(a ^ b) | c
+
+
+
+Possible Answer 4:
+(a & c)
+
+
+
+Possible Answer 5:
+(a && c)
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+(a | b)
+
+
+Answer 2:
+(a || a)
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+(a | b)
+
+
+Answer 2:
+(a || a)
+
+
+
+
+Explanation
+-------------------
+Answers 3, 4 and 5 are incorrect because these operations requires that an int (c) be converted to a boolean, or the boolean be converted to an int. Both of these conversions are illegal.
+
+
+
+
+
+
+
+****************************************************
+
+Question #12  Incorrect
+============
+
+Consider the following piece of code and select the correct statements.
+
+1.  public class Test{
+2.      public static void main(String [] args){
+3.          print();
+4.      }
+5.
+6.      public static void print(){
+7.         System.out.println("Test");
+8.      }
+9.
+10.     public void print(){
+11.         System.out.println("Another Test");
+12      }
+13. }
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The code compiles successfully and displays "Test".
+
+
+
+Possible Answer 2:
+Changing the code at line 10 to the following, will allow the code to compile correctly:  
+
+     public void print(int x){
+
+
+
+Possible Answer 3:
+The code fails to compile. The compiler complains about a static reference to a non-static method, print().
+
+
+
+Possible Answer 4:
+The code fails to compile. The compiler complains about duplicate methods.
+
+
+
+Possible Answer 5:
+Changing the return type on line 10 from 'void' to 'int' will allow the code to compile correctly.
+
+
+
+Correct Answers...
+-----------------
+Answer 2:
+Changing the code at line 10 to the following, will allow the code to compile correctly:  
+
+     public void print(int x){
+
+
+Answer 4:
+The code fails to compile. The compiler complains about duplicate methods.
+
+
+
+Selected Answers...
+-------------------
+Answer 3:
+The code fails to compile. The compiler complains about a static reference to a non-static method, print().
+
+
+Answer 4:
+The code fails to compile. The compiler complains about duplicate methods.
+
+
+
+
+Explanation
+-------------------
+The code appears to be attempting to overload the print() method.
+
+However, the only differentiating feature between the methods is the static keyword. This is insufficient for overloading.
+
+Therefore, 1 is incorrect because the code fails to compile due to duplicate methods.
+
+2 is correct because the methods are different overloaded versions of print().
+
+3 is incorrect because of 1 above.
+
+4 is correct.
+
+5 is incorrect because return parameters are not sufficient to differentiate overloaded methods.
+
+
+
+
+
+
+
+****************************************************
+
+Question #13  Incorrect
+============
+
+Which of the following are valid command line options for the JAR utility:
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+c (create a new or empty archive)
+
+
+
+Possible Answer 2:
+m (indicates that first argument is the name of a user-supplied manifest)
+
+
+
+Possible Answer 3:
+M (do not create a manifest)
+
+
+
+Possible Answer 4:
+z (ZIP the contents of the archive)
+
+
+
+Possible Answer 5:
+L (list the archive contents)
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+c (create a new or empty archive)
+
+
+Answer 2:
+m (indicates that first argument is the name of a user-supplied manifest)
+
+
+Answer 3:
+M (do not create a manifest)
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+c (create a new or empty archive)
+
+
+Answer 4:
+z (ZIP the contents of the archive)
+
+
+
+
+Explanation
+-------------------
+Refer to the Java documentation.
+
+I'm not 100% sure this type of stuff is on the exam syllabus, but there's no harm in being familiar with it!
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #14  Incorrect
+============
+
+Given the following definition:
+      String s = null;
+
+Which code fragment will cause an exception of type NullPointerException to be thrown.
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+if ((s != null) & (s.length()>0))
+
+
+
+Possible Answer 2:
+if ((s != null) && (s.length()>0))
+
+
+
+Possible Answer 3:
+if ((s != null) | (s.length()>0))
+
+
+
+Possible Answer 4:
+if ((s != null) || (s.length()>0))
+
+
+
+Possible Answer 5:
+None of the above.
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+if ((s != null) & (s.length()>0))
+
+
+Answer 2:
+if ((s != null) && (s.length()>0))
+
+
+Answer 3:
+if ((s != null) | (s.length()>0))
+
+
+Answer 4:
+if ((s != null) || (s.length()>0))
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+if ((s != null) & (s.length()>0))
+
+
+Answer 3:
+if ((s != null) | (s.length()>0))
+
+
+Answer 4:
+if ((s != null) || (s.length()>0))
+
+
+
+
+Explanation
+-------------------
+This question revolves around the short-circuit logical operators (at least some of it does!).
+
+For the following, LHS is left-hand side, RHS = right hand side.
+
+Answer 1 must be fully evaluated. The LHS is true and so the RHS needs to be evaluated to ensure the entire expression is true. This is an AND operation, and if the LHS is true, then the RHS must be evaluated for the expression to be true.
+
+Answer 2 is the same as above. Both sides need to be evaluated for an AND expression to be true (if the LHS is true, that is)..  
+
+Answer 3 must be fully evaluated because an OR expression is only true if one or the other is true, but not both. Therefore, since the LHS is true, the RHS must be evaluated.
+
+Answer 4 is similar to answer 3 above.
+
+For someone like me with 14+ years of software experience, this was a tough question! It requires that you are familiar with AND and OR truth tables, as well as Java.
+
+
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #15  Incorrect
+============
+
+Select the statement which most closely describes the user interface of an applet with the following init() method:
+
+public void init(){
+     Panel p = new Panel();
+     p.setLayout(new BorderLayout());
+     p.add(new Button("Hello"), BorderLayout.EAST);
+     p.add(new Button("Bye"), BorderLayout.WEST);
+     add(p);
+}
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Two buttons are displayed. A button with "Hello" is on the right side of the applet. The button with "Bye" is on the left side of the applet. Both buttons extend from the centre of the applet to each side, and are the height of the applet.
+
+
+
+Possible Answer 2:
+Two buttons are displayed. A button with "Hello" is on the right side of the applet. The button with "Bye" is on the left side of the applet. Both buttons are only as wide as the text on the button, but are the height of the applet.
+
+
+
+Possible Answer 3:
+Two buttons are displayed. A button with "Hello" is on the right side of the applet. The button with "Bye" is on the left side of the applet. Both buttons are only large enough to support the associated button texts.
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+Two buttons are displayed. A button with "Hello" is on the right side of the applet. The button with "Bye" is on the left side of the applet. Both buttons are only as wide as the text on the button, but are the height of the applet.
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+Two buttons are displayed. A button with "Hello" is on the right side of the applet. The button with "Bye" is on the left side of the applet. Both buttons extend from the centre of the applet to each side, and are the height of the applet.
+
+
+
+
+Explanation
+-------------------
+BorderLayout preserves the width of components located in the EAST or WEST regions. However they are stretched to the height of the applet.
+
+
+
+
+
+
+
+****************************************************
+
+Question #16  Incorrect
+============
+
+True or False.
+
+The Class class has no public constructor.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+False
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK documentation.
+
+To quote... "Class has no public constructor. Instead Class objects are constructed automatically by the Java Virtual Machine as classes are loaded and by calls to the defineClass method in the class loader."
+
+
+
+
+
+
+
+****************************************************
+
+Question #17  ****** CORRECT *****
+============
+
+Consider the following piece of code:
+
+public class Test extends Applet{
+          public void init(){
+               setLayout(new BorderLayout());
+               add("South", new Button("B1"));
+               add("North", new Button("B2"));
+               add("South", new Button("B3"));
+               }
+          }
+
+Select the correct statements regarding the above.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+There are 2 buttons displayed in the SOUTH section, B1 and B3.
+
+
+
+Possible Answer 2:
+Only B3 is displayed in the SOUTH section.
+
+
+
+Possible Answer 3:
+An exception is thrown when an attempt is made to add a second component to SOUTH.
+
+
+
+Possible Answer 4:
+Only B1 is displayed in the SOUTH section.
+
+
+
+Possible Answer 5:
+You can't add buttons to applets.
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+Only B3 is displayed in the SOUTH section.
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+Only B3 is displayed in the SOUTH section.
+
+
+
+
+Explanation
+-------------------
+You can only add a single component to the peripheral areas of the BorderLayour. However, adding more than 1 will simply result in the most recent being displayed.
+
+
+
+
+
+
+
+****************************************************
+
+Question #18  ****** CORRECT *****
+============
+
+True or False.
+
+A label can only display a single line of text.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Multi-line labels are not currently supported in Java.
+
+Refer to the JDK documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #19  ****** CORRECT *****
+============
+
+True or False.
+
+Anonymous classes cannot have constructors.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Anonymous classes are classes which do not have names. Therefore, constructors are meaningless.
+
+
+
+
+
+
+
+****************************************************
+
+Question #20  ****** CORRECT *****
+============
+
+What is the valid declaration for the finalize() method.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+protected void finalize() throws Throwable
+
+
+
+Possible Answer 2:
+final finalize()
+
+
+
+Possible Answer 3:
+public final finalize()
+
+
+
+Possible Answer 4:
+private boolean finalize()
+
+
+
+Possible Answer 5:
+private final void finalize() throws Exception
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+protected void finalize() throws Throwable
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+protected void finalize() throws Throwable
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #21  Incorrect
+============
+
+Which of the following statements are valid for a method which is overriding the following:
+
+protected void method(int x){..}
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The overriding method must take an int as its only parameter.
+
+
+
+Possible Answer 2:
+The overrding method must return a void.
+
+
+
+Possible Answer 3:
+The overriding method can be declared as private.
+
+
+
+Possible Answer 4:
+The overriding method can return any value it wishes.
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+The overriding method must take an int as its only parameter.
+
+
+Answer 2:
+The overrding method must return a void.
+
+
+
+Selected Answer...
+-------------------
+Answer 4:
+The overriding method can return any value it wishes.
+
+
+
+
+Explanation
+-------------------
+When overriding a method, the overriding method must return the same as the original method, and must have the same signature (parameter list) as the original.
+
+Therefore, 1 and 2 are correct.
+
+3 is incorrect, because you cannot override a method to be more private than the original. It is therefore not possible to override a protected method to be either "friendly" or private.
+
+
+
+
+
+
+
+****************************************************
+
+Question #22  ****** CORRECT *****
+============
+
+Consider the following piece of code:
+
+boolean b = true;
+System.out.println(b);
+
+What is displayed when this code is executed?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The text "true" is displayed.
+
+
+
+Possible Answer 2:
+The text "1" is displayed
+
+
+
+Possible Answer 3:
+The code fails to compile, because conversion string conversion in ths System.out.println() method only applies to integers.
+
+
+
+Possible Answer 4:
+The code compiles but nothing is displayed upon execution.
+
+
+
+Possible Answer 5:
+The code fails to compile. However, changing the first line to "boolean b = TRUE;" will correctly declare a boolean, and the code will compile and display "1".
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+The text "true" is displayed.
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+The text "true" is displayed.
+
+
+
+
+Explanation
+-------------------
+Answer 2 is incorrect, because booleans can't have integer values (in this case, "1").
+
+Answer 3 is an meaningless statement.
+
+Answer 5 is incorrect, attempting to confuse C/C++ and Java ways of defining true and false boolean values.
+
+
+
+
+
+
+
+****************************************************
+
+Question #23  Incorrect
+============
+
+Consider the following piece of code and select the correct statement(s):
+
+1. class A{
+2.     protected int method(){
+3.     }
+4. }
+5.
+6. class B extends A{
+7.     int method(){
+8.     }
+9. }
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The code fails to compile, because you can't override a method to be more private than its parent.
+
+
+
+Possible Answer 2:
+The code fails to compile, because method() is declared as protected, and is therefore not available to any subclass.
+
+
+
+Possible Answer 3:
+The code compiles correctly, but throws a NullPointerException at runtime.
+
+
+
+Possible Answer 4:
+The code fails to compile. However, it can be made to compile correctly by prefixing line 7 with the access qualifier "public".
+
+
+
+Possible Answer 5:
+The code fails to compile. However, it can be made to compile correctly by prefixing line 7 with the access qualifier "protected".
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+The code fails to compile, because you can't override a method to be more private than its parent.
+
+
+Answer 4:
+The code fails to compile. However, it can be made to compile correctly by prefixing line 7 with the access qualifier "public".
+
+
+Answer 5:
+The code fails to compile. However, it can be made to compile correctly by prefixing line 7 with the access qualifier "protected".
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+The code fails to compile, because you can't override a method to be more private than its parent.
+
+
+Answer 5:
+The code fails to compile. However, it can be made to compile correctly by prefixing line 7 with the access qualifier "protected".
+
+
+
+
+Explanation
+-------------------
+The access hierarchy in increasing levels of accessibility is:
+
+private->"friendly"->protected->public
+
+[where "friendly" is used to mean that there is no access qualifier for the method]
+
+Therefore, Answer 1 is correct, because class B attempts to override method() to be less public (ie, protected to "friendly").
+
+Answer 2 is incorrect, because a protected variable or method is always available to child classes (this is the purpose of the protected keyword).
+
+Answer 3 is incorrect, because all the information needed to verify this code is available at compile time.
+
+Answers 4 and 5 are correct because adding either "public" or "protected" to line 7 actually moves it higher up the access hierarchy (ie, more public than friendly).
+
+
+
+
+
+
+
+****************************************************
+
+Question #24  ****** CORRECT *****
+============
+
+Consider the following piece of code and select all statements which yield a boolean value of true as a result.
+
+
+     Double d1=new Double(10.0);
+     Double d2=new Double(10.0);
+     int x=10;
+     float f=10.0f;
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+d1 == d2;
+
+
+
+Possible Answer 2:
+d1 == x;
+
+
+
+Possible Answer 3:
+f == x;
+
+
+
+Possible Answer 4:
+d1.equals(d2);
+
+
+
+Possible Answer 5:
+None of the above
+
+
+
+Correct Answers...
+-----------------
+Answer 3:
+f == x;
+
+
+Answer 4:
+d1.equals(d2);
+
+
+
+Selected Answers...
+-------------------
+Answer 3:
+f == x;
+
+
+Answer 4:
+d1.equals(d2);
+
+
+
+
+Explanation
+-------------------
+
+d1==d2 is false, since they are different objects - only the object references are compared.
+
+d1 == x is an invalid comparison, and will cause a compile error.
+
+f == x is valid and will result in a true value. This is because x will be promoted to a float for the comparison, and they are the same value when this occurs.
+
+d1.equals(d2) returns true, because a "deep compare" is done, and this will compare the actual objects themselves.
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #25  Incorrect
+============
+
+Consider the following piece of code and select the correct statement(s):
+
+1. public class Test{
+2.     static int x;
+3.     public static void main(String [] args){
+4.         x = x + 1;
+5.         System.out.println("Value is " + x);
+6.     }
+7. }
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The code fails to compile. The compiler complains that the variable x is used before it is initialised.
+
+
+
+Possible Answer 2:
+The code compiles correctly and displays "Value is 1" when executed.
+
+
+
+Possible Answer 3:
+The code compiles correctly, but throws a NullPointerException at line 5.
+
+
+
+Possible Answer 4:
+The code fails to compile because the 'main' method is incorrectly declared.
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+The code compiles correctly and displays "Value is 1" when executed.
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+The code fails to compile. The compiler complains that the variable x is used before it is initialised.
+
+
+
+
+Explanation
+-------------------
+Member variables are initialised to 0 at compile time, so x is correctly initialised.
+
+
+
+
+
+
+
+****************************************************
+
+Question #26  ****** CORRECT *****
+============
+
+True or False.
+
+JDK 1.2 contains an Arrays class which provides various methods for manipulating arrays (such as searching and sorting).
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK documentation for 1.2  This class was introduced in 1.2.
+
+
+
+
+
+
+
+****************************************************
+
+Question #27  ****** CORRECT *****
+============
+
+Which of the following interfaces can be used to manage a collection of elements, with no duplication.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+List
+
+
+
+Possible Answer 2:
+Vector
+
+
+
+Possible Answer 3:
+Set
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+Set
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+Set
+
+
+
+
+Explanation
+-------------------
+Lists and Vectors allow duplication (so answers 1 and 2 are incorrect).
+
+
+
+
+
+
+
+****************************************************
+
+Question #28  ****** CORRECT *****
+============
+
+Consider the following real-life relationships, and select the code fragment which most closely represents it.
+
+An employee is a person. An employee has zero or more dependants.
+
+[for the code fragments, assume that all relevant packages are imported, and all relevant class definitions exist].
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+class Employee extends Dependants{
+    Person p;
+}
+
+
+
+
+Possible Answer 2:
+class Person extends Employee{
+     Vector dependants;
+}
+
+
+
+
+Possible Answer 3:
+class Employee extends Person{
+     Vector dependants;
+}
+
+
+
+Possible Answer 4:
+abstract class Person extends Dependants{
+     Employee e;
+}
+
+
+
+
+Possible Answer 5:
+class Dependant implements Employee{
+     Vector person;
+}
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+class Employee extends Person{
+     Vector dependants;
+}
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+class Employee extends Person{
+     Vector dependants;
+}
+
+
+
+
+Explanation
+-------------------
+This questions attempts to test your understanding of real-world situations when mapped to the Java language and object oriented.
+
+Answer 1 is incorrect, because it describes the following:
+
+an employee is a dependant, and an employee has a person.
+
+Answer 2 is incorrect, because it describes the following:
+
+a person is an employee, and a person has zero or more dependants.
+
+Answer 4 is incorrect because it describes the following (the 'abstract' keyword is simply an attempt to confuse the situation):
+
+a person is a dependant (or at least can behave as a dependant), and a person has an employee.
+
+Answer 5 is incorrect and describes the following:
+
+a dependant is an employee (or can behave as an employee), and a dependant has zero or more persons.
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #29  ****** CORRECT *****
+============
+
+Which layout manager do the comments below refer to:
+
+All components contained in it have the same width and height. Contained components are stretched to have the same dimensions.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+FlowLayout
+
+
+
+Possible Answer 2:
+BorderLayout
+
+
+
+Possible Answer 3:
+GridLayout
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+GridLayout
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+GridLayout
+
+
+
+
+Explanation
+-------------------
+FlowLayout retains the preferred sizes of components.
+
+Borderlayout will retain the preferred height of components located in NORTH or SOUTH, and the preferred width for components located in EAST or WEST.
+
+
+
+
+
+
+
+****************************************************
+
+Question #30  ****** CORRECT *****
+============
+
+Which of the following are valid methods for the Applet class.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+start()
+
+
+
+Possible Answer 2:
+stop()
+
+
+
+Possible Answer 3:
+init()
+
+
+
+Possible Answer 4:
+destroy()
+
+
+
+Possible Answer 5:
+kill()
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+start()
+
+
+Answer 2:
+stop()
+
+
+Answer 3:
+init()
+
+
+Answer 4:
+destroy()
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+start()
+
+
+Answer 2:
+stop()
+
+
+Answer 3:
+init()
+
+
+Answer 4:
+destroy()
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #31  Incorrect
+============
+
+Which of the following is not a subclass of java.awt.Component?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Frame
+
+
+
+Possible Answer 2:
+Container
+
+
+
+Possible Answer 3:
+CheckboxGroup
+
+
+
+Possible Answer 4:
+Canvas
+
+
+
+Possible Answer 5:
+Applet
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+CheckboxGroup
+
+
+
+Selected Answer...
+-------------------
+Answer 5:
+Applet
+
+
+
+
+Explanation
+-------------------
+Frame, Container, Canvas and Applet are all subclasses of Component (with Canvas and Container being direct or immediate subclasses, while Frame and Applet are further down the hierarchy).
+
+CheckboxGroup is a direct subclass of java.lang.Object.
+
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #32  Incorrect
+============
+
+Select all valid statements.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+When typing text into a TextField, scroll bars will automatically appear when the TextField becomes full.
+
+
+
+Possible Answer 2:
+When typing text into a TextArea, scroll bars will appear when text is typed past the boundaries of the TextArea.
+
+
+
+Possible Answer 3:
+TextFields can have more than 1 row of text.
+
+
+
+Possible Answer 4:
+The class TextArea is a super class of the class TextField.
+
+
+
+Possible Answer 5:
+Both TextAreas and TextFields have a method called setEditable(), which can enable or disable editingof the component.
+
+
+
+Correct Answers...
+-----------------
+Answer 2:
+When typing text into a TextArea, scroll bars will appear when text is typed past the boundaries of the TextArea.
+
+
+Answer 5:
+Both TextAreas and TextFields have a method called setEditable(), which can enable or disable editingof the component.
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+When typing text into a TextArea, scroll bars will appear when text is typed past the boundaries of the TextArea.
+
+
+
+
+Explanation
+-------------------
+TextFields are 1 row of text high, and 'n' character columns.
+
+Scroll bars do not appear on TextFields.
+
+TextFields and TextAreas are derived from java.awt.TextComponent.
+
+
+
+
+
+
+
+****************************************************
+
+Question #33  Incorrect
+============
+
+Which of the following are valid methods for the Graphics class?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+drawOval(int x, int y, int width, int height)
+
+
+
+Possible Answer 2:
+toString()
+
+
+
+Possible Answer 3:
+drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+
+Possible Answer 4:
+drawPolygon(int[] xPoints, int[] yPoints, int nPoints)
+
+
+
+Possible Answer 5:
+fillArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+drawOval(int x, int y, int width, int height)
+
+
+Answer 2:
+toString()
+
+
+Answer 3:
+drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+Answer 4:
+drawPolygon(int[] xPoints, int[] yPoints, int nPoints)
+
+
+Answer 5:
+fillArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+drawOval(int x, int y, int width, int height)
+
+
+Answer 3:
+drawArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+Answer 4:
+drawPolygon(int[] xPoints, int[] yPoints, int nPoints)
+
+
+Answer 5:
+fillArc(int x, int y, int width, int height, int startAngle, int arcAngle)
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #34  Incorrect
+============
+
+True of False.
+
+CheckboxGroup is a subclass of Component.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+False
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+CheckboxGroup is a direct subclass of Object (refer to the JDK API documentation).
+
+
+
+
+
+
+
+****************************************************
+
+Question #35  Incorrect
+============
+
+Which of the following are valid expressions.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Object o = new String("abcd");
+
+
+
+Possible Answer 2:
+Boolean b = true;
+
+
+
+Possible Answer 3:
+Panel p = new Frame();
+
+
+
+Possible Answer 4:
+Applet a = new Panel()
+
+
+
+Possible Answer 5:
+Panel p = new Applet()
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+Object o = new String("abcd");
+
+
+Answer 5:
+Panel p = new Applet()
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+Object o = new String("abcd");
+
+
+Answer 2:
+Boolean b = true;
+
+
+
+
+Explanation
+-------------------
+1 is correct because String is derived from Object, and this operation is "down the hierarchy".
+
+2 is incorrect, because Boolean is a class which needs a constructor (as in Boolean b = new Boolean("true")).
+
+3 is incorrect because Frame is not derived from Panel (it is derived from Window).
+
+4 is incorrect, because this operation is "up the hierarchy".
+
+5 is correct, because Applet is derived from Panel, and the operation is "down the hierarchy".
+
+
+
+
+
+
+
+****************************************************
+
+Question #36  Incorrect
+============
+
+You have a button, which is in a panel. The panel is inside a frame.  You assign the Frame a 24-point font and a background colour of yellow. You set the panel to have a background colour of red.  Which of the following statements are true (select all valid statements).
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The font size of the button is 24-point.
+
+
+
+Possible Answer 2:
+The background colour of the button is the same as that of the frame.
+
+
+
+Possible Answer 3:
+The panel has a font size of 8-point.
+
+
+
+Possible Answer 4:
+The button inherits the font from the panel.
+
+
+
+Possible Answer 5:
+This is not a valid configuration. It is not valid to place a panel into a frame.
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+The font size of the button is 24-point.
+
+
+Answer 4:
+The button inherits the font from the panel.
+
+
+
+Selected Answers...
+-------------------
+Answer 3:
+The panel has a font size of 8-point.
+
+
+Answer 4:
+The button inherits the font from the panel.
+
+
+
+
+Explanation
+-------------------
+In all cases, unless a component's attributes (font, font size, foreground colour, background colour, etc) are explicitly defined, they are inherited from the surrounding container.
+
+
+
+
+
+
+
+****************************************************
+
+Question #37  ****** CORRECT *****
+============
+
+Which of the following will create a TextField capable of displaying 10 characters, with the initial text "hello"?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+TextField t = new TextField("hello", 10);
+
+
+
+Possible Answer 2:
+TextField t = new TextField(10, "hello");
+
+
+
+Possible Answer 3:
+TextField t = new TextField(); 
+t.setCols(10); 
+t.setText("hello");
+
+
+
+Possible Answer 4:
+TextField t = new TextField(); 
+t.setFieldSize(10); 
+t.setText("hello");
+
+
+
+Possible Answer 5:
+None of the above.
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+TextField t = new TextField("hello", 10);
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+TextField t = new TextField("hello", 10);
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+Answers 3 and 4 are totally fictitious since the methods setCols() and setFieldSize() do not exist for TextField (however, setColumns() does exist).
+
+
+
+
+
+
+
+****************************************************
+
+Question #38  Incorrect
+============
+
+True or False.
+
+Menus can be added to containers.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+False
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Menus can only be added to menu-bars.
+
+
+
+
+
+
+
+****************************************************
+
+Question #39  Incorrect
+============
+
+When a Frame is constructed, it has no size and is not displayed. Which of the following methods can be called to display the Frame.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+setSize()
+
+
+
+Possible Answer 2:
+setBounds()
+
+
+
+Possible Answer 3:
+setDisplayable()
+
+
+
+Possible Answer 4:
+setVisible()
+
+
+
+Possible Answer 5:
+setState()
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+setSize()
+
+
+Answer 2:
+setBounds()
+
+
+Answer 4:
+setVisible()
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+setSize()
+
+
+Answer 4:
+setVisible()
+
+
+
+
+Explanation
+-------------------
+A Frame has zero size by default. It is therefore necessary to first set its size by calling either setSize() or setBounds().
+
+Once it has a size, it is then necessary to make it visible, by calling setVisible().
+
+setDisplayable() is not a valid method.
+
+setState() is used to change between the iconified state and the normal state.
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #40  Incorrect
+============
+
+What is displayed when the following is executed:
+
+String s1 = "aaa";
+s1.concat("bbb");
+System.out.println(s1);
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The string "aaa".
+
+
+
+Possible Answer 2:
+The string "aaabbb".
+
+
+
+Possible Answer 3:
+Nothing. concat() is not a valid method in the String class.
+
+
+
+Possible Answer 4:
+The string "bbbaaa".
+
+
+
+Possible Answer 5:
+The string "bbb".
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+The string "aaa".
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+The string "aaabbb".
+
+
+
+
+Explanation
+-------------------
+Strings are immutable, so concatenating a string will not modify the object reference.
+
+
+
+
+
+
+
+****************************************************
+
+Question #41  ****** CORRECT *****
+============
+
+True or False.
+
+The String class does not have an append() method.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Refer to the standard JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #42  Incorrect
+============
+
+What is the output of the following piece of code:
+
+1. int x = 6;
+2. double d = 7.7;
+3.
+4. System.out.println((x > d) ? 99.9 : 9);
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+9
+
+
+
+Possible Answer 2:
+9.0
+
+
+
+Possible Answer 3:
+99.9
+
+
+
+Possible Answer 4:
+Nothing. An ArithmeticException is thrown at line 4.
+
+
+
+Possible Answer 5:
+6
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+9.0
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+9
+
+
+
+
+Explanation
+-------------------
+The statement at line 4 reads as:
+
+if x > d, result is 99.9, else result is 9
+
+I had much correspondance about this question, but I think the correct explanation must go to Dave. Thanks Dave - here is it (para-phrased)...
+
+The reason 9 is promoted to a double is because 99.9 is a double and the operation must return (assign) the same type.  Trying different numbers gives (eg, 8 and 9):
+
+                       int x = 6;
+                       double d = 7.7;
+                       System.out.println((x > d) ?  8 : 9);
+
+This prints 9,  not 9.0
+
+A further example to clarify...
+
+                       int x = 6;
+                       double d = 7.7;
+                       System.out.println((x > d) ? true : 4);
+
+This gives  "Error: Incompatible type for ?:. Can't convert boolean to int"
+
+From the above, the conversion is performed because the result is a double, and NOT because "x" is promoted to a double for the comparison with "d".
+
+Thanks again, Dave.
+
+
+
+
+
+
+
+****************************************************
+
+Question #43  ****** CORRECT *****
+============
+
+Which values of variable x will show "Message 2".
+
+     switch(x)
+     {
+          case 1 :
+               System.out.println("Message 1");
+          case 2 :
+          case 3 :
+               System.out.println("Message 2");
+          default :
+               System.out.println("End");
+     }
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+1
+
+
+
+Possible Answer 2:
+2
+
+
+
+Possible Answer 3:
+3
+
+
+
+Possible Answer 4:
+4
+
+
+
+Possible Answer 5:
+none
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+1
+
+
+Answer 2:
+2
+
+
+Answer 3:
+3
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+1
+
+
+Answer 2:
+2
+
+
+Answer 3:
+3
+
+
+
+
+Explanation
+-------------------
+There is no 'break' statement after 'case 1', so a value of 1 will "fall down into" case 2 (as well as display "Message 1").
+
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #44  Incorrect
+============
+
+In which class are the following methods defined:
+        - wait()
+        - notify()
+        - notifyAll()
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Thread
+
+
+
+Possible Answer 2:
+Runnable
+
+
+
+Possible Answer 3:
+Object
+
+
+
+Possible Answer 4:
+Event
+
+
+
+Possible Answer 5:
+Synchronize
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+Object
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+Thread
+
+
+
+
+Explanation
+-------------------
+Runnable is an interface, not a class. Synchronize is not a class, it's a keyword.
+
+
+
+
+
+
+
+****************************************************
+
+Question #45  Incorrect
+============
+
+Consider the following list of tags and attributes of tags and select the ones which can legally be placed between the <applet> and </applet> delimiters.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+JAVAC
+
+
+
+Possible Answer 2:
+JAR
+
+
+
+Possible Answer 3:
+CODE
+
+
+
+Possible Answer 4:
+NAME
+
+
+
+Possible Answer 5:
+PARAM
+
+
+
+Correct Answers...
+-----------------
+Answer 3:
+CODE
+
+
+Answer 4:
+NAME
+
+
+Answer 5:
+PARAM
+
+
+
+Selected Answer...
+-------------------
+Answer 5:
+PARAM
+
+
+
+
+Explanation
+-------------------
+Javac is the java compiler, and is not a valid tag.
+
+JAR is a java archive. This is a means of storing java classes. While a JAR can be accessed from an applet, the mechanism is to use the ARCHIVE tag.
+
+CODE specifies the applet class to execute.
+
+NAME is used for identifying variables for passing into the applet.
+
+PARAM is used for passing the value of the variable.
+
+
+
+
+
+
+
+****************************************************
+
+Question #46  ****** CORRECT *****
+============
+
+Which of the following is the default layout manager for a panel.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+BorderLayout
+
+
+
+Possible Answer 2:
+FlowLayout
+
+
+
+Possible Answer 3:
+GridBagLayout
+
+
+
+Possible Answer 4:
+GridLayout
+
+
+
+Possible Answer 5:
+None of the above.
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+FlowLayout
+
+
+
+Selected Answer...
+-------------------
+Answer 2:
+FlowLayout
+
+
+
+
+Explanation
+-------------------
+Refer to JDK documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #47  ****** CORRECT *****
+============
+
+Which of the following statements are true regarding the graphical methods paint(), repaint() and update().
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+paint() schedules a call to repaint().
+
+
+
+Possible Answer 2:
+repaint() schedules a call to update().
+
+
+
+Possible Answer 3:
+update() calls paint().
+
+
+
+Possible Answer 4:
+update() schedules a call to repaint().
+
+
+
+Possible Answer 5:
+repaint() calls paint() directly.
+
+
+
+Correct Answers...
+-----------------
+Answer 2:
+repaint() schedules a call to update().
+
+
+Answer 3:
+update() calls paint().
+
+
+
+Selected Answers...
+-------------------
+Answer 2:
+repaint() schedules a call to update().
+
+
+Answer 3:
+update() calls paint().
+
+
+
+
+Explanation
+-------------------
+The sequence of operation of these three methods is:
+
+-repaint() schedules update()
+-update() calls paint()
+
+
+
+
+
+
+
+****************************************************
+
+Question #48  ****** CORRECT *****
+============
+
+Select the layour manager which is described by the following:
+
+"It arranges its constituent components in horizontal rows. It will attempt to fit as many components as possible into the first row, and remaining components will spill over into subsequent rows. Components always appear left to right, in the order they were added to the container."
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Flow Layout
+
+
+
+Possible Answer 2:
+Grid Layout
+
+
+
+Possible Answer 3:
+Card Layout
+
+
+
+Possible Answer 4:
+Transverse Flow Layout
+
+
+
+Possible Answer 5:
+Grid Bag Layout
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+Flow Layout
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+Flow Layout
+
+
+
+
+Explanation
+-------------------
+The "Transverse Flow Layout" manager does not exist. Refer to the JDK documentation for further datails on layout managers.
+
+
+
+
+
+
+
+
+
+****************************************************
+
+Question #49  Incorrect
+============
+
+Which of the following statements will compile without an error?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Boolean b = new Boolean("abcd");
+
+
+
+Possible Answer 2:
+float f = 123;
+
+
+
+Possible Answer 3:
+byte b = 127;
+
+
+
+Possible Answer 4:
+int x = (int)(1.23);
+
+
+
+Possible Answer 5:
+short s = 128;
+
+
+
+Correct Answers...
+-----------------
+Answer 1:
+Boolean b = new Boolean("abcd");
+
+
+Answer 2:
+float f = 123;
+
+
+Answer 3:
+byte b = 127;
+
+
+Answer 4:
+int x = (int)(1.23);
+
+
+Answer 5:
+short s = 128;
+
+
+
+Selected Answers...
+-------------------
+Answer 3:
+byte b = 127;
+
+
+Answer 4:
+int x = (int)(1.23);
+
+
+
+
+Explanation
+-------------------
+Answer 1 is correct. Any string other than "true" or "false" will create a Boolean object with a false state (see the JDK API documentation).
+
+Answer 2 is correct, because 123 is an integer which gets automatically promoted by the compiler to a float.
+
+Answer 3 is correct, because the valid range for a byte type is -128 to +127.
+
+Answer 4 is correct because the cast will convert 1.23 to 1, which is a valid integer (omitting the explicit cast will cause a compile error).
+
+Answer 5 is correct, because the short type is a 16-bit value, with a range -32768 to +32767.
+
+
+
+
+
+
+
+****************************************************
+
+Question #50  ****** CORRECT *****
+============
+
+True or False.
+
+A class can implement more than one interface, but can only inherit from a single parent class.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+A class can implement multiple interface as follows:
+
+class A implements x, y{...}
+
+where x and y are interfaces.
+
+However, the Java language specification only allows a class to inherit from a single parent class. Accordingly, the following is invalid:
+
+class A extends w, z {...}
+
+where w and z are classes.
+
+Combining the 2 types, results in a valid declaration, as follows:
+
+class A extends w implements x, y {...}
+
+Here, class A inherits from a single parent class (w), but implements 2 interfaces (x and y).
+
+
+
+
+
+
+
+****************************************************
+
+Question #51  ****** CORRECT *****
+============
+
+True or False.
+
+The StringBuffer class does not have a concat() method.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+True
+
+
+
+Possible Answer 2:
+False
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+True
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+True
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #52  ****** CORRECT *****
+============
+
+Which of the following are valid ways to create a Map collection.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Map m = new Map();
+
+
+
+Possible Answer 2:
+Map m = new Map(init capacity, increment capacity);
+
+
+
+Possible Answer 3:
+Map m = new Map(new Collection());
+
+
+
+Possible Answer 4:
+Map is an interface, and cannot be instantiated.
+
+
+
+Correct Answer...
+-----------------
+Answer 4:
+Map is an interface, and cannot be instantiated.
+
+
+
+Selected Answer...
+-------------------
+Answer 4:
+Map is an interface, and cannot be instantiated.
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #53  Incorrect
+============
+
+Which of the following are valid ways to determine the number of elements in an array defined as follows:
+
+int intArray[] = {1,2,3};
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+intArray.size;
+
+
+
+Possible Answer 2:
+intArray.size();
+
+
+
+Possible Answer 3:
+intArray.length;
+
+
+
+Possible Answer 4:
+intArray.length();
+
+
+
+Possible Answer 5:
+intArray.getSize();
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+intArray.length;
+
+
+
+Selected Answers...
+-------------------
+Answer 2:
+intArray.size();
+
+
+Answer 4:
+intArray.length();
+
+
+
+
+Explanation
+-------------------
+Refer to the Java Language Specification.
+
+
+
+
+
+
+
+****************************************************
+
+Question #54  ****** CORRECT *****
+============
+
+Consider the following code segments and select the correct statement:
+
+Segment 1:
+1.  int a = 3;
+2.  int b = 0;
+3.  int c = a/b;
+
+Segment 2:
+4.  float a = 1.0F;
+5.  float b = 0.0F;
+6.  float c = a/b;
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+When executed, both segments will cause an exception to be thrown.
+
+
+
+Possible Answer 2:
+When executed, neither segment will cause an exception to be thrown.
+
+
+
+Possible Answer 3:
+Only Segment 1 will throw an exception.
+
+
+
+Possible Answer 4:
+Only Segment 2 will throw an exception.
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+Only Segment 1 will throw an exception.
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+Only Segment 1 will throw an exception.
+
+
+
+
+Explanation
+-------------------
+A divide by zero will cause an exception ONLY with integer arithmetic. Floating point arithmetic will simply assign the result to be NaN and no exception is thrown.
+
+
+
+
+
+
+
+****************************************************
+
+Question #55  ****** CORRECT *****
+============
+
+What is displayed when the following piece of code is executed (assume the graphics context, g, is correctly set up):
+
+g.drawString("abc", 10, 10);
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+The text "abc" with the lower left part of "a" located at x = 10, y = 10.
+
+
+
+Possible Answer 2:
+The text "abc" with the upper left part of "a" located at x = 10, y = 10.
+
+
+
+Possible Answer 3:
+Nothing. This is not a valid method.
+
+
+
+Correct Answer...
+-----------------
+Answer 1:
+The text "abc" with the lower left part of "a" located at x = 10, y = 10.
+
+
+
+Selected Answer...
+-------------------
+Answer 1:
+The text "abc" with the lower left part of "a" located at x = 10, y = 10.
+
+
+
+
+Explanation
+-------------------
+The drawString() method puts the baseline of the first character at the co-ordinated x = 10, y = 10 (refer to the JDK API documentation).
+
+
+
+
+
+
+
+****************************************************
+
+Question #56  ****** CORRECT *****
+============
+
+Select all the correct statements relating to the following piece of code?
+
+1.  public class A{
+2.      abstract int method();
+3.      void anotherMethod(){
+4.       }
+5.
+6.  class B extends A{
+7.      int method(){
+8.          return 2;
+9.      }
+10. }
+
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Changing "extends" to "implements" on line 6 will allow the code to compile correctly.
+
+
+
+Possible Answer 2:
+The method() in class A cannot be abstract without the entire class being declared as abstract.
+
+
+
+Possible Answer 3:
+Declaring class A to be abstract will allow the code to compile correctly.
+
+
+
+Possible Answer 4:
+The class A must have an explicit default constructor in order for it to be subclassed correctly.
+
+
+
+Possible Answer 5:
+The code fails to compile, because class B does not implement anotherMethod().
+
+
+
+Correct Answers...
+-----------------
+Answer 2:
+The method() in class A cannot be abstract without the entire class being declared as abstract.
+
+
+Answer 3:
+Declaring class A to be abstract will allow the code to compile correctly.
+
+
+
+Selected Answers...
+-------------------
+Answer 2:
+The method() in class A cannot be abstract without the entire class being declared as abstract.
+
+
+Answer 3:
+Declaring class A to be abstract will allow the code to compile correctly.
+
+
+
+
+Explanation
+-------------------
+There are several things wrong with this code:
+
+- class A must be declared as abstract, since method() is declared as abstract
+- if class A is declared as abstract, then the code will compile correctly
+- if the abstract declaration of method() in class A is removed, the code will compile (however, the entire line 2 must now read as follows:
+    int method(){}
+In other words, a method body must now be supplied since the method is no longer abstract.
+
+
+
+
+
+
+
+****************************************************
+
+Question #57  Incorrect
+============
+
+Which of the following is a valid way to declare an abstract method which is intended to be public.
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+public abstract method();
+
+
+
+Possible Answer 2:
+public abstract void method();
+
+
+
+Possible Answer 3:
+public abstract void method(){}
+
+
+
+Possible Answer 4:
+public virtual void method();
+
+
+
+Possible Answer 5:
+public void method() implements abstract;
+
+
+
+Correct Answer...
+-----------------
+Answer 2:
+public abstract void method();
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+public abstract void method(){}
+
+
+
+
+Explanation
+-------------------
+1 is incorrect, because method() has no return value.
+
+3 is incorrect because the {} braces indicate that the method is actually implemented, and is therefore not abstract. In other words, even empty braces are a valid way to define a method.
+
+4 is incorrect, since virtual is not a Java keyword - this is an attempt to confuse C++ programmers:-)
+
+5 is totally incorrect, even though all the keywords actually exist in Java.
+
+
+
+
+
+
+
+****************************************************
+
+Question #58  Incorrect
+============
+
+Which of the following are valid methods in the Math class?
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+arcTan(double a)
+
+
+
+Possible Answer 2:
+atan(double a)
+
+
+
+Possible Answer 3:
+sqrt(double a)
+
+
+
+Possible Answer 4:
+min(int a, int b)
+
+
+
+Possible Answer 5:
+cosine(double a)
+
+
+
+Correct Answers...
+-----------------
+Answer 2:
+atan(double a)
+
+
+Answer 3:
+sqrt(double a)
+
+
+Answer 4:
+min(int a, int b)
+
+
+
+Selected Answers...
+-------------------
+Answer 1:
+arcTan(double a)
+
+
+Answer 3:
+sqrt(double a)
+
+
+
+
+Explanation
+-------------------
+Refer to the JDK API documentation.
+
+
+
+
+
+
+
+****************************************************
+
+Question #59  ****** CORRECT *****
+============
+
+When is the text "Hi there" displayed?
+
+public class StaticTest {
+     static {
+         System.out.println("Hi there");
+         }
+
+     public void print() {
+         System.out.println("Hello");
+     }
+
+     public static void main(String args []) {
+         StaticTest st1 = new StaticTest();
+         st1.print();
+
+         StaticTest st2 = new StaticTest();
+         st2.print();
+     }
+}
+
+
+
+Possible Answers:
+-------------------
+
+Possible Answer 1:
+Never.
+
+
+
+Possible Answer 2:
+Each time a new object of type StaticTest is created.
+
+
+
+Possible Answer 3:
+Once when the class is loaded into the Java virtual machine.
+
+
+
+Possible Answer 4:
+Only when the main() method is executed.
+
+
+
+Correct Answer...
+-----------------
+Answer 3:
+Once when the class is loaded into the Java virtual machine.
+
+
+
+Selected Answer...
+-------------------
+Answer 3:
+Once when the class is loaded into the Java virtual machine.
+
+
+
+
+Explanation
+-------------------
+The code in this segment is what is known as a static initialiser. Static initialiser code is executed once when the class is loaded into the JVM. Multiple static initialiser blocks in a single class are executed in the order they are defined.
+
+Static initialisers are not related to the main() method. Therefore, Answers 1, 2 and 4 are incorrect.
+
+
+

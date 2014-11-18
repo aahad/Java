@@ -1,0 +1,209 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 35</h2>
+
+<h3>Saturday, May 26th, 2001 </h3>
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>java.io package: </b>
+
+System.out.println()   
+System - Class in lang package
+out    - Object that picks up data from the source and takes it to its destination.
+	 Also called an out stream. Java does not have dedicated streams.
+	 In C++ streams are dedicated. 
+
+i/o streams work with 8 bits data, ie 1 byte.
+
+There are 2 types of streams:
+1) low level - picks up data from the data source, eg. from floppy disk, System.in
+	       (System.in is an input stream object)
+2) filter - streams that take data from low level to high level streams, InputStreamReader
+3) high level - BufferedReader
+
+Example:
+BufferedReader br = (new BufferedReader(new InputStreamReader(System.in)));
+
+or in other words:
+InputStreamReader input = new InputStreamReader(System.in);
+BufferedReader br = new BufferedReader(input);
+
+java.io
+   |
+   +-- Input Stream - works in byte
+   |
+   +-- Output Stream - works in byte
+   |
+   +-- Reader - works in characters, Unicode
+   |
+   +-- Writer - works in characters, Unicode
+   |
+   +-- File - picks up date from a file in sequential order
+   |
+   +-- RandonAccessFile - picks up data from a file in randon order
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>File class: </b>
+
+Used to read files. You need to define path keeping in mind that the '\' sign
+is read as an escape sequence like '\n'. Therefore you should either use the
+'/' sign or use '\\'. In the '\\' sign the first '\' is interpreted as an
+escape sequence and the second '\' is interpreted as part of the path definition.
+
+
+canRead()
+caNWrite()
+deleteOnExit()
+exists()
+
+Example:
+<i>// Demonstrate File.
+import java.io.File;
+
+class FileDemo {
+  static void p(String s) {
+    System.out.println(s);
+  }
+
+  public static void main(String args[]) {
+    File f1 = new File("/java/COPYRIGHT");
+    p("File Name: " + f1.getName());
+    p("Path: " + f1.getPath());
+    p("Abs Path: " + f1.getAbsolutePath());
+    p("Parent: " + f1.getParent());
+    p(f1.exists() ? "exists" : "does not exist");
+    p(f1.canWrite() ? "is writeable" : "is not writeable");
+    p(f1.canRead() ? "is readable" : "is not readable");
+    p("is " + (f1.isDirectory() ? "" : "not" + " a directory"));
+    p(f1.isFile() ? "is normal file" : "might be a named pipe");
+    p(f1.isAbsolute() ? "is absolute" : "is not absolute");
+    p("File last modified: " + f1.lastModified());
+    p("File size: " + f1.length() + " Bytes");
+  }
+}
+</i>
+
+Output:
+File Name: COPYRIGHT
+Path: \java\COPYRIGHT
+Abs Path: C:\java\COPYRIGHT
+Parent: \java
+does not exist
+is not writeable
+is not readable
+is not a directory
+might be a named pipe
+is not absolute
+File last modified: 0
+File size: 0 Bytes
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>RandonAccessFile Class: </b>
+
+Picks up data from a file in randon order. 
+
+
+Constructor:
+RandonAccessFile(File file, String mode)
+RandonAccessFile(String pathname, String mode)
+
+Modes are defined as:
+R	- Read only
+RW	- Read and Write
+
+In the File class, if you refer to a file that does not exist, it will compile and run.
+Since in the first constructor you see that it requires a File object to work, if the
+File does not exist, it will generate a FileNotFound Exception.
+
+For the second constructor, if the mode is set to read and write:
+
+Example:
+<i>import java.io.*;
+
+public class RandomIOApp {
+ public static void main(String args[]) throws IOException {
+  RandomAccessFile file = new RandomAccessFile("test.txt","rw");
+  file.writeBoolean(true);
+  file.writeInt(123456);
+  file.writeChar('j');
+  file.writeDouble(1234.56);
+  // Use seek() to move to a specific file location
+  file.seek(1);
+  System.out.println(file.readInt());
+  System.out.println(file.readChar());
+  System.out.println(file.readDouble());
+  file.seek(0);
+  System.out.println(file.readBoolean());
+  file.close();
+ }
+}
+</i>
+
+Output:
+123456
+j
+1234.56
+true
+
+NOTE: 
+1) This also creates a file called test.java
+2) Keep in mind that if the mode is set to "r", ie. read only, it will generate an error:
+   Exception in thread "main" java.io.FileNotFoundException: test.txt (The system cannot find 
+   the file specified)
+        at java.io.RandomAccessFile.open(Native Method)
+        at java.io.RandomAccessFile.<init>(RandomAccessFile.java:102)
+        at RandomIOApp.main(RandomIOApp.java:5)
+3) The seek(1) method skips the data at index 0 which was the boolean object. This shows 
+   that you can skip data using a RandonAccessFile object. The seek(0) method takes you 
+   back to the first object in the file. The file.close() method is used to close the file
+   as it is also an input stream that needs to be shut down.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

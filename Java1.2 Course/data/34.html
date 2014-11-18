@@ -1,0 +1,729 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 34</h2>
+
+<h3>Sunday, May 20th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Collection API: </b>
+
+The use of databases have increased in application development. Sun felt the need for Java
+to have better control over databases. The Collection API was created. 
+
+The Collection API has the following specs:
+1) Central Unified theme
+2) New data structures introduced
+3) Give database power to Java
+</pre>
+
+<table>
+<tr><td width=150 bgcolor=#cccccc>Data Structures</td><td width=200 bgcolor=#dddddd>Specifications</td> </tr>
+<tr> <td>Collection</td> 	<td>Duplication allowed</td>	 </tr>
+<tr> <td>List</td> 		<td>Duplication allowed</td>	 </tr>
+<tr> <td>Set</td>		<td>No Duplication, only 1 null value</td>  </tr>
+<tr> <td>Map</td> 		<td>&nbsp</td>			 </tr>
+<tr><td colspan=2>&nbsp;</td></tr>
+<tr> <td width=200 bgcolor=#cccccc>Storage Technique</td>  <td width=200 bgcolor=#dddddd>Specifications</td>  <tr>
+<tr> <td>Array</td> <td>fast index searching, problem its sequential</td> </tr>
+<tr> <td>linked list</td> <td>like array, but all data linked to data before and after</td> </tr>
+<tr> <td>Tree</td> <td>fast searching, no index searching, higher overheads</td> </tr>
+<tr> <td>Hashing</td> <td>divide data in small pieces in locations with addresses</td> </tr>
+
+</table>
+
+<pre>
+NOTE: Collection API methods are not syncronized, legacy code most methods are syncronized.
+This does not make any difference though.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Collections Interface: </b>
+
+public interface Collection
+
+* The root interface in the collection hierarchy. 
+* A collection represents a group of objects, known as its elements. 
+* Some collections allow duplicate elements and others do not. 
+* Some are ordered and others unordered. 
+* The JDK does not provide any direct implementations of this interface: it provides 
+  implementations of more specific subinterfaces like Set and List. 
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>List Interface: </b>
+
+public interface List extends Collection
+
+* An ordered collection (also known as a sequence). 
+* allow duplicate elements
+* allow multiple null elements 
+
+ 
+int indexOf(Object o) 
+Returns the index in this list of the first occurrence of the specified element, 
+or -1 if this list does not contain this element. 
+
+Iterator iterator() 
+Returns an iterator over the elements in this list in proper sequence. 
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Map Interface: </b>
+
+public interface Map
+
+* An object that maps keys to values
+* contain duplicate keys
+* each key can map to at most one value.
+* takes the place of the Dictionary class, which was a totally abstract class rather 
+  than an interface
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Set Interface: </b>
+
+public interface Set extends Collection
+
+* A collection that contains no duplicate elements
+* contain no pair of elements e1 and e2 such that e1.equals(e2)
+* at most one null element. 
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>ArrayList Class: </b>
+
+NOTE: Keep in mind that when you read the name of a class in the Collections API, you
+can automatically tell its features. Eg. an ArrayList will have the features of a List
+and an Array.
+
+
+java.lang.Object
+  |
+  +--java.util.AbstractCollection
+        |
+        +--java.util.AbstractList
+              |
+              +--java.util.ArrayList
+
+
+public class ArrayList extends AbstractList implements List, Cloneable, Serializable
+
+* Resizable-array implementation of the List interface. 
+* Implements all optional list operations, and permits all elements, including null. 
+* this class provides methods to manipulate the size of the array that is used internally 
+  to store the list. (This class is roughly equivalent to Vector, except that it is 
+  unsynchronized.)
+
+
+Example:
+<i>// Demonstrate ArrayList.
+import java.util.*;
+
+class ArrayListDemo {
+  public static void main(String args[]) {
+    // create an array list
+    ArrayList al = new ArrayList();
+    
+    System.out.println("Initial size of al: " +
+                       al.size());
+
+    // add elements to the array list
+    al.add("C");
+    al.add("A");
+    al.add("E");
+    al.add("B");
+    al.add("D");
+    al.add("F");
+    al.add(1, "A2");
+
+    System.out.println("Size of al after additions: " +
+                       al.size());
+
+    // display the array list
+    System.out.println("Contents of al: " + al);
+
+    // Remove elements from the array list
+    al.remove("F");
+    al.remove(2);
+
+    System.out.println("Size of al after deletions: " +
+                       al.size());
+    System.out.println("Contents of al: " + al);
+  }
+}</i>
+
+Output:
+Initial size of al: 0
+Size of al after additions: 7
+Contents of al: [C, A2, A, E, B, D, F]
+Size of al after deletions: 5
+Contents of al: [C, A2, E, B, D]
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>HashSet vs TreeSet: </b>
+
+Example1:
+<i>// Demonstrate HashSet.
+import java.util.*;
+
+class HashSetDemo {
+  public static void main(String args[]) {
+    // create a hash set
+    HashSet hs = new HashSet();
+    
+    // add elements to the hash set
+    hs.add("B");
+    hs.add("A");
+    hs.add("D");
+    hs.add("E");
+    hs.add("C");
+    hs.add("F");
+
+    System.out.println(hs);
+  }
+}</i>
+
+Output1:
+[A, F, E, D, C, B]
+
+
+Example2:
+<i>// Demonstrate TreeSet.
+import java.util.*;
+
+class TreeSetDemo {
+  public static void main(String args[]) {
+    // Create a tree set
+    TreeSet ts = new TreeSet();
+    
+    // Add elements to the tree set
+    ts.add("C");
+    ts.add("A");
+    ts.add("B");
+    ts.add("E");
+    ts.add("F");
+    ts.add("D");
+
+    System.out.println(ts);
+  }
+}</i>
+
+Output2:
+[A, B, C, D, E, F]
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>HashMap vs TreeMap: </b>
+
+NOTE: Map does not have an iterator() method, therefore in the following example Set object
+is used to use iterator().
+
+Example1:
+<i>import java.util.*;
+
+class HashMapDemo {
+  public static void main(String args[]) {
+
+    // Create a hash map
+    HashMap hm = new HashMap();
+    
+    // Put elements to the map
+    hm.put("John Doe", new Double(3434.34));
+    hm.put("Tom Smith", new Double(123.22));
+    hm.put("Jane Baker", new Double(1378.00));
+    hm.put("Tod Hall", new Double(99.22));
+    hm.put("Ralph Smith", new Double(-19.08));
+
+    // Get a set of the entries
+    Set set = hm.entrySet();
+
+    // Get an iterator
+    Iterator i = set.iterator();
+
+    // Display elements
+    while(i.hasNext()) {
+      Map.Entry me = (Map.Entry)i.next();  // this pulls boths keys and values into me
+      System.out.print(me.getKey() + ": ");
+      System.out.println(me.getValue());
+    }
+    System.out.println();
+
+    // Deposit 1000 into John Doe's account
+    double balance =  ((Double)hm.get("John Doe")).doubleValue();
+    hm.put("John Doe", new Double(balance + 1000));
+    System.out.println("John Doe's new balance: " +
+      hm.get("John Doe"));
+  }
+}</i>
+
+Output1:
+Tod Hall: 99.22
+Ralph Smith: -19.08
+John Doe: 3434.34
+Jane Baker: 1378.0
+Tom Smith: 123.22
+
+John Doe's new balance: 4434.34
+
+
+Example2:
+<i>import java.util.*;
+
+class TreeMapDemo {
+  public static void main(String args[]) {
+
+    // Create a tree map
+    TreeMap tm = new TreeMap();
+    
+    // Put elements to the map
+    tm.put("John Doe", new Double(3434.34));
+    tm.put("Tom Smith", new Double(123.22));
+    tm.put("Jane Baker", new Double(1378.00));
+    tm.put("Tod Hall", new Double(99.22));
+    tm.put("Ralph Smith", new Double(-19.08));
+
+    // Get a set of the entries
+    Set set = tm.entrySet();
+
+    // Get an iterator
+    Iterator i = set.iterator();
+
+    // Display elements
+    while(i.hasNext()) {
+      Map.Entry me = (Map.Entry)i.next();
+      System.out.print(me.getKey() + ": ");
+      System.out.println(me.getValue());
+    }
+    System.out.println();
+
+    // Deposit 1000 into John Doe's account
+    double balance =  ((Double)tm.get("John Doe")).doubleValue();
+    tm.put("John Doe", new Double(balance + 1000));
+    System.out.println("John Doe's new balance: " +
+      tm.get("John Doe"));
+  }
+}</i>
+
+Output2:
+Jane Baker: 1378.0
+John Doe: 3434.34
+Ralph Smith: -19.08
+Tod Hall: 99.22
+Tom Smith: 123.22
+
+John Doe's new balance: 4434.34
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Comparator: </b>
+
+* All classes implements this class
+* If you want to define your own sorting criteria
+
+Example: When the tree method sorts its data, it asks Comparator for the sorting criteria.
+If programmer has not defined one, then the default criteria (alphabetical order) is 
+implemented.
+
+
+Example1:
+<i>// Use a custom comparator.
+import java.util.*;
+
+// A reverse comparator for strings.
+class MyComp implements Comparator {
+  public int compare(Object a, Object b) {
+    String aStr, bStr;
+
+    aStr = (String) a;
+    bStr = (String) b;
+
+    // reverse the comparison
+    return bStr.compareTo(aStr);
+  }
+
+  // no need to override equals
+}
+
+class CompDemo {
+  public static void main(String args[]) {
+    // Create a tree set
+    TreeSet ts = new TreeSet(new MyComp());
+    
+    // Add elements to the tree set
+    ts.add("C");
+    ts.add("A");
+    ts.add("B");
+    ts.add("E");
+    ts.add("F");
+    ts.add("D");
+
+    // Get an iterator
+    Iterator i = ts.iterator();
+
+    // Display elements
+    while(i.hasNext()) {
+      Object element = i.next();
+      System.out.print(element + " ");
+    }
+    System.out.println();
+  }
+}</i>
+
+Output1:
+F E D C B A
+
+
+Example2:
+<i>// Use a comparator to sort accounts by last name.
+import java.util.*;
+
+// Compare last whole words in two strings.
+class TComp implements Comparator {
+  public int compare(Object a, Object b) {
+    int i, j, k;
+    String aStr, bStr;
+
+    aStr = (String) a;
+    bStr = (String) b;
+
+    // find index of beginning of last name
+    i = aStr.lastIndexOf(' ');
+    j = bStr.lastIndexOf(' ');
+
+    // compareTo() comapres the 2 alphabetically and returns int as 0, -1
+    k = aStr.substring(i).compareTo(bStr.substring(j));
+    if(k==0) // last names match, check entire name
+      return aStr.compareTo(bStr);
+    else
+      return k;
+  }
+
+  // no need to override equals
+}
+
+class TreeMapDemo2 {
+  public static void main(String args[]) {
+    // Create a tree map
+    TreeMap tm = new TreeMap(new TComp());
+    
+    // Put elements to the map
+    tm.put("John Doe", new Double(3434.34));
+    tm.put("Tom Smith", new Double(123.22));
+    tm.put("Jane Baker", new Double(1378.00));
+    tm.put("Tod Hall", new Double(99.22));
+    tm.put("Ralph Smith", new Double(-19.08));
+
+    // Get a set of the entries
+    Set set = tm.entrySet();
+
+    // Get an iterator
+    Iterator itr = set.iterator();
+
+    // Display elements
+    while(itr.hasNext()) {
+      Map.Entry me = (Map.Entry)itr.next();
+      System.out.print(me.getKey() + ": ");
+      System.out.println(me.getValue());
+    }
+    System.out.println();
+
+    // Deposit 1000 into John Doe's account
+    double balance =  ((Double)tm.get("John Doe")).doubleValue();
+    tm.put("John Doe", new Double(balance + 1000));
+    System.out.println("John Doe's new balance: " +
+      tm.get("John Doe"));
+  }
+}</i>
+
+Output2:
+Jane Baker: 1378.0
+John Doe: 3434.34
+Tod Hall: 99.22
+Ralph Smith: -19.08
+Tom Smith: 123.22
+
+John Doe's new balance: 4434.34
+
+
+NOTE: 
+1) The constructor of TreeMap used in the above example is:
+   TreeMap(Comparator c)
+   Constructs a new, empty map, sorted according to the given comparator.
+2) compareTo() does the following:
+   the value 0 if the argument string is equal to this string; a value less than 0 
+   if this string is lexicographically less than the string argument; and a value 
+   greater than 0 if this string is lexicographically greater than the string argument.
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>StringTokenizer: </b>
+
+Tokens are those parts that have a definite meaning. Tokens are also called lexers.
+
+When we parse a String like "He is a boy" there are 4 tokens when we parse on the basis
+of the delimiter " " (blank space).
+
+If String is "I am young;isn't it!" and the delimiter is ";" then we have 2 tokens,
+"I am young" and "isn't it!"
+
+
+java.lang.Object
+  |
+  +--java.util.StringTokenizer
+
+public class StringTokenizer extends Object implements Enumeration
+
+The string tokenizer class allows an application to break a string into tokens. 
+
+
+<b>Constructor Summary </b>
+
+StringTokenizer(String str) 
+Constructs a string tokenizer for the specified string. 
+
+StringTokenizer(String str, String delim) 
+Constructs a string tokenizer for the specified string. 
+
+StringTokenizer(String str, String delim, boolean returnTokens) 
+Constructs a string tokenizer for the specified string. 
+
+
+<b>Method Summary </b>
+
+int countTokens() 
+Calculates the number of times that this tokenizer's nextToken method can be called before 
+it generates an exception. 
+
+boolean hasMoreElements() 
+Returns the same value as the hasMoreTokens method. 
+
+boolean hasMoreTokens() 
+Tests if there are more tokens available from this tokenizer's string. 
+
+Object nextElement() 
+Returns the same value as the nextToken method, except that its declared return value is 
+Object rather than String. 
+
+String nextToken() 
+Returns the next token from this string tokenizer. 
+
+String nextToken(String delim) 
+Returns the next token in this string tokenizer's string. 
+
+
+Example:
+<i>// Demonstrate StringTokenizer.
+import java.util.StringTokenizer;
+
+class STDemo {
+  static String in = "title=Java: The Complete Reference;" +
+    "author=Naughton and Schildt;" +
+    "publisher=Osborne/McGraw-Hill;" +
+    "copyright=1999";
+
+  public static void main(String args[]) {
+    StringTokenizer st = new StringTokenizer(in, "=;");
+
+    while(st.hasMoreTokens()) {
+      String key = st.nextToken();
+      String val = st.nextToken();
+      System.out.println(key + "\t" + val);
+    }
+  }
+}</i>
+
+Output:
+title   Java: The Complete Reference
+author  Naughton and Schildt
+publisher       Osborne/McGraw-Hill
+copyright       1999
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Date Class: </b>
+
+java.lang.Object
+  |
+  +--java.util.Date
+
+public class Date extends Object implements Serializable, Cloneable, Comparable
+
+The class Date represents a specific instant in time, with millisecond precision. 
+
+
+NOTE: Most of the methods and constructors here are deprecated. They have been replaced by
+the Calender class.
+
+
+Date() 
+Allocates a Date object and initializes it so that it represents the time at which it was 
+allocated, measured to the nearest millisecond.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Locale Class: </b>
+
+java.lang.Object
+  |
+  +--java.util.Locale
+
+
+public final class Locale extends Object implements Cloneable, Serializable
+
+A Locale object represents a specific geographical, political, or cultural region. An 
+operation that requires a Locale to perform its task is called locale-sensitive and uses 
+the Locale to tailor information for the user. For example, displaying a number is a 
+locale-sensitive operation--the number should be formatted according to the 
+customs/conventions of the user's native country, region, or culture. 
+
+This is applied towards internationalization of Java.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Calendar Class: </b>
+
+java.lang.Object
+  |
+  +--java.util.Calendar
+
+public abstract class Calendar extends Object implements Serializable, Cloneable
+
+Calendar is an abstract base class for converting between a Date object and a set of integer 
+fields such as YEAR, MONTH, DAY, HOUR, and so on. 
+
+
+NOTE: The field summary for this class in really long, where you can specify hour, day etc.
+
+
+<b>Constructor Summary </b>
+
+protected  Calendar() 
+Constructs a Calendar with the default time zone and locale. 
+
+protected  Calendar(TimeZone zone, Locale aLocale) 
+Constructs a calendar with the specified time zone and locale. 
+
+
+<b>Method SUmmary</b>
+
+abstract  void add(int field, int amount) 
+Date Arithmetic function. 
+
+boolean equals(Object obj) 
+Compares this calendar to the specified object. 
+
+int get(int field) 
+Gets the value for a given time field 
+
+
+NOTE: We do not use this class directly, we use these methods using GregorianCalendar class
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>GregorianCalendar Class: </b>
+
+java.lang.Object
+  |
+  +--java.util.Calendar
+        |
+        +--java.util.GregorianCalendar
+
+
+public class GregorianCalendar extends Calendar
+
+GregorianCalendar is a concrete subclass of Calendar and provides the standard calendar 
+used by most of the world. 
+
+The standard (Gregorian) calendar has 2 eras, BC and AD. 
+
+</pre>
+
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

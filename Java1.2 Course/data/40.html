@@ -1,0 +1,154 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 40</h2>
+
+<h3>Saturday, June 16th, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Networking: </b>
+
+Connecting 2 or more computers using media devices for file sharing, messaging etc. is called
+Networking. This concept started from Unix in 1969. Internet is also a network.
+
+Protocols are like languages used for communication purposes. If the same protocol is not 
+being used, the computers will not be able to talk to each other.
+
+TCP/IP are 2 protocols that work together. Internet uses TCP/IP for communication. It started
+from Unix.
+
+Other protocols:
+* Netbeus - Microsoft
+* IPX/SPX - Novell
+* Apple Talk - Mac
+
+For networks with multiple OS, individual OS will have support for the common protocol.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Miscellaneous: </b>
+
+<b>OSI Layers:</b>
+DO NOT THROW SAUSAGE PIZZA AWAY
+
+* Application
+* Presentation
+* Session
+* Transport
+* Network
+* Datalink
+* Physical
+
+This does not exist physically. This is the core of networking. All protocols work under
+this system. 
+
+
+<b>UDP vs TCP/IP: </b>
+UDP and TCP/IP are in the same layer, the Transport layer. TCP/IP is more reliable since it 
+checks whether the packet has reached its destination successfully or not. In computer terms
+TCP/IP is connection oriented and UDP is connection-less. UDP is faster than TCP/IP since
+it does not waste bandwidth over acknowledgement. This is used over voice conversations 
+like over the net. Keep in mind that TCP/IP is used to connect over the net, but the software
+being used like MSN uses UDP to connect to its server.
+
+
+<b>Client/Server: </b>
+Peer to Peer
+When there is no central server. All computers are clients and servers as well.
+
+Client/Server situation is when there is a central server that is used as a domain controller
+to connect all the computers together.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Socket: </b>
+
+http://www.yahoo.com:80 as a whole makes a socket. A socket has three sections:
+* http
+* www.yahoo.com
+* 80  <-- port number
+If any of the above three have an error, you get a socket error as the socket is not complete.
+
+Internet has the following services:
+* www - images, animations, html	- Port 80
+* ftp - file transfer protocol		- Port 21
+* telnet - text only			- Port 25
+* email
+
+Each service has an assigned port number. When we type www.yahoo.com, we get redirected 
+to the yahoo homepage. This is because port 80 of the server is called. The port numbers
+are assigned by the administrator of the server. If the administrator wants he can assign 
+port 1000 to www. You cannot assign the same port number to 2 services, this will cause an
+error. If you assign 1000 to www, then the socket will be written as http://www.abc.com:1000
+The port number shown in the above table are default port numbers that all admins should use
+if they want to comply with the norm.
+
+There are 1 to 65350 ports that can be defined. Well-defined ports are from 1 to 1024.
+SMTP and POP are also assigned ports.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Domain Name Service (DNS): </b>
+
+Every computer connected to the net has a unique IP address. To connect to a server you have
+to use its IP address. When connecting to websites IP addresses are very rarely used. Usually
+domain names are used as they are easier to remember.
+
+DNS resolves a domain names (www.yahoo.com) into IP addresses. The DNS server has a database
+of all IP addresses for domain names. When a browser trys to connect to a server using its
+domain name, a request is sent to the DNS server which then in turn returns the IP address
+of the server back to the computer which will now be able to connect to the server directly.
+
+There are approx 8 DNS servers that are categorized by .com .edu .org .gov .net etc.
+These DNS servers are owned and controlled by Network Solutions. You can go to the IEEE
+site to see the details of how DNS servers are controlled.
+
+When the DNS server gets the request, it first checks whether the domain name ends in .com
+.net etc and then redirects the request to the specific server that resolves it.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>IP addressing: </b>
+
+On an intranet, you can assign any IP address as long it does not conflict within the
+intranet. On the internet this is not the case. IP addresses are administered by InterNIC.
+InterNIC has created 3 classes:
+				128  64  32  16  8  4  2  1	Subnet Mask
+Class A		1 to 126	  0   1   1   1  1  1  1  1	255.0.0.0
+Class B		128 to 192	  1   0   1   1  1  1  1  1	255.255.0.0
+Class C		193 to 223	  1   1   0   1  1  1  1  1	255.255.255.0
+
+</pre>
+
+
+
+</body>
+</html>

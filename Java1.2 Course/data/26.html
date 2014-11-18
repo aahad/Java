@@ -1,0 +1,198 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 26</h2>
+
+<h3>Thursday, May 3rd, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Introduction to Applets: </b>
+
+First used for the web, executed on the browser
+
+To view an applet there are 3 techniques:
+
+<b>1) View applet in browser</b>
+&ltapplet codebase="." code=SimpleApplet.class width=460 height=50&gt &lt/applet&gt
+
+Example1:
+<i>import java.awt.*;
+import java.applet.*;
+
+public class SimpleApplet extends Applet {
+  public void paint(Graphics g) {
+    g.drawString("Abdul's Simple Applet", 20, 20);
+    g.draw3DRect(5, 5, 200, 50, true);
+    int[] Xarray = {20,30,40};
+    int[] Yarray = {40,20,40};
+    g.drawPolygon( Xarray, Yarray, 3);
+  }
+}</i>
+
+Output1:
+<applet codebase="." code=SimpleApplet.class width=460 height=100></applet>
+
+
+<b>2) Use appletviewer </b>
+Once you have created the .class file and the html file, on the command prompt type:
+appletviewer htmlfilename.html
+
+
+<b>3) Use appletviewer without creating html</b>
+Define the html code with comment tags, compile to .class file and then run the .java file
+using the appletviwer.exe file.
+
+Example2:
+<i>import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="SimpleApplet.java" width=200 height=60&gt
+&lt/applet&gt
+*/
+
+public class SimpleApplet extends Applet {
+  public void paint(Graphics g) {
+    g.drawString("A Simple Applet", 20, 20);
+  }
+}</i>
+
+On the command line type the following:
+> javac SimpleApplet.java
+> appletviewer SimpleApplet.java
+
+
+NOTE: In the html applet tag in techniques 2 and 3 above, you even if you don't specify the
+.class extension, it works, ie. 
+&ltapplet codebase="." code=<b>SimpleApplet</b> width=460 height=50&gt &lt/applet&gt
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Applet methods: </b>
+
+NOTE: To see all the code for Java built-in methods and classes, find the src.jar file
+in the jdk folder and type the following line:
+jar xf src.jar
+
+This will uncompress the jar file and now you will be able to see the source code.
+
+Applet hirarchy:
+
+java.lang.Object
+  |
+  +--java.awt.Component
+        |
+        +--java.awt.Container
+              |
+              +--java.awt.Panel
+                    |
+                    +--java.applet.Applet
+
+
+<b>init() method:</b>
+Called by the browser or applet viewer to inform this applet that it has been loaded 
+into the system
+
+
+<b>destroy()</b>
+Called by the browser or applet viewer to inform this applet that it is being reclaimed 
+and that it should destroy any resources that it has allocated
+
+<b>setForeground(Color c)</b>
+Defined in the init method. Sets the foreground color of this component.
+eg. setForground(Color.white);
+Also Color red = new Color(256,0,0);  <-- ie. (Red, Green, Blue)
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Applet structure: </b>
+
+<i>// An Applet skeleton.
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="AppletSkel" width=300 height=100&gt
+&lt/applet&gt
+*/
+
+public class AppletSkel extends Applet {
+  // Called first.
+  public void init() {
+    // initialization
+  }
+
+  /* Called second, after init().  Also called whenever
+     the applet is restarted. */
+  public void start() {
+    // start or resume execution
+  }
+
+  // Called when the applet is stopped.
+  public void stop() {
+    // suspends execution
+  }
+
+  /* Called when applet is terminated.  This is the last
+     method executed. */
+  public void destroy() {
+    // perform shutdown activities
+  }
+
+  // Called when an applet's window must be restored.
+  public void paint(Graphics g) {
+    // redisplay contents of window
+  }
+}</i>
+
+
+Example:
+<i>/* A simple applet that sets the foreground and
+   background colors and outputs a string. */
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="Sample" width=300 height=50&gt
+&lt/applet&gt
+*/
+
+public class Sample extends Applet{
+  String msg;
+
+  // set the foreground and background colors.
+  public void init() {
+    setBackground(Color.cyan);
+    setForeground(Color.red);
+    msg = "Inside init( ) --";
+  }
+
+  // Initialize the string to be displayed.
+  public void start() {
+    msg += " Inside start( ) --";
+  }
+
+  // Display msg in applet window.
+  public void paint(Graphics g) {
+    msg += " Inside paint( ).";
+    g.drawString(msg, 10, 30);
+  }
+}</i>
+
+</pre>
+
+</body>
+</html>

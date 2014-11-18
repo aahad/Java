@@ -1,0 +1,245 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 8</h2>
+
+<h3>Saturday , March 17th, 2001</h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Object sent as method argument: </b>
+
+Example:
+String obj1 = new String("abc");
+method(obj1);
+
+NOTE: The name you give the constructed object is called the object reference.
+In the above example, obj1 is the object reference, String("abc") is the 
+constructor, new is a keyword and String is the object class.
+
+When a primitive is passed to a method and the method changes the values,
+the actual primitive does not change because only a copy is sent. Primitives
+don't have addresses (references).
+
+When an object is passed to a method and the method changes the values,
+the actual object does change. This is because objects have their own
+addresses, which are passed to the method. So when the method changes the 
+value, it actually changes the address, so in turn the original object also changes.
+
+
+Example 2:
+<i>// Objects are passed by reference.
+
+class Test {
+  int a, b;
+
+  Test(int i, int j) {
+    a = i;
+    b = j;
+  }
+
+  // pass an object
+  void meth(Test o) {
+    o.a *=  2;	// Although we are just changing o, ob also changes
+    o.b /= 2;
+  }
+}
+
+class CallByRef {
+  public static void main(String args[]) {
+    Test ob = new Test(15, 20);
+    
+    System.out.println("ob.a and ob.b before call: " +
+                       ob.a + " " + ob.b);
+
+    ob.meth(ob); 
+
+    System.out.println("ob.a and ob.b after call: " +
+                       ob.a + " " + ob.b);
+  }
+}</i>
+
+
+Output:
+ob.a and ob.b before call: 15 20
+ob.a and ob.b after call: 30 10
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Access Modifiers: </b>
+
+4 types:
+* public
+   - everyone can access it from anywhere, any location
+* protected
+   - to access another class in another package
+   - the other class is the parent of the current class being used
+* package/friendly
+   - accessing another class within the current pacakage
+* private
+   - most encapsulated
+   - cannot be accessed by anyone
+
+NOTE: The top-level class (which has the main method) cannot be private or protected.
+The main method is always public.
+
+Access modifiers are used on both classes and methods.
+
+package statement
+import statement
+
+eg. to use the Vector class we use:
+import java.io.*;
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Additional Modifiers: </b>
+
+abstract
+native
+syncronized
+static
+non-static
+transient
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>abstract: </b>
+
+   Like all living things eat, but to define how they eat, you can't. Because they
+   all eat diferently. This is the case with abstract.
+   abstract void eat(); <--- note that there is no body
+
+   If any method in a class is abstract, the whole class becomes abstract. For an 
+   abstract class, there can be no constructor or object. It can only be used for
+   reference purposes. 
+
+   If the abstract class has a child, it is upto the child to provide a body for all
+   the classes in the parent class, which are all abstract. If the child fails to 
+   provide a body for even one of the parent's methods, it will itself become abstract.
+
+Example:
+<i>abstract class livingthing {
+  abstract void eat(); // if one is abstract, everything has to be abstract
+  abstract void move();
+}
+
+class Animal extends livingthing{
+  /* If child fails to provide a body for all methods in its abstract parent,
+     child will have to be abstract and thus all methods inside child will
+     have to be abstract */
+
+  void eat(){ // provide body for eat method which is abstract in parent
+	System.out.println("Living things eat.");
+  }
+
+  void move(){ // provide body for move method which is abstract in parent
+	System.out.println("Living things move.");
+  }
+
+  public static void main(String args[]){
+	Animal obj1 = new Animal(); // object cannot be defined for abstract parent
+	obj1.eat();
+	obj1.move();
+  }
+
+}</i>
+
+Output:
+Living things eat.
+Living things move.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>interface: </b>
+
+methods cannot be defined in an interface. They are all abstract methods.
+The body for those methods are defined by a class that says:
+class myclass implements interface1 { }
+
+<i>interface i{
+   abstract void meth1();
+   abstract void meth2();
+}
+
+class myclass implement i{
+
+   void meth1(){
+  	----
+	----
+   }
+
+   void meth2(){
+  	----
+	----
+   }
+
+   public static void main(String args[]){
+	----
+	----
+   }
+
+}</i>
+
+NOTE: The interface is not called abstract
+Just like before, the bodies for all methods in the interface (which are also abstract)
+have to be defined in the child class or else the child will have to be abstract as well.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Value passed to an abstract class: </b>
+
+<i>abstract class livingthing {
+  abstract void eat(int i);
+}
+
+class Animal extends livingthing{
+
+  void eat(int i){ 
+	System.out.println(i);
+  }
+
+  public static void main(String args[]){
+	Animal obj1 = new Animal(); 
+	obj1.eat(10);
+  }
+
+}</i>
+
+</pre>
+
+
+</body>
+</html>

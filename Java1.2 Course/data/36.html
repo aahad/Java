@@ -1,0 +1,367 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 36</h2>
+
+<h3>Sunday, May 27th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>InputStream Class: </b>
+
+<b>Method Summary:</b>
+
+read()
+Reads the next byte of data from the input stream
+
+read(byte[] b)
+to read data from the buffer stored by the input stream 
+
+available() 
+returns the amount of data available to the input stream
+
+mark(int readlimit)
+Marks the current position in the input stream
+This is the number of bytes that the input stream should pick up. If it does not
+recieve any new info from the use before this limit is reached, it will flush
+the buffer. This is usually done automatically by JVM.
+
+
+Example:
+<i>// Demonstrate FileInputStream.
+import java.io.*;
+
+class FileInputStreamDemo {
+  public static void main(String args[]) throws Exception {
+    int size;
+    InputStream f =
+      new FileInputStream("FileInputStreamDemo.java");
+
+    System.out.println("Total Available Bytes: " +
+                       (size = f.available()));
+    int n = size/40;
+    System.out.println("First " + n +
+                       " bytes of the file one read() at a time");
+    for (int i=0; i < n; i++) {
+      System.out.print((char) f.read());
+    }
+    System.out.println("\nStill Available: " + f.available());
+    System.out.println("Reading the next " + n +
+                       " with one read(b[])");
+    byte b[] = new byte[n];
+    if (f.read(b) != n) {
+      System.err.println("couldn't read " + n + " bytes.");
+    }
+    System.out.println(new String(b, 0, n));
+    System.out.println("\nStill Available: " + (size = f.available()));
+    System.out.println("Skipping half of remaining bytes with skip()");
+    f.skip(size/2);
+    System.out.println("Still Available: " + f.available());
+    System.out.println("Reading " + n/2 + " into the end of array");
+    if (f.read(b, n/2, n/2) != n/2) {
+      System.err.println("couldn't read " + n/2 + " bytes.");
+    }
+    System.out.println(new String(b, 0, b.length));
+    System.out.println("\nStill Available: " + f.available());
+    f.close();
+  }
+}
+</i>
+
+Output:
+Total Available Bytes: 1431
+First 35 bytes of the file one read() at a time
+// Demonstrate FileInputStream.
+im
+Still Available: 1396
+Reading the next 35 with one read(b[])
+port java.io.*;
+
+class FileInputS
+
+Still Available: 1361
+Skipping half of remaining bytes with skip()
+Still Available: 681
+Reading 17 into the end of array
+port java.io.*;
+Sread(b) != n) {
+
+Still Available: 664
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>FileOutputStream Class: </b>
+
+Example:
+<i>// Demonstrate FileOutputStream.
+import java.io.*;
+
+class FileOutputStreamDemo {
+  public static void main(String args[]) throws Exception {
+    String source = "Now is the time for all good men\n"
+      + " to come to the aid of their country\n"
+      + " and pay their due taxes.";
+    byte buf[] = source.getBytes();
+    OutputStream f0 = new FileOutputStream("file1.txt");
+    for (int i=0; i < buf.length; i += 2) {
+      f0.write(buf[i]);
+    }
+    f0.close();
+
+    OutputStream f1 = new FileOutputStream("file2.txt");
+    f1.write(buf);
+    f1.close();
+
+    OutputStream f2 = new FileOutputStream("file3.txt");
+    f2.write(buf,buf.length-buf.length/4,buf.length/4);
+    f2.close();
+  }
+}
+</i>
+
+Output:
+file1.txt:
+Nwi h iefralgo e
+t oet h i ftercuty n a hi u ae.
+
+file2.txt:
+Now is the time for all good men
+ to come to the aid of their country
+ and pay their due taxes.
+
+file3.txt:
+nd pay their due taxes.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Swings: </b>
+
+javax.swing package
+
+heavy weight components
+* AWT components
+* takes more resources
+* there is a time delay when accessing the components as they are accessed from the
+  local OS
+* this was used to give user the same feel for components as the local OS components
+
+light weight components - Swings
+* has Java defined components, not local OS defined
+* same feel on every OS
+* plaf
+    - pluggable look and feel
+    - you can make components look like linux components on a win2k machine for example
+* can make user defined components
+* also has the BoxLayout layout manager, which is pretty easy to use
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Swing's Layering model: </b>
+
+Also called containment model
+
+Different tasks are given to different layers:
+1) Content pane
+2) Mouse pane - takes care of mouse events
+3) Glass pane - eg. toolkit
+
+
+getContentPane()
+picks up the reference for the content pane so that you can add content to it
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>First Swing Applet - JButton: </b>
+
+Component
+    |
+    +-- Container
+	    |
+	    +-- JComponent  <-- all swings extend to this
+
+
+Example:
+<i>import java.awt.*; // to get the coponent class
+import java.awt.event.*; // for event handling
+import javax.swing.*;
+/*
+  &ltapplet code="JButtonDemo1" width=250 height=300&gt
+  &lt/applet&gt
+*/
+  
+public class JButtonDemo1 extends JApplet 
+implements ActionListener {
+  JTextField jtf;
+
+  public void init() {
+
+    // Get content pane
+    Container contentPane = getContentPane();
+    contentPane.setLayout(new FlowLayout());
+
+    // Add buttons to content pane
+    ImageIcon cake = new ImageIcon("cake.gif");
+    JButton jb = new JButton("Cake",cake);
+    jb.setActionCommand("cake");
+    jb.setMnemonic (KeyEvent.VK_C);  // sets hotkey to ALT+C, puts underscore under C of Cake
+    jb.setToolTipText("This is a JButton with Cake Icon"); 
+    jb.addActionListener(this);
+    contentPane.add(jb);
+
+    ImageIcon burger = new ImageIcon("burger.gif");
+    jb = new JButton("Burger",burger);
+    jb.setActionCommand("burger");
+    jb.setMnemonic (KeyEvent.VK_B); 
+    jb.setToolTipText("This is a JButton with Burger Icon"); 
+    jb.addActionListener(this);
+    contentPane.add(jb);
+
+    ImageIcon pizza = new ImageIcon("pizza.gif");
+    jb = new JButton("Pizza", pizza);
+    jb.setActionCommand("pizza");
+    jb.setMnemonic (KeyEvent.VK_P);
+    jb.setToolTipText("This is a JButton with Pizza Icon"); 
+    jb.addActionListener(this);
+    contentPane.add(jb);
+
+    ImageIcon fries = new ImageIcon("fries.gif");
+    jb = new JButton("Fries", fries);
+    jb.setActionCommand("fries");
+    jb.setMnemonic (KeyEvent.VK_F);
+    jb.setToolTipText("This is a JButton with Fries Icon"); 
+    jb.addActionListener(this);
+    contentPane.add(jb);
+ 
+     // Add text field to content pane
+    jtf = new JTextField(15);
+    contentPane.add(jtf);
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    jtf.setText(ae.getActionCommand());
+  }
+}
+</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>JRadioButton: </b>
+
+Example:
+<i>import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+/*
+  &ltapplet code="JRadioButtonDemo" width=300 height=50&gt
+  &lt/applet&gt
+*/
+  
+public class JRadioButtonDemo extends JApplet 
+implements ActionListener {
+  JTextField tf;
+
+  public void init() {
+
+    // Get content pane
+    Container contentPane = getContentPane();
+    contentPane.setLayout(new FlowLayout());
+
+    // Create icons
+    ImageIcon normal = new ImageIcon("duke2.gif");
+    ImageIcon rollover = new ImageIcon("dukeWaveRed.gif");
+    ImageIcon selected = new ImageIcon("dukeWave.gif");
+   
+    // Add radio buttons to content pane
+    JRadioButton b1 = new JRadioButton("A",normal);
+    b1.setRolloverIcon(rollover);
+    b1.setSelectedIcon(selected); 
+    b1.setToolTipText("This is a RadioButton with Icon"); 
+    b1.setMnemonic (KeyEvent.VK_A);
+    b1.addActionListener(this);
+    contentPane.add(b1);
+
+    JRadioButton b2 = new JRadioButton("B",normal);
+    b2.setRolloverIcon(rollover);
+    b2.setSelectedIcon(selected);
+    b2.setToolTipText("This is a RadioButton with Icon");
+    b2.setMnemonic (KeyEvent.VK_B);
+    b2.addActionListener(this);
+    contentPane.add(b2);
+
+    JRadioButton b3 = new JRadioButton("C",normal);
+    b3.setRolloverIcon(rollover);
+    b3.setSelectedIcon(selected);
+    b3.setToolTipText("This is a RadioButton with Icon");
+    b3.setMnemonic (KeyEvent.VK_C);
+    b3.addActionListener(this);
+    contentPane.add(b3);
+      
+    // Define a button group
+    ButtonGroup bg = new ButtonGroup();
+    bg.add(b1);
+    bg.add(b2);
+    bg.add(b3);
+
+    // Create a text field and add it 
+    // to the content pane
+    tf = new JTextField(5);
+    contentPane.add(tf);
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    tf.setText(ae.getActionCommand());
+  }
+}
+</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

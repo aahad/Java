@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+       "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+
+<head>
+<meta content="text/html;charset=iso-8859-1" http-equiv="Content-Type">
+<title>Technical Introduction</title>
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<meta content="Microsoft FrontPage 4.0" name="GENERATOR">
+</head>
+
+<body aLink="#0000ff" bgColor="#ffffff" link="#ff0000" text="#000000" vLink="#808080">
+<center>
+
+<table border="0" cellPadding="0" cellSpacing="0">
+<tbody>
+  <tr>
+    <td align="left" vAlign="top" width="640"><a href="/unicode/contents.html"><img alt="Contents" border="0" src="/img/nb_cont.gif" WIDTH="77" HEIGHT="24"></a><a href="/unicode/standard/standard.html"><img alt="Standard" border="0" src="/img/nb_stan.gif" WIDTH="126" HEIGHT="24"></a><a href="/unicode/uni2errata/UnicodeErrata.html"><img alt="Updates and Errata" border="0" src="/img/nb_updt.gif" WIDTH="138" HEIGHT="24"></a><a href="/unicode/techwork.html"><img alt="Technical Work" border="0" src="/img/nb_tech.gif" WIDTH="112" HEIGHT="24"></a><a href="/unicode/onlinedat/online.html"><img alt="Online Data" border="0" src="/img/nb_onln.gif" WIDTH="92" HEIGHT="24"></a><a href="/unicode/conf.html"><img alt="Conferences" border="0" src="/img/nb_conf.gif" width="90" height="24"></a> 
+      <p>&nbsp;</p>
+ </td>
+  </tr>
+</tbody>
+</table>
+</center>
+
+<table border="0" cellspacing="5" cellpadding="5">
+<tbody>
+  <tr>
+    <td vAlign="center"><img alt="Standard.Small.gif (3252 bytes)" src="../../img/Standard.Small.gif" width="72" height="72"></td>
+    <td align="left" vAlign="center" width="559"><h1 align="left"><i>The Unicode®
+    Standard</i>&nbsp;</h1>
+    <h1 align="left">A Technical Introduction</h1>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p>This is intended as a concise source of information about the Unicode®
+  Standard. It is neither a comprehensive definition of, nor a technical guide to the
+  Unicode Standard. The authoritative source of information is <a href="/unicode/uni2book/u2.html"><i>The Unicode Standard, Version 3.0</i></a>, Addison
+  Wesley Longman Publisher, 2000. The book may be ordered from the Consortium by using the <a href="/unicode/uni2book/u2ord.html">book
+  order form.</a>&nbsp;</p>
+  <p>
+  For more information, also see the <a href="../faq">FAQ</a>, the <a href="../../glossary/index.html">Glossary</a>, and <a href="versions/Unicode3.0.html">New
+  in 3.0</a>.</p>
+</blockquote>
+
+<hr width="11%">
+
+<p>The Unicode Standard is the universal character encoding standard used for
+representation of text for computer processing. It is fully compatible with the
+second edition of International Standard ISO/IEC 10646-1:2000, and contains all the same characters and
+encoding points as ISO/IEC 10646. The Unicode Standard also provides additional
+information about the characters and their use. Any implementation that is conformant to
+Unicode is also conformant to ISO/IEC 10646.</p>
+
+<p>Unicode provides a consistent way of encoding multilingual plain text and brings
+order to a chaotic state of affairs that has made it difficult to exchange text files
+internationally. Computer users who deal with multilingual text -- business people,
+linguists, researchers, scientists, and others -- will find that the Unicode Standard
+greatly simplifies their work. Mathematicians and technicians, who regularly use
+mathematical symbols and other technical characters, will also find the Unicode Standard
+valuable.</p>
+
+<p>The design of Unicode is based on the simplicity and consistency of ASCII, but
+goes far beyond ASCII's limited ability to encode only the Latin alphabet. The Unicode
+Standard provides the capacity to encode all of the characters used for the written
+languages of the world. It uses a default 16-bit encoding that provides code points for more than
+65,000 characters. To keep character coding simple and efficient, the Unicode Standard
+assigns each character a unique numeric value and name.</p>
+
+<p>While 65,000 characters are sufficient for encoding most of the many thousands of
+characters used in major languages of the world, the Unicode standard and ISO 10646
+provide an extension mechanism called UTF-16 that allows for encoding as many as a million
+more characters, without use of complex modes or escape codes. This is sufficient for all known character
+encoding requirements, including full coverage of all historic scripts of the world.</p>
+
+<h3>What Characters Does the Unicode Standard Include?</h3>
+
+<p>The Unicode Standard defines codes for characters used in the major
+languages written today. Scripts include the
+European alphabetic scripts, Middle Eastern right-to-left scripts, and scripts
+of Asia.</p>
+
+<p>The Unicode Standard also includes punctuation marks, diacritics, mathematical
+symbols, technical symbols, arrows, dingbats, etc. It provides codes for diacritics, which
+are modifying character marks such as the tilde (~), that are used in conjunction with
+base characters to encode accented or vocalized letters (ñ, for example). In all, the
+Unicode Standard provides codes for 49,194 characters from the world's alphabets,
+ideograph sets, and symbol collections.</p>
+
+<p>There are about 8,000 unused code values for future expansion in the basic 16-bit
+encoding, plus provision for another 917,476 code values through the UTF-16 extension
+mechanism. The Unicode Standard also reserves 6,400 code values for private use, which
+software and hardware developers can assign internally for their own characters and
+symbols. UTF-16 makes another 131,068 private use code values available, should 6,400 be
+insufficient for particular applications.</p>
+
+<h3>Encoding Forms</h3>
+
+<p>Character encoding standards define not only the identity of each character
+and its numeric value, or code position, but also how this value is represented in bits.
+The Unicode Standard, Version 3.0 defines two encoding forms that correspond to ISO 10646
+<i>transformation
+formats</i>, UTF-8 and UTF-16.</p>
+
+<p>The ISO/IEC 10646 transformation formats UTF-8 and UTF-16 are essentially ways of
+turning the encoding into the actual bits that are used in implementation.
+UTF-16 assumes 16-bit code values and allows for a certain range of characters
+to be used as an extension mechanism in order to access an additional million characters
+using 16-bit character pairs.</p>
+
+<p>The other transformation format is known as UTF-8. This is a way of transforming
+all Unicode characters into a variable length encoding of bytes. It has the advantages
+that the Unicode characters corresponding to the familiar ASCII set have the same
+byte values as ASCII, and that Unicode characters transformed into UTF-8 can be used with
+much existing software without extensive software rewrites. The Unicode Consortium
+fully endorses the use of UTF-8 as a way of implementing the Unicode Standard. Any Unicode
+character expressed in the 16-bit UTF-16 form can be converted to the UTF-8 form and back
+without loss of information.</p>
+
+<h3>Design Basis</h3>
+
+<p>To make it possible to successfully encode, process, and interpret text, a
+character set should be universal, efficient, uniform and unambiguous. These requirements are the basis for the design of the Unicode Standard.</p>
+
+<h3>Defining Elements of Text</h3>
+
+<p>Written languages are represented by textual elements that are used to create
+words and sentences. These elements may be letters such as &quot;w&quot; or &quot;M&quot;;
+characters such as those used in Japanese Hiragana to represent syllables; or ideographs
+such as those used in Chinese to represent full words or concepts.</p>
+
+<p>The definition of <i>text elements</i> often changes depending on the process
+handling the text. For example, in historic Spanish language sorting, &quot;ll&quot;;
+counts as a single text element. However, when Spanish words are typed, &quot;ll&quot; is
+two separate text elements: &quot;l&quot; and &quot;l&quot;.</p>
+
+<p>To avoid deciding what is and is not a text element in different processes, the
+Unicode Standard defines <i>code elements</i> (commonly called &quot;characters&quot;).
+A code element is fundamental and useful for computer text processing. For the most part,
+code elements correspond to the most commonly used text elements. In the case of the
+Spanish &quot;ll&quot;, the Unicode Standard defines each &quot;l&quot; as a separate code
+element. The task of combining two &quot;l&quot; together for alphabetic sorting is left
+to the software processing the text. As another example, each upper- and lowercase letter
+in the English alphabet is a single code element.</p>
+
+<h3>Text Processing</h3>
+
+<p>Computer text handling involves processing and encoding. Consider, for example, a
+word processor user typing text at a keyboard. The computer's system software receives a
+message that the user pressed a key combination for &quot;T&quot;, which it encodes as
+U+0054. The word processor stores the number in memory, and also passes it on to the
+display software responsible for putting the character on the screen. The display
+software, which may be a window manager or part of the word processor itself, uses the
+number as an index to find an image of a &quot;T&quot;, which it draws on the monitor
+screen. The process continues as the user types in more characters.</p>
+
+<p>The Unicode Standard directly addresses only the encoding and semantics text. It
+addresses no other action performed on the text. For example, the word processor may check
+the typist's input after it has been encoded to look for misspelled words, and then beep
+if it finds any. Or it may insert line breaks when it counts a certain number of
+characters entered since the last line break. An important principle of the Unicode
+Standard is that it does not specify how to carry out these processes as long as the
+character encoding and decoding is performed properly.</p>
+
+<h3>Interpreting Characters and Rendering Glyphs</h3>
+
+<p>The difference between identifying a code value and rendering it on screen or
+paper is crucial to understanding the Unicode Standard's role in text processing. The
+character identified by a Unicode code value is an abstract entity, such as &quot;LATIN
+CHARACTER CAPITAL A&quot; or &quot;BENGALI DIGIT 5.&quot; The mark made on screen or paper
+-- called a <i>glyph</i> -- is a visual representation of the character.</p>
+
+<p>The Unicode Standard does not define glyph images. The
+standard defines how characters are interpreted, not how glyphs are rendered. The software
+or hardware-rendering engine of a computer is responsible for the appearance of the
+characters on the screen. The Unicode Standard does not specify the size, shape, nor
+orientation of on-screen characters.</p>
+
+<h3>Creating Composite Characters</h3>
+
+<p>Text elements may be encoded as composed character sequences; in presentation, the
+multiple characters are rendered together. For example, &quot;â&quot; is a <i> composite
+character</i> created by rendering &quot;a&quot; and &quot;^&quot; together. A
+composed character sequence is typically made up of a base letter, which occupies a single
+space, and one or more non-spacing marks, which are rendered in the same space as the base
+letter.</p>
+
+<p>The Unicode Standard specifies the order of characters used to create a composite
+character. The base character comes first, followed by one or more non-spacing marks. If a
+text element is encoded with more than one non-spacing mark, the order in which the
+non-spacing marks are stored isn't important if the marks don't interact typographically.
+If they do, order is important. The Unicode Standard specifies how competing non-spacing
+characters are applied to a base character.</p>
+
+<p><i>Precomposed characters</i> are another option for some composite characters.
+Each precomposed character is represented by a single code value rather than two or more
+code values which may combine during rendering. For example, the character &quot;ü&quot;
+can be encoded as the single code value U+00FC &quot;ü&quot; or as the base character
+U+0075 &quot;u&quot; followed by the non-spacing character U+0308 &quot;¨&quot;. The
+Unicode Standard offers precomposed characters to retain compatibility with established
+standards such as Latin 1, which includes many precomposed characters such as
+&quot;ü&quot; and &quot;ñ&quot;.</p>
+
+<p>Precomposed characters may be decomposed for consistency or analysis. For example,
+a word processor importing a text file containing the precomposed character &quot;ü&quot;
+may decompose that character into a &quot;u&quot; followed by the non-spacing character
+&quot;¨&quot;. Once the character has been decomposed, it may be easier for the word
+processor to work with the character because the word processor can now easily recognize
+the character as a &quot;u&quot; with modifications. This allows easy alphabetical sorting
+for languages where character modifiers do not affect alphabetical order. The Unicode
+Standard defines decomposition for all precomposed characters.</p>
+
+<h3>Principles of the Unicode Standard</h3>
+
+<p>The Unicode Standard was created by a team of computer professionals, linguists,
+and scholars to become a worldwide character standard, one easily used for text encoding
+everywhere. To that end, the Unicode Standard follows a set of fundamental principles:</p>
+
+<blockquote>
+    <center>
+  <table border="0">
+<tbody>
+    <tr>
+      <td align="left"><ul>
+        <li><p align="left"><i>Sixteen-bit characters</i></p>
+        </li>
+      </ul>
+      </td>
+      <td align="left"></td>
+      <td align="left"><ul>
+        <li><i>Logical order</i> </li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><ul>
+        <li><i>Efficiency</i> </li>
+      </ul>
+      </td>
+      <td align="left"></td>
+      <td align="left"><ul>
+        <li><i>Unification</i> </li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><ul>
+        <li><i>Characters, not glyphs</i> </li>
+      </ul>
+      </td>
+      <td align="left"></td>
+      <td align="left"><ul>
+        <li><i>Dynamic composition</i> </li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><ul>
+        <li><i>Semantics</i> </li>
+      </ul>
+      </td>
+      <td align="left"></td>
+      <td align="left"><ul>
+        <li><i>Equivalent Sequence</i> </li>
+      </ul>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><ul>
+        <li><i>Plain Text</i> </li>
+      </ul>
+      </td>
+      <td align="left"></td>
+      <td align="left"><ul>
+        <li><i>Convertibility</i> </li>
+      </ul>
+      </td>
+    </tr>
+</tbody>
+  </table>
+    </center>
+</blockquote>
+
+<hr width="11%">
+
+<p>The character sets of many existing international, national and corporate
+standards are incorporated within the Unicode Standard. For example, its
+first 256 characters are taken from the widely used Latin-1 character set.</p>
+
+<p>Duplicate encoding of characters is avoided by unifying characters within scripts
+across languages; characters that are equivalent in form are given a single code.
+Chinese/Japanese/Korean (CJK) consolidation is achieved by assigning
+a single code for each ideograph that is common to more than one of these languages. This
+is instead of providing a separate code for the ideograph each time it appears in a
+different language. (These three languages share many thousands of identical characters
+because their ideograph sets evolved from the same source.)</p>
+
+<p>The Unicode Standard specifies an algorithm for the presentation of text
+with bidirectional behavior, for example, Arabic and English. Characters are stored in logical order. The Unicode Standard includes characters
+to specify changes in direction when scripts of different directionality are mixed. For
+all scripts Unicode text is in logical order within the memory representation,
+corresponding to the order in which text is typed on the keyboard.</p>
+
+<h3>Assigning Character Codes</h3>
+
+<p>A single 16-bit number is assigned to each code element defined by the Unicode
+Standard, Version 3.0. Each of these 16-bit numbers is called a <i>code value</i> and, when referred to
+in text, is listed in hexadecimal form following the prefix &quot;U&quot;. For example,
+the code value U+0041 is the hexadecimal number 0041 (equal to the decimal number 65). It
+represents the character &quot;A&quot; in the Unicode Standard.</p>
+
+<p>Each character is also assigned a unique name that specifies it and no other. For
+example, U+0041 is assigned the character name &quot;LATIN CAPITAL LETTER A.&quot; U+0A1B
+is assigned the character name &quot;GURMUKHI LETTER CHA.&quot; These Unicode names are
+identical to the ISO/IEC 10646 names for the same characters.</p>
+
+<p>The Unicode Standard groups characters together by scripts in code blocks. A <i>script</i>
+is any system of related characters. The standard retains the order of characters in a
+source set where possible. When the characters of a script are traditionally arranged in a
+certain order -- alphabetic order, for example -- the Unicode Standard arranges them in
+its code space using the same order whenever possible. Code blocks vary greatly in size.
+For example, the Cyrillic code block does not exceed 256 code values, while the CJK code
+block has a range of thousands of code values.</p>
+
+<p>Code elements are grouped logically throughout the range of code values, called
+the <i>codespace</i>. The coding starts at U+0000 with the standard ASCII characters, and
+continues with Greek, Cyrillic, Hebrew, Arabic, Indic and other scripts; then followed by
+symbols and punctuation. The code space continues with Hiragana, Katakana, and Bopomofo.
+The unified Han ideographs are followed by the complete set of modern Hangul. The
+surrogate range of code values is reserved for future expansion with UTF-16. Towards the
+end of the codespace is a range of code values reserved for private use, followed by a
+range of compatibility characters. The compatibility characters are character variants
+that are encoded only to enable transcoding to earlier standards and old implementations
+which made use of them.</p>
+
+<p>A range of code values are reserved as <i>private use area</i>. These code values have
+no universal meaning, and may be used for characters specific to a program or by a group
+of users for their own purposes. For example, a group of choreographers may design a set
+of characters for dance notation and encode the characters using code values in user
+space. A set of page-layout programs may use the same code values as control codes to
+position text on the page. The main point of user space is that the Unicode Standard
+assigns no meaning to these code values, and reserves them as user space, promising never
+to assign them meaning in the future.</p>
+
+<h3>Conformance to the Unicode Standard</h3>
+
+<p>The Unicode Standard specifies unambiguous requirements for conformance in terms
+of the principles and encoding architecture it embodies. A conforming implementation has
+the following characteristics, as a minimum requirement:
+
+<ul>
+  <li><i>characters are 16-bit units;</i></li>
+  <li><i>characters are interpreted with Unicode semantics;</i></li>
+  <li><i>unassigned codes are not used; and,</i> </li>
+  <li><i>unknown characters are not corrupted.</i> </li>
+</ul>
+
+<p>UTF-8 implementations of the Unicode Standard are conformant as long as they treat
+each UTF-8 encoding of a Unicode character (sequence of bytes) as if it were the
+corresponding 16-bit unit and otherwise interpret characters according to the Unicode
+specification. The full conformance requirements are available within <a href="/unicode/uni2book/u2.html"><i>The Unicode Standard, Version
+3.0</i></a>, Addison Wesley Longman, 2000.</p>
+
+<h3>Unicode and ISO/IEC 10646</h3>
+
+<p>The Unicode Standard is very closely aligned with the international standard
+ISO/IEC 10646-1:2000 (also known as the Universal Character Set, or UCS, for short).
+Close cooperation and formal liaison between the committees has ensured that all
+additions to either standard are coordinated and kept in synch, so that the two standards
+maintain exactly the same character repertoire and encoding.</p>
+
+<p>Version 3.0 of the Unicode Standard is code-for-code identical to ISO/IEC
+10646-1:2000. This code-for-code identity is true for all
+encoded characters in the two standards, including the East Asian (Han) ideographic
+characters.</p>
+
+<p>The international standard ISO/IEC 10646 allows for two forms of use, a two-octet
+(= byte) form known as UCS-2 and a four-octet form known as UCS-4. The Unicode Standard, as
+a profile of ISO/IEC 10646, chooses the two-octet form, which is equivalent to saying that
+characters are represented in 16-bits per character. When extended characters are used,
+Unicode is equivalent to UTF-16.</p>
+
+<hr width="11%">
+
+<h3>For Further Information</h3>
+
+<p>The fundamental source of information about Unicode is <a href="/unicode/uni2book/u2.html"><i>The Unicode Standard, Version 3.0</i></a>, published
+by Addison Wesley Longman, 2000. The book comes with a CD-ROM that contains character
+names and properties, as well as tables for mapping and transcoding. <i> The Unicode
+Standard, Version 3.0</i> may be ordered from the Unicode Consortium by using the <a href="/unicode/uni2book/u2ord.html">Book
+Order Form</a>. The Unicode Standard <a href="/unicode/uni2errata/UnicodeErrata.html">Updates and Errata</a>
+are posted on this
+web site.</p>
+
+<p>May 2000</p>
+
+<p align="center">Contacting Unicode?<br>
+<a href="/unicode/contacts.html">Telephone, fax, e-mail, postal and courier
+addresses</a></p>
+<center>
+
+<table border="0" cellPadding="0" cellSpacing="0">
+<tbody>
+  <tr>
+    <td><a href="/index.html"><img alt="Home" border="0" src="/img/hb_home.gif" WIDTH="40" HEIGHT="49"></a><a href="/unicode/copyright.html"><img alt="Terms of Use" border="0" src="/img/hb_mid.gif" WIDTH="152" HEIGHT="49"></a><a href="mailto:info@unicode.org"><img alt="E-mail" border="0" src="/img/hb_mail.gif" WIDTH="46" HEIGHT="49"></a></td>
+  </tr>
+</tbody>
+</table>
+</center>
+</body>
+</html>

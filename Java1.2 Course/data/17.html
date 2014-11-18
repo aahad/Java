@@ -1,0 +1,212 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 17</h2>
+
+<h3>Tuesday, April 10th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Garbage Collection (contd): </b>
+
+Example1:
+<i>public class GarbageDemo {
+ Garbage g;
+ int max;
+ public static void main(String[] args) {
+  int n = 15; // default value for n in case no arguments are given 
+
+  /* converting String fed at command prompt into interger and saving to n */
+  if(args.length > 0) n = (new Integer(args[0])).intValue(); 
+
+  // Creating Object using class constructor  
+  GarbageDemo app = new GarbageDemo(n);
+
+  // Calling run method of object app 
+  app.run();
+ }
+ public GarbageDemo(int n) {
+  max = n; // setting max to n
+ }
+ void run() {
+  for(int i=1;i&lt;max;++i) {
+   g = new Garbage(i); // running loop and calling Garbage class each time
+  }
+ }
+}
+class Garbage {
+ String[] trash; // declaring trash array
+ int value;
+  public Garbage(int n) {
+  value = n;
+  trash = new String[n];
+  trash[0] = "This String uses up memory resources. ";
+  for(int i=1;i&lt;n;++i) 
+
+   // concatenating the above string multiple tims until computer runs out of memory
+   trash[i] = trash[i-1] + trash[i-1]; 
+ }
+ protected void finalize() { // run when garbage is collected
+  System.out.println(value+" is being collected.");
+ }
+}</i>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>PIE: </b>
+
+The println method can be used to print interger, char etc. Its ability to change 
+with the type of arguments fed to it is called <b>Polymorphism</b> also known as <b>Overloading</b>.
+
+Java only allows one parent to each child. Whatever methods the parent has are 
+inherited by the child. Instead of multiple parents, Java allows multiple interfaces
+which are abstract classes. This is known as <b>Inheritence</b>. One major rule is that if
+you are making an object of a child, an object of the parent has to be made first,
+and in turn if the parent has a parent, that needs to have an object created before
+everything and so on.
+
+Example1:
+<i>class B {
+ B() {
+    System.out.println("Inside the constructor of class B.");
+ }
+}
+
+class A extends B {
+ A() {
+    System.out.println("Inside the constructor of class A.");
+ }
+}
+
+public class temp extends A {
+
+ public static void main(String[] args) {
+    temp b = new temp();	
+ }
+
+ temp() {
+    System.out.println("Inside the constructor of temp class.");
+ }
+
+}</i>
+
+Output1:
+Inside the constructor of class B.
+Inside the constructor of class A.
+Inside the constructor of temp class.
+
+NOTE: Although the constructor in class A is not called at all from the main method,
+it runs auromatically just because we tried to make an object for class temp which 
+is the child of class A. Therefore, before a child's object is made, JVM requires 
+that an object for the parent's class is made, if it does not already exist. Same way
+class B is the parent of class A, therefore its constructor is called even before the
+constructor of A.
+
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>this and super: </b>
+
+Example1:
+<i>class A {
+ A() {
+    System.out.println("Inside the main constructor of class A.");
+ }
+ A(int i) {
+    this(); // to call the main constructor of current class
+    // has to be first, cannot be written later in this method.
+    System.out.println("Class A with int " + i);
+ }
+}
+
+public class temp extends A {
+ public static void main(String[] args) {
+    temp b = new temp();	
+ }
+ temp() {
+    super(10); /* since we are passing an integer value, JVM will use the A constructor
+    that is using an integer as a passing value, ie. A(int i) */
+    System.out.println("Inside the constructor of temp class.");
+ }
+}</i>
+
+Output1:
+Inside the main constructor of class A.
+Class A with int 10
+Inside the constructor of temp class.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Recursion: </b>
+
+This happens when program goes into a loop because of the wrong use of this or super.
+
+Example:
+<i>class A {
+ A() {
+    // this calls A() thus going into a loop, called recursion
+    this();
+    System.out.println("Inside the main constructor of class A.");
+ }
+}
+
+public class temp extends A {
+ public static void main(String[] args) {
+    temp b = new temp();	
+ }
+ temp() { // calls constructor for A first as A is the parent
+    System.out.println("Inside the constructor of temp class.");
+ }
+}</i>
+
+Output:
+temp.java:4: recursive constructor invocation
+    this();
+        ^
+1 error
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Converting words to program: </b>
+
+A <i>circle</i> <b>is a</b> <i>figure</i> which <b>has a</b> <i>radius</i>.
+
+is a - inheritance, extends
+has a - composition
+
+class Circle extends Figure {
+   int radius;
+   -------
+}
+
+</pre>
+
+
+</body>
+</html>

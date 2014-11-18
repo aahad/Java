@@ -1,0 +1,172 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 21</h2>
+
+<h3>Thursday, April 19th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Thread States: </b>
+
+1) Ready State / Start State
+   The thread is ready to start, but is not running yet. 
+
+2) Running State
+   This is when the thread is actually running and is waiting for the OS to allow
+   it to perform its task, which depends on the thread's priority and on other 
+   threads that are already running. The OS needs to monitor it, for which it creates
+   its own object.
+
+3) Waiting State
+   If the thread is waiting for the OS to allow it to be run, it is in its waiting 
+   state. Once the OS allows it to run again, the thread will be in its run state 
+   again. The wait state puts it back in its start state and so the thread keeps 
+   looping between these three states until the OS allows it to be executed.
+
+4) Dead State
+   Once the thread has performed its task, it comes to its dead state. Once the
+   thread is in its dead state, it cannot go back to either one of its previous
+   states, ie. run, wait or start.
+
+Yielding: It is when a thread goes from its running state to its start state directly
+	  using the yield() method. In this case, the thread does not go through its
+   	  waiting state.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Scheduling: </b>
+
+Types of Scheduling:
+
+1) Priemptive:
+   To run the thread with a higher priority, this what Java uses
+
+2) Time-slicing:
+   Equivalent time assigned to each thread and each thread is executed during this
+   assigned time. This is what Microsoft used in its previous Operating Systems.
+   Problem with it is that it becomes impossible to find out which thread is running
+   currently. (Windows 2000 uses Priemptive)
+
+An OS is all about Interrupts. Every trigger or event handler generates an interrupt 
+which tells the OS to do what it is supposed to do. Catching interrupts is easier 
+with priemtive scheduling than in time-slicing.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>synchronized keyword: </b>
+
+lock, monitor
+
+The Object class assigns a lock to all objects. 
+
+public synchronized void method1() {
+  -----
+  -----
+}
+
+When multiple threads aquire a synchronized method of an object, the object gives its
+lock to the first thread that aquires it, and the object puts the rest of the threads 
+in their waiting state. When the first thread gets done, the object passes the lock 
+onto the next thread with the highest priority.
+
+Example1:
+<i>class Thread3 extends Thread {
+ static String message[] = {"Java","is","hot,","aromatic,","and",
+  "invigorating."};
+ public static void main(String args[]) {
+  Thread3 thread1 = new Thread3("thread1: ");
+  Thread3 thread2 = new Thread3("thread2: ");
+  // invokes Thread's start method which in turn invokes its abstract run method
+  thread1.start();
+  thread2.start();
+  boolean thread1IsAlive = true;
+  boolean thread2IsAlive = true;
+  do {
+   if(thread1IsAlive && !thread1.isAlive()){
+    thread1IsAlive = false;
+    System.out.println("Thread 1 is dead.");
+   }
+   if(thread2IsAlive && !thread2.isAlive()){
+    thread2IsAlive = false;
+    System.out.println("Thread 2 is dead.");
+   }
+  }while(thread1IsAlive || thread2IsAlive);
+ }
+ public Thread3(String id) {
+  super(id);
+ }
+ public void run() {
+  SynchronizedOutput.displayList(getName(),message);
+ }
+ void randomWait(){
+  try {
+   sleep((long)(3000*Math.random()));
+  }catch (InterruptedException x){
+   System.out.println("Interrupted!");
+  }
+ }
+}
+class SynchronizedOutput {
+ public static synchronized void 
+  displayList(String name,String list[]) {
+  for(int i=0;i<list.length;++i) {
+   Thread3 t = (Thread3) Thread.currentThread(); // performed casting
+   t.randomWait();
+   System.out.println(name+list[i]);
+  }
+ }
+}
+</i>
+
+Output1:
+thread1: Java
+thread1: is
+thread1: hot,
+thread1: aromatic,
+thread1: and
+thread1: invigorating.
+Thread 1 is dead.
+thread2: Java
+thread2: is
+thread2: hot,
+thread2: aromatic,
+thread2: and
+thread2: invigorating.
+Thread 2 is dead.
+
+If we delete the syncronized keyword from the method displayList, the new output is:
+thread1: Java
+thread2: Java
+thread1: is
+thread2: is
+thread1: hot,
+thread2: hot,
+thread1: aromatic,
+thread2: aromatic,
+thread2: and
+thread1: and
+thread1: invigorating.
+Thread 1 is dead.
+thread2: invigorating.
+Thread 2 is dead.
+
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 44</h2>
+
+<h3>Sunday, June 24th, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Box Layout: </b>
+
+This is a Swing layout. It uses the Box class for its implementation.
+
+Example:
+<i>import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SwingBoxLayout {
+    public static void main(String args[]) {
+
+        // Create the first row using a box.                           
+        Container row1 = new Box(BoxLayout.X_AXIS);
+        row1.add(createLabel("Row 1"));
+        row1.add(createLabel("Glue -->"));
+        row1.add(Box.createHorizontalGlue());
+        row1.add(createLabel("Horiz. Strut -->"));
+        row1.add(Box.createHorizontalStrut(50));
+        row1.add(createLabel("End of Row 1"));
+
+        // Create the second row using a box layout manager.           
+        Container row2 = new JPanel();
+        row2.setLayout(new BoxLayout(row2, BoxLayout.X_AXIS));
+        row2.add(createLabel("Row 2"));
+        row2.add(createLabel("Rigid Area -->"));
+        row2.add(Box.createRigidArea(new Dimension(75, 50)));
+        row2.add(createLabel("Glue -->"));
+        row2.add(Box.createHorizontalGlue());
+        row2.add(createLabel("End of Row 2"));
+
+        // Create the root component and compose its content pane.     
+        JFrame window = new JFrame("Swing layout");
+        Container content = window.getContentPane();
+        LayoutManager lm = new BoxLayout(content, BoxLayout.Y_AXIS);
+        content.setLayout(lm);
+        content.add(row1);
+        content.add(new JSeparator(JSeparator.HORIZONTAL));
+        content.add(row2);
+
+        window.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent wEvt) {
+                System.exit(0);
+            }
+        });
+
+        window.pack();
+        window.setVisible(true);
+    }
+
+    private static Component createLabel(String text) {
+        JComponent label = new JLabel(text, SwingConstants.CENTER);
+        label.setBorder(new SoftBevelBorder(SoftBevelBorder.LOWERED));
+        return label;
+    }
+}</i>
+
+Output:
+<img src=images/44_1.gif>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Inheritance model of Events: </b>
+
+Java and C# are the only 2 languages that use the delegation model. All other languages use
+the inheritance model. The example below shows inheritance model.
+
+Example:
+<i>import java.awt.*;
+import java.awt.event.*;
+
+public class EventOverrideApp extends Frame {
+ public static void main(String args[]){
+  EventOverrideApp app = new EventOverrideApp();
+ }
+ public EventOverrideApp() {
+  super("Event Override");
+  setup();
+  setSize(300,300);
+  // Add event handler for closing the frame.
+  addWindowListener(new WindowEventHandler());
+  show();
+ }
+ void setup() {
+  setupMenuBars();
+  setupPanels();
+ }
+ void setupMenuBars() {
+  MenuBar menuBar = new MenuBar();
+  Menu fileMenu = new Menu("File");
+  MenuItem fileExit = new MenuItem("Exit");
+  MenuItemHandler mh = new MenuItemHandler();
+  // Add an action listener for File -> Exit.
+  fileExit.addActionListener(mh);
+  fileMenu.add(fileExit);
+  menuBar.add(fileMenu);
+  setMenuBar(menuBar);
+ }
+ void setupPanels() {
+  Panel panel = new Panel();
+  TextArea textArea = new TextArea(15,20);
+  MyButton button = new MyButton("Click here!",textArea);
+  panel.add(button);
+  panel.add(textArea);
+  add(panel);
+ }
+ class WindowEventHandler extends WindowAdapter {
+  public void windowClosing(WindowEvent e){
+   System.exit(0);
+  }
+ }
+ class MenuItemHandler implements ActionListener {
+  public void actionPerformed(ActionEvent ev){
+   String s=ev.getActionCommand();
+   if(s.equals("Exit")) System.exit(0);
+  }
+ }
+}
+
+class MyButton extends Button {
+ TextArea textArea;
+
+ public MyButton(String s, TextArea textArea) {
+  super(s);
+  this.textArea = textArea;
+  enableEvents(AWTEvent.ACTION_EVENT_MASK); 
+  // since we cannot use the addActionListener() method, we use this to add listener
+ }
+
+ // if we were working with items, we would use processItemEvent()
+ public void processActionEvent(ActionEvent event) {
+  String s = textArea.getText();
+  s += "\nThe button was clicked.";
+  textArea.setText(s);
+  // super.processActionEvent(event);
+  // Uncomment the above line to allow event listeners to 
+  // also handle this event.
+ }
+}</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+</body>
+</html>

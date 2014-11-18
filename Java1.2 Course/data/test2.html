@@ -1,0 +1,890 @@
+<pre>
+
+1.  What is the output of the following program?
+
+class Test extends SuperTest  {
+   String s = "this";
+   public static void main (String[ ] args)  {
+     new Test( );
+   }
+
+  Test( )  {
+   super.display(s);
+  }
+  void display (String s)  {
+   System.out.println("this:  "+s);
+  }
+}
+class SuperTest  {
+  String s = "super" ;
+  void display(String s)  {
+    System.out.println("super:  "+s);
+  }
+}
+A. this:  this
+B. super:  this
+C. this: super
+D. super: super
+
+
+<b>My Ans: </b> B
+
+<b>Actual Ans: </b>B
+
+<hr>
+
+2. What is wrong with the following program?
+class Wrong  {
+  String s = "wrong";
+  public static void main(String arguments[ ] )  {
+    System.out.println(s) ;
+  }
+}
+A. Nothing is wrong with the program.
+B. main( ) cannot be declared public because Wrong is not public.
+C. The main( ) argument list is wrong.
+D. s can't be accessed from main( ).
+
+
+<b>My Ans: </b>A
+
+<b>Actual Ans: </b>D, printing non-static from static
+
+<hr>
+
+3.   What is output of the following program ?  
+class Static {
+  static int j = 1; 
+  static {
+    ++j ;
+   }
+public static void main (String[ ] args)  {
+  increment(j,5);
+  display(j);
+}
+static void increment(int n, int m)  { 
+   n += m;
+}
+
+
+static void display(int n)  {
+   System.out.println(n);
+}
+  static {
+  ++j ;
+  }
+ }
+A. 1
+B. 3
+C. 6
+D. 7
+
+
+<b>My Ans: </b>D
+
+<b>Actual Ans: </b>B
+
+<hr>
+
+4. What is the output of the following program? 
+       class Problem {
+         private static int x = 100;
+         public static void main(String args[] )   {
+           Problem P1 = new Problem( );
+           P1.x++ ;                                       //line 1
+           Problem P2 = new Problem( );
+           P2.x++ ;
+           Problem.x ++;                            //line 2
+           System.out.println("x = " + x);
+         }
+       }
+A. line 1 will not compile because it is a non-static reference to a static variable.
+B. line 2 will not compile because it is a static reference to a private variable.
+C. The output is x = 100;
+D. The output is x = 101;
+E. The output is x = 103;
+F. The output is x = 104;
+
+
+<b>My Ans: </b>E
+
+<b>Actual Ans: </b>E
+
+<hr>
+
+5. Which of the following declerations are legal?
+A. friendly Object O ;
+B. transient int I  = 41;
+C. public final static native int method( ) ;
+D. abstract byte b ;
+E. abstract final double m1( );
+
+
+<b>My Ans: </b>D, E
+
+<b>Actual Ans: </b>B, C
+
+<hr>
+
+6. Which of the following are true?
+A. Transient classes may not be serialized.
+B. A native variable is always final
+C. Transient variables may not be serialized.
+D. Final class is always abstract.
+
+
+<b>My Ans: </b>B, C
+
+<b>Actual Ans: </b>C
+
+<hr>
+
+7. What is wrong with the following program?
+abstract class A  {
+   void m1( ) {
+     // method body
+    }
+    abstract void m2(int j) ;
+}
+class B { 
+    void m2(int k ) {
+    // method body
+    }
+}
+
+
+<b>My Ans: </b>m1 has to be abstract, and there is no main method defined.
+
+<b>Actual Ans: </b>class B extends A
+
+<hr>
+
+8. Which of the following are true?
+A. A top-level class may be declared as private.
+B. A method may be declared as transient
+C. A local variable may be declared as final   
+
+
+<b>My Ans: </b>B
+
+<b>Actual Ans: </b>C
+
+<hr>
+
+9.  What will be the result of attempting to compile and run the following code? 
+
+abstract class MineBase { 
+        abstract void amethod( ); 
+        static int i; 
+}
+public class Mine extends MineBase      { 
+        public static void main(String argv[]){ 
+                        int[] ar=new int[5]; 
+                       System.out.println(ar[50]); 
+                        } 
+}
+
+A. Output of 0 will be printed 
+B.  Error: ar is used before it is initialized 
+C.  Error: Mine must be declared abstract 
+D.  IndexOutOfBoundes Error 
+
+
+<b>My Ans: </b>C
+
+<b>Actual Ans: </b>C
+
+<hr>
+
+10.  Which of the following are true ?
+A. An abstract class may not have any final methods
+B. A method can be volatile.
+C. A private variable can be final
+D. A final class may not have any abstract methods
+
+
+<b>My Ans: </b>B, D
+
+<b>Actual Ans: </b>C, D
+
+<hr>
+
+11.  What will happen when you attempt to compile and run this code?
+
+abstract class Base{
+        abstract public void myfunc();
+        public void another(){
+        System.out.println("Another method");
+        }
+}
+public class Abs extends Base{
+        public static void main(String argv[]){
+        Abs a = new Abs();
+        a.amethod();
+        }
+        public void myfunc(){
+                System.out.println("My func");
+                } 
+        public void amethod(){
+        myfunc();
+        }
+}
+
+A. The code will compile and run, printing out the words "My Func"
+B.  The compiler will complain that the Base class has non abstract methods
+C.  The code will compile but complain at run time that the Base class has non abstract methods
+D. The compiler will complain that the method myfunc in the base class has no body.
+E.  None of the above.
+
+
+<b>My Ans: </b>B
+
+<b>Actual Ans: </b>A
+
+<hr>
+
+12.  What will happen when you attempt to compile and run this code?
+
+class Base{
+public final void amethod(){
+        System.out.println("amethod");
+        }
+}
+public class Fin extends Base{
+public static void main(String argv[]){
+        Base b = new Base();
+        b.amethod();
+        }
+}
+
+A.  Compile time error indicating that a class with any final methods must be declared final itself.
+B.  Compile time error indicating that you cannot inherit from a class with final methods
+C.  Run time error indicating that Base is not defined as final
+D.  Success in compilation and output of "amethod" at run time.
+E. Compile time error indicating that you cannot access a non-static method from a static method.
+
+
+<b>My Ans: </b>D
+
+<b>Actual Ans: </b>D
+
+<hr>
+
+13. Which of the following are true about this method declaration?
+void mymethod(String s) {
+}
+A. mymethod( ) is static
+B. mymethod( ) does not return a value.
+C. mymethod( ) is abstract.
+D. mymethod( ) may not be accessed outside of the package in which it is declared.
+
+
+<b>My Ans: </b>B
+
+<b>Actual Ans: </b>B, D
+
+<hr>
+
+14.  If you run the following program, which lines would be in its output ?
+
+class Test  { 
+   public static void main(String args[ ] )  {
+      int i = 1;
+      int j = 2;
+      first :  while ( i < j )  {
+          ++i;
+           second:  do  {
+              ++j;
+              if ( j % 3 = = 0 )
+                continue first;  
+              if ( i % 3  = = 0 )
+                break second;
+              if ( i % 3 = = 1 )
+                break first;
+              System.out.println( i * j ) ;
+   	   }  while ( j < i );
+      System.out.println( i + j );
+      }
+ }
+}
+
+A. 5
+B. 6
+C. 7
+D. 8
+E. The program will not compile
+F. none of above
+
+
+<b>My Ans: </b>C
+
+<b>Actual Ans: </b>C
+
+<hr>
+
+15. If you run the following program, which lines would be in its output ?
+class Test1  { 
+   public static void main(String args[ ] )  {
+      int i = 1;
+      int j = 2;
+      One :  while ( i < j )  {
+          + + i;
+           Two:  do  {
+              + + j;
+              if ( i+ + % 3 = = 2 )
+                break Two;  
+              else if ( j + +  % 3  = = 1 )
+                break One;
+              System.out.println( i * j ) ;
+   }  while ( j < i );
+   System.out.println( i + j );
+  }
+ }
+}
+
+
+A. 5
+B. 6
+C. 7
+D. 8
+E. The program will not compile.
+F. The program will not display any output.
+
+
+<b>My Ans: </b>B
+
+<b>Actual Ans: </b>B
+
+<hr>
+
+16.  What is wrong with the following switch statement ? 
+
+switch( i = = 10)  {
+
+case '1' :
+   + + i ;
+ break;
+  
+case "2" :
+- - i ;
+break ;
+
+case 3 :
+ i *= 5 ;
+break;
+
+default 
+  i %= 3;
+}
+
+
+<b>My Ans: </b>Switch cannot compare boolean to char, String. Only int to int. Case 2 is String,
+
+
+<b>Actual Ans: </b>
+
+<hr>
+
+17.  If you run the following program, which lines would be in its output ?
+
+      class test  {
+         public static void main (String[] args)  {
+            int j , k ;
+            for (j = 0, k = 0; j + k < 20; k += j )  {
+                System.out.println( j + k );
+            }
+        }
+      }
+ 
+
+A. 5
+B. 8
+C. 13
+D. The program cannot compile because the for statement syntax is incorrect.
+E.  The program would compile and a series of 0's will printed.
+
+
+<b>My Ans: </b>E
+
+<b>Actual Ans: </b>E
+
+<hr>
+
+18.   If you run the following program, which lines would be in its output ?
+
+class loop  {
+    public static void main (String[] args)  {
+            int j , k ;
+            for (j = 0, k = 0; j + k < 20; + +j, k += j - - )  {
+                System.out.println( j + k );
+            }
+        }
+      }
+
+
+
+A. 5
+B. 8
+C. 13
+D. The program cannot compile because the for statement syntax is incorrect.
+
+
+<b>My Ans: </b>D
+
+<b>Actual Ans: </b>A, B, C
+
+<hr>
+
+19.  Which of the following are true about the finally clause of a try - catch - finally statement ?
+
+A. It is only excuted after a catch clause has executed.
+B. It is only excuted after a catch clause has not executed.
+C. It is always excuted unless its thread terminates.
+D. It is only excuted if an exception is thrown.
+E. None of the above.
+
+
+<b>My Ans: </b>C
+
+<b>Actual Ans: </b>C
+
+<hr>
+
+20.  If you run the following program, which lines would be in its output ?
+
+   class tryThis  {
+         public static void main (String[] args)  {
+           for ( int j = 0; j < 10; j + +)  {
+             try {
+                if ( j % 3 = = 0 ) throw new Exception("outer") ;
+                try {
+                   if ( j % 3 = = 1 ) throw new Exception("inner") ;
+                   System.out.println( j ) ;
+                }catch (Exception inner)  {
+                     j * = 2 ;
+                }finally {
+                    + + j ;
+                  }
+                }catch (Exception outer )  {
+                    j + = 3 ;
+                } finally {
+                   + + j ;
+                }
+             }
+            }
+          }
+     
+A. 4
+B. 5
+C. 6
+D. 7
+E. 8
+F. 9
+
+
+<b>My Ans: </b>A
+
+<b>Actual Ans: </b>B, E
+
+<hr>
+
+21.  If you run the following program, which lines would be in its output ?
+
+   class tryThis1  {
+         public static void main (String[] args)  {
+           for ( int j = 0; j < 10; j + +)  {
+             try {
+                 try {
+                   if ( j % 3 = = 0 ) throw new Exception("outer") ;
+                   System.out.println( j ) ;
+                }catch (Exception inner)  {
+                     j * = 2 ;
+                     if ( j % 3 = = 0 ) throw new Exception( "inner");                 
+                   }finally {
+                    + + j ;
+                  }
+                }catch (Exception outer )  {
+                    j + = 3 ;
+                } finally {
+                     - - j ;
+                }
+             }
+            }
+          }
+     
+A. 4
+B. 5
+C. 6
+D. 7
+E. 8
+F. 9
+
+
+<b>My Ans: </b>A
+
+<b>Actual Ans: </b>A, B
+
+<hr>
+
+22.  What is wrong with the following if statement ? 
+     if ( x + + ) {
+         y = x * z ;
+         x /= 2;
+     else { 
+         y = y * y ;
+         + + z ;
+      }
+
+
+<b>My Ans: </b>x++ will not return a boolean value
+
+<b>Actual Ans: </b>
+
+<hr>
+
+23.  What is the output of the following program ?
+class TestBreak {
+      public static void main ( String args[ ] )  {
+         int sum = 0;
+         int item = 0 ;
+         do {
+              item ++;
+              sum += item;
+              if (sum >= 6) 
+                 break;   
+          } while ( item < 5 );
+          System.out.println(" The sum is " + sum );
+       }
+  }
+
+
+<b>My Ans: </b> The sum is 6
+
+<b>Actual Ans: </b>
+
+<hr>
+
+24.  What is the output of the following program ?
+class TestContinue {
+      public static void main ( String args[ ] )  {
+         int sum = 0;
+         int item = 0 ;
+         do {
+              item ++;
+              if (item == 2) 
+                 continue;
+                 sum += item;   
+          } while ( item < 5 );
+          System.out.println(" The sum is " + sum );
+       }
+  }
+
+
+<b>My Ans: </b> The sum is 13
+
+<b>Actual Ans: </b>
+
+<hr>
+
+25. What is the output of the following program's segment ?
+
+ x = 2;
+ y = 3;
+ if (x > 2)
+     if ( y > 2)   {
+         int z = x + y;
+         System.out.println("z is " + z );
+     }
+ else
+         System.out.println("x is "+x);       
+
+
+<b>My Ans: </b>x is 2
+
+<b>Actual Ans: </b>
+
+<hr>
+
+26. What is the output of the following program's segment ?
+
+ x = 3;
+ y = 2;
+ if (x > 2)  {
+     if ( y > 2)   {
+         int z = x + y;
+         System.out.println("z is " + z );
+     }
+  }   else
+            System.out.println("x is "+x);       
+
+
+<b>My Ans: </b>NO OUTPUT
+
+<b>Actual Ans: </b>
+
+<hr>
+
+27.  What all gets printed when the following gets compiled and run. Select all
+         correct answers. 
+
+                public class example {
+                         public static void main(String args[]) {
+                                 int x = 0;
+                                 if(x > 0) x = 1;
+
+                                 switch(x) {
+                                 case 1: System.out.println(1);
+                                 case 0: System.out.println(0);
+                                 case 2: System.out.println(2);
+                                 break;
+                                 case 3: System.out.println(3);
+                                 default: System.out.println(4);
+                                 break;
+                                }
+                         }
+                 }
+
+
+
+A.  0
+B.  1
+C.  2
+D.  3
+E.  4
+F. nothing above
+
+
+<b>My Ans: </b>A, C
+
+<b>Actual Ans: </b>
+
+<hr>
+
+28.  What happens when the following class is compiled and run. Select one
+        correct answer. 
+
+
+                public class test {
+                         public static void main(String args[]) {
+                                 int x = 0, y = 1, z;
+                                 if(x) 
+                                     z = 0;
+                                 else
+                                     z = 1;
+                                 if(y) 
+                                     z = 2;
+                                 else
+                                     z = 3;
+                                 System.out.println(z);          
+                         }
+                 }
+
+
+A.   The program prints 0
+B.   The program prints 1
+C.   The program prints 2
+D.   The program prints 3
+E.   The program does not compile because of problems in the if statement.
+
+
+<b>My Ans: </b>E
+
+<b>Actual Ans: </b>
+
+<hr>
+
+29.   Which all lines are part of the output when the following code is compiled and
+         run. Select all correct answers.
+
+
+                 public class test {
+                         public static void main(String args[]) {
+                             for(int i = 0; i < 3; i++) {
+                                 for(int j = 3; j >= 0; j--) {
+                                     if(i == j) continue;
+                                     System.out.println(i + " " + j);
+                                 }
+                             }
+                         }
+                 }
+
+
+A.   0 0
+B.   0 1
+C.   0 2
+D.   0 3
+E.   1 0
+F.   1 1
+G.   1 2
+H.   1 3
+I.   2 0
+J.   2 1
+K.   2 2
+L.   2 3
+M.   3 0
+N.   3 1
+O.   3 2
+P.   3 3
+Q.   The program does not print anything.
+
+
+<b>My Ans: </b>
+0 3
+0 2
+0 1
+1 3
+1 2
+2 3
+2 1
+D, C, B, H, G, L, J
+
+<b>Actual Ans: </b>
+
+<hr>
+
+30.  Which all lines are part of the output when the following code is compiled and
+         run. Select all correct answers.
+
+
+                 public class test {
+                         public static void main(String args[]) {
+                             for(int i = 0; i < 3; i++) {
+                                 for(int j = 3; j <= 0; j--) {
+                                     if(i == j) continue;
+                                     System.out.println(i + " " + j);
+                                 }
+                             }
+                         }
+                 }
+
+
+A.   0 0
+B.   0 1
+C.   0 2
+D.   0 3
+E.   1 0
+F.   1 1
+G.   1 2
+H.   1 3
+I.   2 0
+J.   2 1
+K.   2 2
+L.   2 3
+M.   3 0
+N.   3 1
+O.   3 2
+P.   3 3
+Q.   The program does not print anything.
+
+
+<b>My Ans: </b>
+
+<b>Actual Ans: </b>
+
+<hr>
+
+31.  Which all lines are part of the output when the following code is compiled and
+         run. Select all correct answers.
+
+
+                 public class test {
+                         public static void main(String args[]) {
+                             for(int i = 0; i < 3; i++) {
+                                 for(int j = 3; j >= 0; j--) {
+                                     if(i == j) break;
+                                     System.out.println(i + " " + j);
+                                 }
+                             }
+                         }
+                 }
+
+
+A.   0 0
+B.   0 1
+C.   0 2
+D.   0 3
+E.   1 0
+F.   1 1
+G.   1 2
+H.   1 3
+I.   2 0
+J.   2 1
+K.   2 2
+L.   2 3
+M.   3 0
+N.   3 1
+O.   3 2
+P.   3 3
+
+
+32.  Which all lines are part of the output when the following code is compiled and
+       run. Select all correct answers.
+
+                 public class test {
+                         public static void main(String args[]) {
+                 outer:      for(int i = 0; i < 3; i++) {
+                                 for(int j = 3; j >= 0; j--) {
+                                     if(i == j) continue outer;
+                                     System.out.println(i + " " + j);
+                                 }
+                             }
+                         }
+                 }
+
+
+A.   0 0
+B.   0 1
+C.   0 2
+D.   0 3
+E.   1 0
+F.   1 1
+G.   1 2
+H.   1 3
+I.   2 0
+J.   2 1
+K.   2 2
+L.   2 3
+M.   3 0
+N.   3 1
+O.   3 2
+P.   3 3
+
+
+
+33.  Which all lines are part of the output when the following code is compiled and
+        run. Select all correct answers.
+
+                public class test {
+                         public static void main(String args[]) {
+                 outer :     for(int i = 0; i < 3; i++) {
+                                 for(int j = 3; j >= 0; j--) {
+                                     if(i == j) break outer;
+                                     System.out.println(i + " " + j);
+                                 }
+                             }
+                         }
+                 }
+
+
+
+A.   0 0
+B.   0 1
+C.   0 2
+D.   0 3
+E.   1 0
+F.   1 1
+G.   1 2
+H.   1 3
+I.   2 0
+J.   2 1
+K.   2 2
+L.   2 3
+M.   3 0
+N.   3 1
+O.   3 2
+P.   3 3
+
+Prepared By:  Muhammad Asif Khan Aman
+
+
+</pre>

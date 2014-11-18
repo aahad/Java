@@ -1,0 +1,344 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 31</h2>
+
+<h3>Tuesday, May 15th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Grid Layout Manager: </b>
+
+The GridLayout class is a layout manager that lays out a container's components in a 
+rectangular grid. The container is divided into equal-sized rectangles, and one component 
+is placed in each rectangle. 
+
+<img src=images/31_1.gif>
+
+The above is generated with the following code:
+
+ import java.awt.*;
+ import java.applet.Applet;
+ public class ButtonGrid extends Applet {
+     public void init() {
+         setLayout(new GridLayout(3,2));
+         add(new Button("1"));
+         add(new Button("2"));
+         add(new Button("3"));
+         add(new Button("4"));
+         add(new Button("5"));
+         add(new Button("6"));
+     }
+ }
+
+NOTE: If columns is set to zero, this will create infinite horizontal lines on each row.
+For rows set to zero, infinite vertical columns will be drawn. Both cannot be zero.
+
+As you can see in the above example, in a grid layout, each cell is filled as a new
+component is added. The components are added row by row. If you create a layout with 
+16 cells but you only add 14 components, the last 2 cells will be left blank.
+
+Example:
+<i>// Demonstrate GridLayout
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="GridLayoutDemo" width=300 height=200&gt
+&lt/applet&gt
+*/
+
+public class GridLayoutDemo extends Applet {
+  static final int n = 4;
+  public void init() {
+    setLayout(new GridLayout(n, n));
+
+    setFont(new Font("SansSerif", Font.BOLD, 24));
+
+    for(int i = 0; i &lt n; i++) {
+      for(int j = 0; j &lt n; j++) {
+        int k = i * n + j;
+        if(k &gt 0)
+          add(new Button("" + k));
+      }
+    }
+  }
+}</i>
+
+Output:
+<applet code="GridLayoutDemo" width=300 height=200></applet>
+
+NOTE: When run in appletviewer, when you resize the window all the buttons resize to fill
+the space completely.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Card Layout Manager: </b>
+
+Example:
+<i>// Demonstrate CardLayout. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="CardLayoutDemo" width=300 height=100&gt
+  &lt/applet&gt
+*/
+
+public class CardLayoutDemo extends Applet
+  implements ActionListener, MouseListener {
+
+  Checkbox Win98, winNT, solaris, mac;
+  Panel osCards;
+  CardLayout cardLO;
+  Button Win, Other;
+
+  public void init() {
+    Win = new Button("Windows");
+    Other = new Button("Other");
+    add(Win);
+    add(Other);
+
+    cardLO = new CardLayout();
+    osCards = new Panel();
+    osCards.setLayout(cardLO); // set panel layout to card layout
+
+    Win98 = new Checkbox("Windows 98", null, true);
+    winNT = new Checkbox("Windows NT");
+    solaris = new Checkbox("Solaris");
+    mac = new Checkbox("MacOS");
+
+    // add Windows check boxes to a panel
+    Panel winPan = new Panel();
+    winPan.add(Win98);
+    winPan.add(winNT);
+
+    // Add other OS check boxes to a panel
+    Panel otherPan = new Panel();
+    otherPan.add(solaris);
+    otherPan.add(mac);
+
+    // add panels to card deck panel
+    osCards.add(winPan, "Windows");
+    osCards.add(otherPan, "Other");
+
+    // add cards to main applet panel
+    add(osCards);
+
+    // register to receive action events
+    Win.addActionListener(this);
+    Other.addActionListener(this);
+
+    // register mouse events
+    addMouseListener(this);
+  }
+
+  // Cycle through panels.
+  public void mousePressed(MouseEvent me) {
+    cardLO.next(osCards);
+  }
+
+  // Provide empty implementations for the other MouseListener methods.
+  public void mouseClicked(MouseEvent me) {
+  }
+  public void mouseEntered(MouseEvent me) {
+  }
+  public void mouseExited(MouseEvent me) {
+  }
+  public void mouseReleased(MouseEvent me) {
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    if(ae.getSource() == Win) {
+      cardLO.show(osCards, "Windows");
+    }
+    else {
+      cardLO.show(osCards, "Other");
+    }
+  }
+}</i>
+
+
+Output:
+<applet code="CardLayoutDemo" width=300 height=100></applet>
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>GridBagConstraints class: </b>
+
+The GridBagConstraints class specifies constraints for components that are laid out using
+the GridBagLayout class. 
+
+
+Field Summary:
+
+int anchor 
+This field is used when the component is smaller than its display area. 
+
+int fill 
+This field is used when the component's display area is larger than the component's 
+requested size. 
+
+int gridheight 
+Specifies the number of cells in a column for the component's display area. 
+
+int gridwidth 
+Specifies the number of cells in a row for the component's display area. 
+
+int gridx 
+Specifies the cell at the left of the component's display area, where the leftmost cell 
+has gridx=0. 
+
+int gridy 
+Specifies the cell at the top of the component's display area, where the topmost cell 
+has gridy=0. 
+
+double weightx 
+Specifies how to distribute extra horizontal space. Value of 0.8 is like saying width=80%
+
+double weighty 
+Specifies how to distribute extra vertical space. Value of 0.8 like saying height=80%
+
+
+NOTE: You should define anchor, fill, gridwidth, gridheight, gridx, gridy.
+
+Example:
+theGBC.fill = GridBagConstraints.BOTH; <-- fill the component in this cell in bith directions.
+
+
+Example:
+<i>// Shows how to use the GridBagLayout layout manager
+import java.awt.*;
+import java.awt.event.*;
+
+public class StudyGridBagLayout extends Frame implements ActionListener, WindowListener
+{
+    GridBagLayout      theBag = new GridBagLayout();
+    GridBagConstraints theGBC = new GridBagConstraints();  
+  
+    public static void main(String args[])
+    {
+        StudyGridBagLayout theApp = new StudyGridBagLayout( );
+    }
+      
+    public StudyGridBagLayout( )
+    {
+        setTitle( "A Simple GridBagLayout" );
+        setFont( new Font( "Courier", Font.BOLD, 36 ) );
+
+        setLayout( theBag );
+
+        theGBC.fill   = GridBagConstraints.BOTH;  // Fill both directions
+        theGBC.insets = new Insets( 5, 5, 5, 5 ); // 5 pixels around each
+        theGBC.weightx = 1.0;                     // Allow X expansion
+        theGBC.weighty = 1.0;                     // Allow Y expansion
+        
+        addComponent( 0, 0, 1, 1, new Button( "7" ) );
+        addComponent( 0, 1, 1, 1, new Button( "8" ) );
+        addComponent( 0, 2, 1, 1, new Button( "9" ) );
+        addComponent( 0, 3, 1, 1, new Button( "-" ) );
+        addComponent( 0, 4, 1, 1, new Button( "%" ) );
+
+        addComponent( 1, 0, 1, 1, new Button( "4" ) );
+        addComponent( 1, 1, 1, 1, new Button( "5" ) );
+        addComponent( 1, 2, 1, 1, new Button( "6" ) );
+        addComponent( 1, 3, 3, 1, new Button( "+" ) );
+        addComponent( 1, 4, 1, 1, new Button( "/" ) );
+
+        addComponent( 2, 0, 1, 1, new Button( "1" ) );
+        addComponent( 2, 1, 1, 1, new Button( "2" ) );
+        addComponent( 2, 2, 1, 1, new Button( "3" ) );
+        addComponent( 2, 4, 2, 1, new Button( "X" ) );
+
+        addComponent( 3, 0, 1, 2, new Button( "0" ) );
+        addComponent( 3, 2, 1, 1, new Button( "." ) );
+        
+        addWindowListener(this);
+
+        setSize( 400, 300 );
+        setVisible(true);
+    }
+
+    public void addComponent( int row, int col, int high, int wide,
+                              Component theComponent )
+    {
+        theGBC.gridx      = col;
+        theGBC.gridy      = row;
+        theGBC.gridwidth  = wide;
+        theGBC.gridheight = high;
+        theBag.setConstraints( theComponent, theGBC );
+        add( theComponent );
+        if (theComponent instanceof Button)
+            ((Button) theComponent).addActionListener(this);
+    }
+     
+    public void actionPerformed(ActionEvent theEvent)
+    {
+        if (theEvent.getSource( ) instanceof Button)
+        {
+            String s = ((Button) theEvent.getSource( )).getLabel( );
+            System.out.println( s );
+        }
+    }
+    
+    public void windowClosed     (WindowEvent theEvent) {  }
+    public void windowClosing    (WindowEvent theEvent) { quitApplication( ); }
+    public void windowDeiconified(WindowEvent theEvent) { }
+    public void windowIconified  (WindowEvent theEvent) { }
+    public void windowOpened     (WindowEvent theEvent) { }
+    public void windowActivated  (WindowEvent theEvent) { }
+    public void windowDeactivated(WindowEvent theEvent) { }
+
+    public void quitApplication( )
+    {
+        setVisible(false);
+        dispose();
+        System.exit(0);
+    }
+}</i>
+
+Output:
+<img src=images/31_2.gif>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+</body>
+</html>

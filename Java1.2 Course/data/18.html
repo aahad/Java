@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 18</h2>
+
+<h3>Thursday, April 12th, 2001 </h3>
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Taking input: </b>
+
+BufferReader br = new BufferReader(new Input Stream Reader(System.in));
+String st = br.readline();
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Constructor Overloading: </b>
+
+Constructor Overloading occurs when there are more than one constructors defined for 
+the same class. 
+
+Before the constructor of the child is run, the constructor of the parent is run first.
+This is done automatically if not specified. You could call a specific constructor of
+the parent by using the super() keyword and giving the arguments that it needs. 
+
+Example1:
+<i>class Test {
+
+  Test() {
+	System.out.println("Inside Test()");
+  }
+
+  Test (int i) {
+	this(5,6);
+	System.out.println("Inside Test(int i) value: "+i);
+  }
+
+  Test(int i, int j) {
+	this();
+	System.out.println("Inside Test(int i, int j) values "+i+" "+j);
+  }
+
+}
+
+
+class Child extends Test {
+  public static void main(String args[]) {
+	System.out.println("Running Child()");
+	Child obj1 = new Child();
+
+	System.out.println("");
+	System.out.println("Running Child(int i)");
+	Child obj2 = new Child(10);
+
+	System.out.println("");
+	System.out.println("Running Child(int i, int j)");
+	Child obj3 = new Child(10,7);
+  }
+
+  Child() {
+	System.out.println("Inside Child()");
+  }
+
+  Child(int i) {
+	super();
+	// this(); will not work, can't call super and this constructors at the same time
+	System.out.println("Inside Child(int i) value: "+i);
+  }
+
+  Child(int i, int j) {
+	super(10,5);
+	System.out.println("Inside Child(int i, int j) values "+i+" "+j);
+  }
+
+}</i>
+
+Output1:
+Running Child()
+Inside Test()
+Inside Child()
+
+Running Child(int i)
+Inside Test()
+Inside Child(int i) value: 10
+
+Running Child(int i, int j)
+Inside Test()
+Inside Test(int i, int j) values 10 5
+Inside Child(int i, int j) values 10 7
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Method Over-riding: </b>
+
+Eg. Two methods within the same class that have the same signature, eg.
+void Test(int i){
+}
+void Test(int j){
+}
+
+Also if the signatures are the same but the one method exists in the child and the 
+other in the parent. 
+(1)
+**********
+* Parent *
+**********
+*        *
+* eat()  *  <-- over-ridden method
+*        *
+**********
+
+(2)
+**********
+* Child  *
+**********
+*        *
+* eat()  *  <-- over-riding method
+*        *
+**********
+
+The access of (2) has to be the same or higher than that of (1).
+
+Access modifiers in increasing order is private, package, protected, public
+Therefore, if (1) is private, (2) has to be private.
+If (1) is protected, then (2) can be protected or public
+
+NOTE: When not specified, access is by default package.
+
+Example1:
+<i>class Parent {
+  protected void doeat() {
+	System.out.println("doeat called from Parent.");
+  }
+}
+class Child extends Parent {
+  public void doeat() {
+	System.out.println("doeat called from Child.");
+  }
+}
+class temp {
+  public static void main(String [] args) {
+	Child ch = new Child();
+	ch.doeat();
+	Parent pr = new Parent();
+	pr.doeat();
+  }
+}</i>
+
+Output:
+doeat called from Child.
+doeat called from Parent.
+
+NOTE: private cannot be called from anywhere.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Exception handling with overriding: </b>
+
+Exceptions can only be thrown from parent to child or sub-child. That is
+For Parent -- void doeat() throws ExceptionDefinedInChild {}
+
+Example:
+<i>class Parent {
+  void doeat() throws Exception {
+	System.out.println("doeat called from Parent.");
+  }
+}
+class Child extends Parent {
+  void doeat() throws ArithmeticException {
+	System.out.println("doeat called from Child.");
+  }
+}
+class temp {
+  public static void main(String [] args) {
+	Child ch = new Child();
+	ch.doeat();
+  }
+}</i>
+
+Output:
+doeat called from Child.
+
+</pre>
+
+
+</body>
+</html>

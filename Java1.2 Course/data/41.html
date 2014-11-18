@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 41</h2>
+
+<h3>Sunday, June 17th, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Remote M Interface - RMI: </b>
+
+* javax.rmi
+* Look at www.omg.com to earn about RMI.
+* Business Logic Server
+
+rmi://host:port/Object
+
+NOTE: Default port for RMI is 1099
+
+Example:
+<i>import java.rmi.*;
+
+public void bindFlight(Flight flight, int number) {
+
+  try {
+	naming.rebind("Flight"+number, flight);
+  }
+  catch(MalformedURLException e) {}
+  catch(RemoteException e) {}
+
+}</i>
+
+
+java.rmi.UnicastRemoteObject - export() method
+
+You use stubs & skeletons to connect clients to servers. Skeletons are on the sever side
+and stubs are on the client side. The rmic tool is used to create stubs and skeletons.
+We use rmic using the remote object's name, eg. rmic Flight. This creates Flight-stub and
+Flight-skel.
+
+RMI-registry
+  * monitors all the requests going back and forth.
+  * start rmiregistry
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>RMI server and client creation: </b>
+
+You are given the following four .java files:
+
+AddServerIntf.java:
+
+import java.rmi.*;
+public interface AddServerIntf extends Remote {
+  double add(double d1, double d2) throws RemoteException;
+}
+
+
+--------------------------------------------------------------------
+AddServerImpl.java:
+
+import java.rmi.*;
+import java.rmi.server.*;
+public class AddServerImpl extends UnicastRemoteObject
+  implements AddServerIntf {
+
+  public AddServerImpl() throws RemoteException {
+  }
+  public double add(double d1, double d2) throws RemoteException {
+    return d1 + d2;
+  }
+}
+
+
+--------------------------------------------------------------------
+AddServer.java:
+
+import java.net.*;
+import java.rmi.*;
+public class AddServer {
+  public static void main(String args[]) {
+    try {
+      AddServerImpl addServerImpl = new AddServerImpl();
+      Naming.rebind("AddServer", addServerImpl);
+    }
+    catch(Exception e) {
+      System.out.println("Exception: " + e);
+    }
+  }
+}
+
+--------------------------------------------------------------------
+AddClient.java:
+
+import java.rmi.*;
+public class AddClient {
+  public static void main(String args[]) {
+    try {
+      String addServerURL = "rmi://" + args[0] + "/AddServer";
+      AddServerIntf addServerIntf =
+                    (AddServerIntf)Naming.lookup(addServerURL);
+      System.out.println("The first number is: " + args[1]);
+      double d1 = Double.valueOf(args[1]).doubleValue();
+      System.out.println("The second number is: " + args[2]);
+
+      double d2 = Double.valueOf(args[2]).doubleValue();
+      System.out.println("The sum is: " + addServerIntf.add(d1, d2));
+    }
+    catch(Exception e) {
+      System.out.println("Exception: " + e);
+    }
+  }
+}
+
+--------------------------------------------------------------------
+
+Step 1: 	Compile the source code
+Step 2:		Generate stubs and skeleton
+		rmic AddServerImpl
+Step 3:		start rmiregistry
+Step 4:		start the server
+		java AddServer
+Step 5:		start the client
+		java AddClient localhost 8 9
+				   or
+				127.0.0.1
+
+
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

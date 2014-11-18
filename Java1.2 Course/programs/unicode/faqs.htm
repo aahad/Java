@@ -1,0 +1,1908 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!-- saved from url=(0035)http://www.unicode.org/unicode/faq/ -->
+
+<html>
+
+
+
+<head>
+
+<title>Unicode FAQ</title>
+
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
+
+<meta content="Microsoft FrontPage 4.0" name="GENERATOR">
+
+<meta name="ProgId" content="FrontPage.Editor.Document">
+
+<link href="http://www.unicode.org/unicode.css" rel="stylesheet" type="text/css">
+
+</head>
+
+
+
+<body>
+
+
+
+<p align="center"><a href="http://www.unicode.org/unicode/contents.html"><img
+
+align="bottom" alt="Contents" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_cont.gif" width="77" naturalsizeflag="0"></a><a
+
+href="http://www.unicode.org/unicode/standard/standard.html"><img align="bottom"
+
+alt="Standard" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_stan.gif" width="126" naturalsizeflag="0"></a><a
+
+href="http://www.unicode.org/unicode/uni2errata/UnicodeErrata.html"><img
+
+align="bottom" alt="Updates and Errata" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_updt.gif" width="138" naturalsizeflag="0"></a><a
+
+href="http://www.unicode.org/unicode/techwork.html"><img align="bottom"
+
+alt="Technical Work" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_tech.gif" width="112" naturalsizeflag="0"></a><a
+
+href="http://www.unicode.org/unicode/onlinedat/online.html"><img align="bottom"
+
+alt="Online Data" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_onln.gif" width="92" naturalsizeflag="0"></a><a
+
+href="http://www.unicode.org/unicode/conf.html"><img align="bottom"
+
+alt="Conferences" border="0" height="24"
+
+src="http://www.unicode.org/img/nb_conf.gif" width="90" naturalsizeflag="0"></a></p>
+
+<h1>Unicode FAQ</h1>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+
+  <tbody>
+
+    <tr>
+
+      <td height="24" width="20%">Revision</td>
+
+      <td>2.1</td>
+
+    </tr>
+
+    <tr>
+
+      <td height="24">Authors</td>
+
+      <td>Mark Davis (<i><a href="mailto:mark@unicode.org">mark@unicode.org</a>)</i></td>
+
+    </tr>
+
+    <tr>
+
+      <td height="24">Date</td>
+
+      <td>2000-02-15</td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+<h3>Summary</h3>
+
+<p><i>This document provides informal answers to a number of commonly asked
+
+questions that software developers have about Unicode. It is only a supplement
+
+to the Unicode Standard--for complete information you should always consult the <a
+
+href="http://www.unicode.org/unicode/uni2book/u2.html">The Unicode
+
+Standard,Version&nbsp;3.0</a>. The online <a
+
+href="http://www.unicode.org/glossary/">Glossary</a> may also answer some
+
+questions.</i>
+
+<p><i>The FAQ topics are divided up into the following sections:</i></p>
+
+<ul>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#General_Questions"><i>Basic
+
+    Questions</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Characters"><i>Characters</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Directionality"><i>Directionality</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Languages_and_CJK"><i>Languages
+
+    and CJK</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Case_Mappings"><i>Case
+
+    Mappings</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Encoding_Forms"><i>Encoding
+
+    Forms</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#UTF-16 and UCS-4"><i>UTF-16,
+
+    UCS-4, and UTF-32</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#BOM"><i>BOM</i></a>
+
+  <li><a href="http://www.unicode.org/unicode/faq/#Unicode_and_ISO_10646"><i>Unicode
+
+    and ISO 10646</i></a></li>
+
+</ul>
+
+<h3>Acknowledgements</h3>
+
+<p><i>Many of the Q&amp;A's were contributed by different volunteers. The source
+
+is acknowledged where possible, by inclusion in square brackets at the end of
+
+the answer. However, the original contribution may have been edited during
+
+incorporation into this document. If you have a Q&amp;A that you would like to
+
+see added, please send it to the <a href="mailto:mark@unicode.org">author</a>
+
+(note that not all such submissions will be included). Make sure that the
+
+subject header starts with either &quot;<tt>FAQ</tt>&quot; or &quot;<tt>RE: FAQ</tt>&quot;.</i></p>
+
+<p><i>Ken Whistler, Joe Becker, Lloyd Honomichl, Paul Hoffman, Jim Agenbroad,
+
+and Markus Scherer also contributed to the review of this material.</i></p>
+
+<hr align="left">
+
+<h2><a name="General_Questions"></a>Basic Questions</h2>
+
+<h4><i>Q: In the past, we have just handed off our code to a translation agency.
+
+What's wrong with that?</i></h4>
+
+<p>Often, companies develop a first version of a program or system to just deal
+
+with English. When it comes time to produce a first international version, a
+
+common tactic is to just go through all the lines of code, and translate the
+
+literal strings.</p>
+
+<p>While this may work once, it is not a pattern that you want to follow. Not
+
+all literal strings get translated, so this process requires human judgment, and
+
+is time-consuming. Each new version is expensive, since people have to go
+
+through the same process of identifying the strings that need to be changed. In
+
+addition, since there are multiple versions of the source code, maintenance and
+
+support becomes expensive. Moreover, there a high risk that a translator may
+
+introduce bugs by mistakenly modifying code.</p>
+
+<h4><i>Q: What is the modern approach?</i></h4>
+
+<p>The general technique used now is to <i>internationalize</i> the programs.
+
+This means to prepare them so that the code never needs modification--separate
+
+files contain the translatable information. This involves a number of
+
+modifications to the code:
+
+<ul>
+
+  <li>move all translatable strings into separate files called resource files,
+
+    and make the code access those strings when needed. These resource files can
+
+    be flat text files, databases, or even code resources, but they are
+
+    completely separate from the main code, and contain nothing but the
+
+    translatable data.
+
+  <li>change variable formatting to be language-independent. This means that
+
+    dates, times, numbers, currencies, and messages all call functions to format
+
+    according to local language and country requirements.
+
+  <li>change sorting, searching and other types of processing to be
+
+    language-independent.</li>
+
+</ul>
+
+<p>Once this process is concluded, you have an internationalized program. To <i>localize</i>
+
+that program then involves no changes to the source code. Instead, just the
+
+translatable files are typically handed off to contractors or translation
+
+agencies to modify. The initial cost of producing internationalized code is
+
+somewhat higher than localizing to a single market, but you only pay that once.
+
+The costs of simply doing a localization, once your code is internationalized,
+
+is a fraction of the previous cost--and avoids the considerable cost of
+
+maintenance and source code control for multiple code versions.</p>
+
+<h4><i>Q: How does Unicode play in internationalization?</i></h4>
+
+<p>Unicode is the new foundation for this process of internationalization. Older
+
+codepages were difficult to use, and have inconsistent definitions for
+
+characters. Internationalizing your code while using the same code base is
+
+complex, since you would have to support different character sets--with
+
+different architectures--for different markets.</p>
+
+<p>But modern business requirements are even stronger; programs have to handle
+
+characters from a wide variety of languages at the same time: the EU alone
+
+requires several different older character sets to cover all its languages.
+
+Mixing older character sets together is a nightmare, since all data has to be
+
+tagged, and mixing data from different sources is nearly impossible to do
+
+reliably.</p>
+
+<p>With Unicode, a single internationalization process can produce code that
+
+handles the requirements of all the world markets at the same time. Since
+
+Unicode has a single definition for each character, you don't get data
+
+corruption problems that plague mixed codeset programs. Since it handles the
+
+characters for all the world markets in a uniform way, it avoids the
+
+complexities of different character code architectures. All of the modern
+
+operating systems, from PCs to mainframes, support Unicode now or are actively
+
+developing support for it. The same is true of databases, as well.</p>
+
+<h4><i>Q: What was wrong with using classical character sets for application
+
+programs?</i></h4>
+
+<p>Different character sets have very different architectures. In many, even
+
+simply detecting which bytes form a character is a complex,
+
+contextually-dependent process. That means either having multiple versions of
+
+the program code for different markets, or making the program code is much, much
+
+more complicated. Both of these choices involve development, testing,
+
+maintenance, and support problems. These make the non-US versions of programs
+
+more expensive, and delay their introduction, causing significant loss of
+
+revenue.</p>
+
+<h4><i>Q: What was wrong with using classical character sets for databases?</i></h4>
+
+<p>Classical character sets only handle a few languages at a time. Mixing
+
+languages was very difficult or impossible. In today's markets, mixing data from
+
+many sources all around the world, that strategy for products fails badly. The
+
+code for a simple letter like &quot;A&quot; will vary wildly between different
+
+sets, making searching, sorting, and other operations very difficult. There is
+
+also the problem of tagging every piece of textual data with a character set,
+
+and corruption problems when mixing text from different character sets.</p>
+
+<h4><i>Q: What is different about Unicode?</i></h4>
+
+<p>Unicode provides a unique encoding for every character. Once your data is in
+
+Unicode, it can be all handled the same way--sorted, searched, and manipulated
+
+without fear of data corruption.</p>
+
+<h4><i>Q: You talk about Unicode being the right technical approach. But is it
+
+being accepted by the market?</i></h4>
+
+<p>The industry is converging on Unicode for all internationalization. For
+
+example, Microsoft NT is built on a base of Unicode; AIX, Sun, HP/UX all offer
+
+Unicode support. All the new web standards; HTML, XML, etc. are supporting or
+
+requiring Unicode. The latest versions of Netscape Navigator and Internet
+
+Explorer both support Unicode. Sybase, Oracle, DB2 all offer or are developing
+
+Unicode support.</p>
+
+<p>Most significant application programs with international versions either
+
+support Unicode or are moving towards it. For example, Microsoft's products are
+
+rapidly being adapted to use Unicode: most of Office 98 is Unicode-capable. This
+
+is a good illustration--Microsoft first started by merging their East Asian
+
+(Chinese, Japanese, and Korean) plus their US version into a single program
+
+using Unicode. They will be merging in their Middle East and South Asian support
+
+in the future.</p>
+
+<h4><i>Q: What about the Far East support?</i></h4>
+
+<p>Unicode incorporates the characters of all the major government standards for
+
+ideographic characters from Japan, Korea, China, and Taiwan, and more. The
+
+Unicode Standard, Version 3.0 has almost 28,000 ideographic characters. The
+
+Unicode Consortium actively works with the IRG committee of ISO SC2/WG2 to
+
+define additional sets of ideographic characters for inclusion in future
+
+versions.</p>
+
+<h4><i>Q: So all I need is Unicode, right?</i></h4>
+
+<p>Unicode is not a magic wand; it is a standard for the storage and interchange
+
+of textual data. Somewhere there has to be code that recognizes and provides for
+
+the conventions of different languages and countries. These conventions can be
+
+quite complex, and require considerable expertise to develop code for and to
+
+produce the data formats. Changing conditions and new markets also require
+
+considerable maintenance and development. Usually this support is provided in
+
+the operating system, or with a set of code libraries.</p>
+
+<h4><i>Q: Unicode has all sorts of features: combining marks,
+
+bidirectionality,input methods, surrogates, Hangul syllables, etc. Isn't a big
+
+burden to support?</i></h4>
+
+<p>Unicode <i>by itself</i> is not complicated to implement--it all depends on
+
+which languages you want to support. The character repertoire you need
+
+fundamentally determines the features you need to have for compliance. If you
+
+just want to support Western Europe, you don't need to have much implementation
+
+beyond what you have in ASCII.</p>
+
+<p>Which further characters you need to support is really dependent on the
+
+languages you want, and what system requirements you have (servers, for example,
+
+may not need input or display). For example, if you need East Asian languages
+
+(in input), you have to have input methods. If you support Arabic or Hebrew
+
+characters (in display), then you need the bidirectional algorithm. For normal
+
+applications, of course, much of this will be handled by the operating system
+
+for you.</p>
+
+<h4><i>Q: What level of support should I look for?</i></h4>
+
+<p>Unicode support really divides up into two categories: <i>server-side support</i>
+
+and <i>client-side support</i>. The requirements for Unicode support in these
+
+two categories can be summarized as follows (although you may only need a subset
+
+of these features for your projects):
+
+<ul>
+
+  <li>Full server-side Unicode support consists of:
+
+    <ul>
+
+      <li>Storage and manipulation of Unicode strings.
+
+      <li>Conversion facilities to a full complement of other charsets (8859-x,
+
+        JIS, EBCDIC, etc.)
+
+      <li>A full range of formatting/parsing functionality for numbers,
+
+        currencies, date/time and messages for all locales you need.
+
+      <li>Message cataloging (resources) for accessing translated text.
+
+      <li>Unicode-conformant collation, normalization, and text boundary
+
+        (grapheme, word, line-break) algorithms.
+
+      <li>Multiple locales/resources available simultaneously in the same
+
+        application or thread.
+
+      <li>Charset-independent locales (all Unicode characters usable in any
+
+        locale).</li>
+
+    </ul>
+
+  <li>Full client-side support consists all the same features as server-side,
+
+    plus GUI support:
+
+    <ul>
+
+      <li>Displaying, printing and editing Unicode text.
+
+        <ul>
+
+          <li>This requires BIDI display if Arabic and Hebrew characters are
+
+            supported.
+
+          <li>This requires character shaping if scripts such as Arabic and
+
+            Indic are supported.</li>
+
+        </ul>
+
+      <li>Inputting text (e.g. with Japanese input methods)
+
+      <li>Full incorporation of these facilities into the windowing system and
+
+        the desktop interface.</li>
+
+    </ul>
+
+  </li>
+
+</ul>
+
+<h4><i>Q: Are there on-line resources to help me with Unicode?</i></h4>
+
+<p>Yes. Here is a short table to help you find some of them.</p>
+
+<table border="1" cellpadding="0" cellspacing="2">
+
+  <tbody>
+
+    <tr>
+
+      <th valign="top">Question</th>
+
+      <th valign="top">Reference</th>
+
+    </tr>
+
+    <tr>
+
+      <td valign="top">
+
+        <ul>
+
+          <li><i>What is in each particular version of Unicode?</i>
+
+          <li><i>What is in the latest version of Unicode?</i></li>
+
+        </ul>
+
+      </td>
+
+      <td valign="top"><a
+
+        href="http://www.unicode.org/unicode/standard/versions/">Versions of the
+
+        Unicode Standard</a>
+
+        <p><i><a
+
+        href="http://www.unicode.org/unicode/standard/versions/Unicode3.0.html">New
+
+        in Version 3.0</a></i></p>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td valign="top">
+
+        <ul>
+
+          <li><i>How do I handle CRLF in Unicode?</i>
+
+          <li><i>What should regular expressions do with Unicode?</i>
+
+          <li><i>Can I transmit Unicode text on EBCDIC systems?</i>
+
+          <li><i>How should a word-processor break lines in Unicode text?</i>
+
+          <li><i>Are there ways to normalize Unicode text?</i>
+
+          <li><i>For the Far East, how do I decide which characters should use
+
+            wide glyphs and which ones narrow?</i>
+
+          <li><i>How should I sort Unicode text?</i>
+
+          <li><i>Is there an update to the BIDI algorithm?</i>
+
+          <li><i>How can I compress Unicode text?</i></li>
+
+        </ul>
+
+      </td>
+
+      <td valign="top"><a href="http://www.unicode.org/unicode/reports/">Unicode
+
+        Technical Reports</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td valign="top">
+
+        <ul>
+
+          <li>&nbsp;I want to get online data for implementing Unicode. Where
+
+            can I find data for:
+
+            <ul>
+
+              <li>Character properties?
+
+              <li>Upper/lower/titlecasing?
+
+              <li>Decompositions?
+
+              <li>Normalization?
+
+              <li>Conversion to other character encodings?
+
+              <li>Code for Kanji code conversion with compressed tables?</li>
+
+            </ul>
+
+          </li>
+
+        </ul>
+
+      </td>
+
+      <td valign="top"><a href="http://www.unicode.org/unicode/onlinedat/">Online
+
+        Data</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td valign="top">
+
+        <ul>
+
+          <li>&nbsp;Are there conferences where we can find out more about
+
+            Unicode?</li>
+
+        </ul>
+
+      </td>
+
+      <td valign="top"><a href="http://www.unicode.org/unicode/conf.html">Unicode
+
+        Conferences</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td valign="top">
+
+        <ul>
+
+          <li>Who are the current members of the consortium?</li>
+
+          <li>I am interested in joining the consortium. Where can I find out
+
+            more?</li>
+
+        </ul>
+
+      </td>
+
+      <td valign="top"><a href="http://www.unicode.org/unicode/consortium/">Membership
+
+        Information</a>
+
+        <p><a href="http://www.unicode.org/unicode/consortium/memblogo.html">Our
+
+        Members</a></p>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+<h4><i>Q: What does Unicode conformance require?</i></h4>
+
+<p>Chapter 3 discusses this in detail. Here's a very informal version:</p>
+
+<blockquote>
+
+  <p><i>1) Unicode code units are 16 bits long; deal with it.<br>
+
+  2) Byte order is only an issue in files.<br>
+
+  3) If you don't have a clue, assume big-endian.<br>
+
+  4) Loose surrogates don't mean jack.<br>
+
+  5) Neither do U+FFFE and U+FFFF.<br>
+
+  6) Leave the unassigned codepoints alone.<br>
+
+  7) It's OK to be ignorant about a character, but not plain wrong.<br>
+
+  8) Subsets are strictly up to you.<br>
+
+  9) Canonical equivalence matters.<br>
+
+  10) Don't garble what you don't understand.</i></p>
+
+</blockquote>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<hr align="left">
+
+<h2><a name="Characters"></a>Characters</h2>
+
+<h4><i>Q: Does &quot;text element&quot; mean the same as &quot;combining
+
+character sequence&quot;?</i></h4>
+
+<p>No, this is a common misperception. A <i>text element</i> just means any
+
+sequence of characters that are treated as a unit by some process (see page
+
+2-2). A <i>combining character sequence</i> is a base character followed by any
+
+number of combining characters. It is one type of a text element, but words and
+
+sentences are <i>also</i> examples of text elements.</p>
+
+<h4><i>Q: So is a combining character sequence the same as a
+
+&quot;character&quot;?</i></h4>
+
+<p>That depends. For a programmer, a Unicode code value represents a single
+
+character (for exceptions, see below). For an end user, it may not. The better
+
+word for what end-users think of as characters is <i>grapheme</i> (as defined on
+
+page G-5): a minimally distinctive unit of writing in the context of a
+
+particular writing system.</p>
+
+<p>For example, å (A + COMBINING RING or A-RING) is a grapheme in the Danish
+
+writing system, while KA + VIRAMA + TA + VOWEL SIGN U is one in the Devanagari
+
+writing system. Graphemes are not necessarily combining character sequences, and
+
+combining character sequences are not necessarily graphemes. Moreover, there are
+
+a number of other cases where a user would not count &quot;characters&quot; the
+
+same way as a programmer would: where there are invisible characters such as the
+
+RLM used in BIDI, compatibility composites such as &quot;Dz&quot;, &quot;ij&quot;,
+
+or Roman numerals, and so on.</p>
+
+<h4><i>Q: I would think that the following characters (and probably a few
+
+others) would have compatibility decompositions. Why don't they?</i></h4>
+
+<blockquote>
+
+  <p><i>2044 (FRACTION SLASH) --&gt; 002F (SOLIDUS)</i></p>
+
+  <p><i>2010 (HYPHEN) --&gt; 002D (HYPHEN-MINUS)</i></p>
+
+  <p><i>2013 (EN DASH) --&gt; 002D (HYPHEN-MINUS)</i></p>
+
+  <p><i>2014 (EM DASH) --&gt; 002D 002D (HYPHEN-MINUS, HYPHEN-MINUS)</i></p>
+
+</blockquote>
+
+<p>These are called &quot;confusables&quot;: characters that look similar, but
+
+do have distinct behavior and generally distinct appearance (length or angle).
+
+Consult the Unicode Standard for descriptions of the differences between these
+
+characters.</p>
+
+<p>Compatibility characters are really just particular presentation forms of
+
+another character (or sequence of characters), encoded to ensure round-trip
+
+conversion to legacy encodings.</p>
+
+<h4><i>Q: Do all the compatibility ideographs have equivalents?</i></h4>
+
+<p>No, the ideographs FA0E, FA0F, FA11, FA13, FA14, FA1F, FA21, FA23, FA24,
+
+FA27, FA28, and FA29 have no canonical equivalents. These 12 characters are not
+
+duplicates and should be treated as a small extension of the set of unified
+
+ideographs. In fact, they are derived from industry standards, but are not
+
+duplicates of anything. They didn't make it into the main Unihan block because
+
+they aren't in any preexisting national standard.</p>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<h4><i>Q: Do all the Unicode character set mappings cover control codes?</i></h4>
+
+<p>No, the control code mappings are often omitted from the tables on the
+
+Unicode site. For the ASCII family of character sets, these are usually
+
+one-to-one mappings from the Unicode set based on taking the lower 8 bits of the
+
+Unicode character. However, they may differ significantly for other sets, such
+
+as EBCDIC.</p>
+
+<p>The correct Unicode mappings for the special graphic characters (01-1F, 7F)
+
+of CP437 and other DOS-type code pages are available at <a href="ftp://ftp.unicode.org/Public/MAPPINGS/">ftp://ftp.unicode.org/Public/MAPPINGS/</a>.</p>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<h4><i>Q: Is the POSIX ctype.h model sufficient for Unicode?</i></h4>
+
+<p>POSIX &quot;ctype.h&quot; knows but two cases, whereas Unicode knows three.
+
+In POSIX, only European Arabic digits can pass &quot;isdigit&quot;, whereas
+
+Unicode has many sets of digits, all putatively equal. In POSIX &quot;ctype.h&quot;,
+
+that which is &quot;alnum&quot; but not &quot;alpha&quot; must be a
+
+&quot;digit&quot;, but Unicode is aware that not all numbers are digits, nor are
+
+all letters alphabetic. Unicode groks spacing and non-spacing marks, but POSIX
+
+comprehends them not.</p>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<hr align="left">
+
+<h2><a name="Directionality"></a>Directionality</h2>
+
+<h4><i>Q: What is meant by the &quot;directionality&quot; of a script?</i></h4>
+
+<p>Individual writing systems make different default assumptions about how
+
+characters are arranged into lines and lines are arranged on a page or screen.
+
+Such assumptions are referred to as a script's directionality. For example, in
+
+the Latin script, characters run horizontally from left to right to form lines,
+
+and lines run from top to bottom.</p>
+
+<p>Semitic scripts arrange characters right-to-left into lines, although digits
+
+run the other way, making the scripts inherently bidirectional. Ordering
+
+characters into lines can be even more complex when left-to-right and
+
+right-to-left scripts are used together. Because bidirectional scripts can have
+
+opposite directions on the same line, and because the direction of punctuation
+
+characters is determined by their surroundings, resolving the actual direction
+
+of a specific part of the line depends on context analysis. The Unicode Standard
+
+defines an implicit algorithm to determine the layout of a line, and also
+
+provides overrides to handle situations that are ambiguous; see <i>Section 3.11,
+
+Bidirectional behavior,</i> for more information.</p>
+
+<p align="right"><i>[John Jenkins]</i></p>
+
+<h4><i>Q: Are any scripts written vertically?</i></h4>
+
+<p>East Asian scripts are frequently written in vertical lines which run from
+
+top-to-bottom and are arrange columns either from left-to-right (Mongolian) or
+
+right-to-left (other scripts). Most characters use the same shape and
+
+orientation when displayed horizontally or vertically, but many punctuation
+
+characters will change their shape when displayed vertically.</p>
+
+<p>Letters and words from other scripts are generally rotated through ninety
+
+degree angles so that they, too, will read from top to bottom. That is, letters
+
+from left-to-right scripts will be rotated clockwise and letters from
+
+right-to-left scripts counterclockwise, both through ninety degree angles.</p>
+
+<p>Unlike the bidirectional case, the choice of vertical layout is usually
+
+treated as a formatting style; therefore, the Unicode Standard does not define
+
+default rendering behavior for vertical text nor provide directionality controls
+
+designed to override such behavior.</p>
+
+<p align="right"><i>[John Jenkins]</i></p>
+
+<h4><i>Q: Are there any other script directions?</i></h4>
+
+<p>Other script directionalities are possible and are found in actual writing
+
+systems, mainly in historical ones. For example, some ancient Numidian texts are
+
+written bottom-to-top, and Egyptian hieroglyphics can be written with arbitrary
+
+directions for individual lines.</p>
+
+<p>One prominent example is boustrophedon (literally, &quot;ox-turning&quot;),
+
+which is often found in ancient European writing systems such as early Greek. In
+
+boustrophedon writing, characters are arranged into horizontal lines, but the
+
+individual lines alternate between running right to left and running left to
+
+right, the way an ox goes back and forth when plowing a field. The letters
+
+themselves use mirrored images in accordance with each individual line's
+
+direction.</p>
+
+<p align="right"><i>[John Jenkins]</i></p>
+
+<h4><i>Q: So do developers need to worry about these historical directions?</i></h4>
+
+<p>Not really. Boustrophedon writing is of interest almost exclusively to
+
+scholars intent on reproducing the exact visual content of ancient texts. The
+
+Unicode Standard does not provide formatting codes to signal boustrophedon text.
+
+Specialized word processors for ancient scripts might offer support for this. In
+
+the absence of that, fixed texts can be written in boustrophedon by using hard
+
+line breaks and directionality overrides</p>
+
+<p align="right"><i>[John Jenkins]</i></p>
+
+<hr align="left">
+
+<h2><a name="Languages_and_CJK"></a>Languages and CJK</h2>
+
+<h4><i>Q: Won't users be confused by CJK characters being presented in different
+
+font styles for different countries?</i></h4>
+
+<ul>
+
+  <li>It is true that some Unihan characters are typically written differently
+
+    within the Japanese, Taiwanese, Korean, and Mainland Chinese typographic
+
+    traditions.
+
+  <li>These differences of writing style are within the general range of
+
+    allowable differences within each typographic tradition.
+
+    <ul>
+
+      <li>E.g., the official &quot;Taiwanese&quot; glyph for U+8349
+
+        (&quot;grass&quot;) per ISO/IEC 10646 uses four strokes for the
+
+        &quot;grass&quot; radical, whereas the PRC, Japanese, and Korean glyphs
+
+        use three. As it happens, Apple's LiSung Light font for Big Five (which
+
+        follows the &quot;Taiwanese&quot; typographic tradition) uses three
+
+        strokes. (This is easily confirmed by accessing <a
+
+        href="http://charts.unicode.org/unihan/unihan.acgi$8349">http://charts.unicode.org/unihan/unihan.acgi$8349</a>.)</li>
+
+    </ul>
+
+  <li>Japanese users prefer to see Japanese text written with
+
+    &quot;Japanese&quot; glyphs.
+
+  <li>It is also acceptable to Japanese users to see Chinese text written with
+
+    &quot;Japanese&quot; glyphs. For example:
+
+    <ul>
+
+      <li>A standard Japanese dictionary which quotes Chinese authors (e.g.,
+
+        Mencius) uses &quot;Japanese&quot; glyphs, not Chinese ones.
+
+      <li>In particular, it is perfectly acceptable within Japanese typography
+
+        for stretches of Chinese quoted in a predominantly Japanese text to be
+
+        written with &quot;Japanese&quot; glyphs.</li>
+
+    </ul>
+
+  <li>Han unification allows for the possibility that a Japanese user might be
+
+    required to use a Chinese font to display some Japanese text (e.g., if it
+
+    uses a rare kanji).
+
+  <li>Ditto for JIS or an ISO 2022-based solution.
+
+  <li>Unicode doesn't include all the characters in actual use in Japan today,
+
+    particularly for personal names.
+
+  <li>Neither does JIS or an ISO 2022-based solution. There are vendor sets
+
+    which include many of these characters, and Unicode is working with the IRG
+
+    and East Asian national bodies to add them.</li>
+
+</ul>
+
+<p align="right"><i>[John Jenkins]</i></p>
+
+<hr align="left">
+
+<h2><a name="Case_Mappings"></a>Case Mappings</h2>
+
+<h4><i>Q: Do all scripts have upper and lower case?</i></h4>
+
+<p>No, as a matter of fact, most scripts do not have cases.</p>
+
+<p align="right"><i>[Jonathan Rosenne]</i></p>
+
+<h4><i>Q: Do the case mappings in Unicode allow a round-trip?</i></h4>
+
+<p>No, there are instances where two characters map to the same result. For
+
+example, both a sigma and a final sigma both uppercase to a capital sigma. There
+
+are other cases where the uppercase of a character requires decomposition. In
+
+some cases, the correct mapping also depends on the locale. For example, in
+
+Turkish, an <b><i>i</i></b> maps to an uppercase dotted I.</p>
+
+<h4><i>Q: Doesn't this cause a problem?</i></h4>
+
+<p>Remember that in general, case mappings of strings lose information and thus
+
+do not allow round tripping. Take the word &quot;anglo-American&quot; or the
+
+Italian word &quot;vederLa&quot;. Once you uppercase, lowercase or titlecase
+
+these strings, you can't recover the original just by performing the reverse
+
+operation.</p>
+
+<h4><i>Q: Why aren't there extra characters to support locale-independent casing
+
+for Turkish?</i></h4>
+
+<p>The fact is that there is too much data coded in 8859-9 (with 0xDD = LATIN
+
+CAPITAL LETTER I WITH DOT and 0xFD = LATIN SMALL LETTER DOTLESS I) which
+
+contains both Turkish and non-Turkish text. Transcoding this data to Unicode
+
+would be intolerably difficult if it all had to be tagged first to sort out
+
+which 0x49 characters are ordinary &quot;I&quot; and which are CAPITAL LETTER
+
+DOTLESS I. Better to accept the compromise and get on with moving to Unicode.
+
+Moreover, there is a strong doubt that users will &quot;get it right&quot; in
+
+future either when they enter new characters.</p>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<h4><i>Q: Why is there no upper-case SHARP S (ß)?</i></h4>
+
+<p>There are 139 lower-case letters in Unicode 2.1 that have no direct uppercase
+
+equivalent. Should there be introduced new bogus characters for all of them, so
+
+that when you see an &quot;fl&quot; ligature you can uppercase it to
+
+&quot;FL&quot; without expanding anything? Of course not.</p>
+
+<p>Note that case conversion is inherently language-sensitive, notably in the
+
+case of IPA, which needs to be left strictly alone even when embedded in another
+
+language which is being case converted. The best you can get is an approximate
+
+fit.</p>
+
+<p align="right"><i>[John Cowan]</i></p>
+
+<h4><i>Q: Is all of the Unicode case mapping information in <a
+
+href="ftp://ftp.unicode.org/Public/UNIDATA/UnicodeData.txt">UnicodeData.txt</a>?</i></h4>
+
+<p>No. The <a href="ftp://ftp.unicode.org/Public/UNIDATA/UnicodeData.txt">UnicodeData.txt</a>
+
+file includes all of the 1:1 case mappings, but doesn't include <i>1:many</i>
+
+mappings such as the one needed for uppercasing ß. Since many parsers now
+
+expect this file to have at most single characters in the case mapping fields,
+
+an additional file (<a
+
+href="ftp://ftp.unicode.org/Public/UNIDATA/SpecialCasing.txt">SpecialCasing.txt</a>)
+
+was added to provide the <i>1:many</i> mappings. For more information, see <a
+
+href="http://www.unicode.org/unicode/reports/tr21/">UTR #21- Case Mappings</a></p>
+
+<hr align="left">
+
+<h2><a name="Encoding_Forms"></a>Encoding Forms</h2>
+
+<h4><i>Q: Can Unicode text be represented in more than one way?</i></h4>
+
+<p>Yes, there are several possible representations of Unicode data, including
+
+UTF-8,&nbsp; UTF-16 and UTF-32. In addition, there are compression
+
+transformations such as the one described in the <i><a
+
+href="http://www.unicode.org/unicode/reports/tr6/">Unicode Technical Report #6:
+
+A Standard Compression Scheme for Unicode</a></i>.</p>
+
+<h4><i>Q: What is a UTF?</i></h4>
+
+<p>A <i>Unicode transformation format</i> (UTF) is an algorithmic mapping from
+
+every Unicode scalar value to a unique byte sequence. (The <a
+
+href="http://www.unicode.org/unicode/reports/tr6/">SCSU</a> compression method
+
+is not a UTF because the same string can map to very many different byte
+
+sequences, depending on the capabilities of the compressor.)</p>
+
+<p>Since every Unicode coded character sequence maps to a unique sequence of
+
+bytes in a given UTF, a reverse mapping can be derived. Thus every UTF supports <i>lossless
+
+round tripping</i>: mapping from any Unicode coded character sequence S to a
+
+sequence of bytes and back will produce S again. To ensure round tripping, a UTF
+
+mapping <i>must also</i> map the 16-bit values that are not valid Unicode values
+
+to unique byte sequences. These invalid 16-bit values are FFFE, FFFF, and
+
+unpaired surrogates.</p>
+
+<h4><i>Q: But what about the byte sequences that are not generated by a UTF. How
+
+should I interpret them?</i></h4>
+
+<p>Let's start with a couple of definitions:</p>
+
+<p><i>D1. For a given UTF, a byte sequence that cannot be produced from any
+
+sequence of 16-byte values is called an ill-formed byte sequence.</i></p>
+
+<p>For a given UTF, there are two different types of ill-formed byte sequences.
+
+The first cannot be interpreted by the UTF:</p>
+
+<p><i>D2. For a given UTF, a byte sequence that cannot be mapped back to a
+
+sequence of 16-byte values is called an illegal byte sequence.</i></p>
+
+<p>For example, in UTF-8 every byte of the form 110xxxxx<i><sub>2</sub></i> <i>must</i>
+
+be followed with a byte of the form 10xxxxxx<i><sub>2</sub></i>. A sequence such
+
+as &lt;110xxxxx<i><sub>2</sub></i> 0xxxxxxx<i><sub>2</sub></i>&gt; is illegal,
+
+and must never be generated. When faced with this illegal byte sequence while
+
+transforming or interpreting, a UTF-8 conformant process must treat the first
+
+byte 110xxxxx<i><sub>2</sub></i> as an illegal termination error: for example,
+
+either signaling an error, filtering the byte out, or representing the byte with
+
+a marker such as FFFD (REPLACEMENT CHARACTER). In the latter two cases, it will
+
+continue processing at the second byte 0xxxxxxx<i><sub>2</sub></i>.</p>
+
+<p>The second type of ill-formed sequence <i>can</i> be interpreted by the UTF:</p>
+
+<p><i>D3. For a given UTF, an ill-formed byte sequence that is not illegal is
+
+called an irregular byte sequence.</i></p>
+
+<p>To make implementations simpler and faster, transformation formats can allow
+
+irregular byte sequences without requiring error handling. For example, UTF-8
+
+allows non-shortest byte sequences to be interpreted. A UTF-8 conformant process
+
+may map the byte sequence &lt;C0 80&gt; to the Unicode value &lt;0000&gt;, even
+
+though a UTF-8 conformant process must <i>never</i> generate that byte
+
+sequence--it must generate the byte sequence &lt;00&gt; instead. Similarly, it
+
+may map the sequence &lt;ED A0 BF ED B0 80&gt; to the Unicode values &lt;D800
+
+DC00&gt;, even though it must <i>never</i> generate it--it must generate the
+
+byte sequence &lt;F0 90 80 80&gt; instead.</p>
+
+<p>However, a conformant process <i>cannot</i> use irregular byte sequences to
+
+encode out-of-band information.</p>
+
+<h4><i>Q: You talked about the 16-bit invalid values. Are there any paired
+
+surrogates that are invalid?</i></h4>
+
+<p>Of course, there are no assigned surrogate pairs yet, except for private use
+
+characters, so this topic is not too important yet--you should never be
+
+generating any unassigned characters. However, there are surrogate pairs whose
+
+scalar values are defined as invalid by ISO 10646 (although not for any
+
+particularly good reason). These have the following form:</p>
+
+<div align="center">
+
+  <center>
+
+  <table border="1" cellpadding="2" cellspacing="2">
+
+    <tbody>
+
+      <tr>
+
+        <th>UTF-16</th>
+
+        <th>UTF-8</th>
+
+        <th>UCS-4</th>
+
+      </tr>
+
+      <tr>
+
+        <td>D83F DFF*</td>
+
+        <td>F0 9F BF B*</td>
+
+        <td>0001FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>D87F DFF*</td>
+
+        <td>F0 AF BF B*</td>
+
+        <td>0002FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>D8BF DFF*</td>
+
+        <td>F0 BF BF B*</td>
+
+        <td>0003FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>D8FF DFF*</td>
+
+        <td>F1 8F BF B*</td>
+
+        <td>0004FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>D93F DFF*</td>
+
+        <td>F1 9F BF B*</td>
+
+        <td>0005FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>D97F DFF*</td>
+
+        <td>F1 AF BF B*</td>
+
+        <td>0006FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td colspan="3">
+
+          <p align="center">...</p>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td>DBBF DFF*</td>
+
+        <td>F3 BF BF B*</td>
+
+        <td>000FFFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td>DBFF DFF*</td>
+
+        <td>F4 8F BF B*</td>
+
+        <td>0010FFF*</td>
+
+      </tr>
+
+      <tr>
+
+        <td colspan="3">* = E or F</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  </center>
+
+</div>
+
+<hr align="left">
+
+<h2><a name="UTF-16_and_UCS-4"></a>UTF-16, UCS-4, and UTF-32</h2>
+
+<h4><i>Q: What is UTF-16?</i></h4>
+
+<p>Unicode was originally designed as a pure 16-bit encoding, aimed at
+
+representing all modern scripts. (Ancient scripts were to be represented with
+
+private-use characters.) Over time, and especially after the addition of over
+
+14,500 composite characters for compatibility with legacy sets, it became clear
+
+that 16-bits were not sufficient for the user community. Out of this arose
+
+UTF-16.</p>
+
+<p>UTF-16 allows access to 63K characters as single Unicode 16-bit units. It can
+
+access an additional 1M characters by a mechanism known as surrogate pairs. Two
+
+ranges of Unicode code values are reserved for the high (first) and low (second)
+
+values of these pairs. Highs are from 0xD800 to 0xDBFF, and lows from 0xDC00 to
+
+0xDFFF. In Unicode 3.0, there are no assigned surrogate pairs. Since the most
+
+common characters have already been encoded in the first 64K values, the
+
+characters requiring surrogate pairs will be relatively rare (see below).</p>
+
+<h4><i>Q: Since the surrogate pairs will be rare, does that mean I can dispense
+
+with them?</i></h4>
+
+<p>Just because the characters are rare does <i>not</i> mean that they should be
+
+neglected. It will be important to support surrogate pairs in the future; they
+
+will start appearing in versions of Unicode post-3.0. The fact that the
+
+characters are rare <i>can</i> be taken into account when optimizing code and
+
+storage, however.</p>
+
+<h4><i>Q: Does UTF-16 have an alternative representation?</i></h4>
+
+<p>Yes, all characters represented in UTF-16, both those represented with 16
+
+bits and those with a surrogate pair, can be represented as a single 32-bit unit
+
+in UTF-32. This single 4 code unit corresponds to the Unicode scalar value,
+
+which is the abstract number associated with a Unicode character. UTF-32 is a
+
+subset of the encoding mechanism called <i>UCS-4</i> in ISO 10646. For more
+
+information, see <a href="http://www.unicode.org/unicode/reports/tr19/">UTR #19:
+
+UTF-32</a>.</p>
+
+<h4><i>Q: Should I use UTF-32 (or UTF-4) for storing Unicode strings in memory?</i></h4>
+
+<p>This depends. We don't anticipate a general switch to UTF-32 storage for a
+
+long time (if ever). It was difficult enough to sell the average US or European
+
+programmer on the idea of using twice as much storage for their characters!</p>
+
+<p>The chief selling point for Unicode was providing a representation for all
+
+the world's characters, eliminating the need for juggling multiple character
+
+sets (and associated data corruption problems). These features were enough to
+
+swing industry to the side of using Unicode (UTF-16). While a UTF-32
+
+representation does make the programming model somewhat simpler, that is
+
+probably not compelling enough in the foreseeable future to get industry to take
+
+the additional storage hit in switching to internal UCS-4 representations.</p>
+
+<h4><i>Q: How about using UTF-32 interfaces in my APIs?</i></h4>
+
+<p>Given an internal UTF-16 storage, you can, of course, still index into text
+
+using UTF-32 indices. However, while converting from a UTF-32 index to a UTF-16
+
+index or vice versa is fairly straightforward, it does involve a scan through
+
+the 16-bit units up to the index point. In a test run, for example, accessing
+
+UTF-16 storage as UTF-32 characters results in a 10X degradation. Of course, the
+
+precise differences will depend on the compiler, and there are some interesting
+
+optimizations that can be performed, but it will always be slower on average.
+
+This kind of performance hit is unacceptable in many environments.</p>
+
+<p>Most Unicode APIs are using UTF-16. The low-level character indexing are at
+
+the common storage level, with higher-level mechanisms for graphemes or words
+
+specifying their boundaries in terms of the storage units. This provides
+
+efficiency at the low levels, and the required functionality at the high levels.</p>
+
+<p>Convenience APIs can be produced that take parameters in UTF-32 methods for
+
+common utilities: e.g. converting UTF-32 indices back and forth, accessing
+
+character properties, etc. Outside of indexing, differences between UTF-32 and
+
+UTF-16 are not as important. For most other APIs outside of indexing, characters
+
+values cannot really be considered outside of their context--not when you are
+
+writing internationalized code. For such operations as display, input,
+
+collation, editing, and even upper and lowercasing, characters need to be
+
+considered in the context of a string. That means that in any event you end up
+
+looking at more than one character. In our experience, the incremental cost of
+
+doing surrogates is pretty small.</p>
+
+<h4><i>Q: Why are some people opposed to UTF-16?</i></h4>
+
+<p>East Asians (Chinese, Japanese, and Koreans) are understandably nervous about
+
+UTF-16, which sometimes requires two code units to represent a single character.
+
+They have are well acquainted with the problems that variable-width codes (such
+
+as SJIS) have caused. However, there are some important differences between the
+
+mechanisms:
+
+<ul>
+
+  <li>Overlap
+
+    <ul>
+
+      <li>In SJIS, there is overlap between the high unit values and the low
+
+        unit values, and between the low unit values and the single unit values.
+
+        This causes a number of problems:
+
+        <ul>
+
+          <li>It causes false matches. For example, searching for an
+
+            &quot;a&quot; may match against the second unit of a Japanese
+
+            character.
+
+          <li>It prevents efficient random access. To know whether you are on a
+
+            character boundary, you have to search backwards to find a known
+
+            boundary.
+
+          <li>It makes the text extremely fragile. If a unit is dropped from a
+
+            high-low pair, many following characters can be corrupted.</li>
+
+        </ul>
+
+      <li>In UTF-16, high, low, and single units are all completely disjoint.
+
+        None of the above problems occur.</li>
+
+    </ul>
+
+  <li>Frequency
+
+    <ul>
+
+      <li>The vast majority of SJIS characters require 2 units.
+
+      <li>With UTF-16, relatively few characters require 2 units. The vast
+
+        majority of characters in common use are single code units. Even in East
+
+        Asian text, the incidence of surrogate pairs should be well less than 1%
+
+        of all text storage on average. (Certain documents, of course, may have
+
+        a higher incidence of surrogate pairs, just as <i>phthisique</i> is an
+
+        fairly infrequent word in English, but may occur quite often in a
+
+        particular scholarly text.)</li>
+
+    </ul>
+
+  </li>
+
+</ul>
+
+<h4><i>Q: When will most implementations of Unicode support surrogates?</i></h4>
+
+<p>Since only private use characters are encoded as surrogates now, there is no
+
+market pressure for implementation yet. It will probably be around the middle of
+
+2001 before surrogates are fully supported by a variety of platforms.</p>
+
+<h4><i>Q: Can applications simply use unassigned characters as they wish?</i></h4>
+
+<p><b>No! No conformant Unicode implementation can use the unencoded values
+
+outside of the private use area.</b></p>
+
+<p>Only the values in the private use areas (E000..F8FF, F0000..FFFFD, and
+
+100000..10FFFD) are legal for private assignment. However, this is over 137,000
+
+code points, which should be more than ample for the vast majority of
+
+implementations. [F0000..FFFFD and 100000..10FFFD are represented by surrogate
+
+pairs with private-use high surrogates (DB80..DBFF).]</p>
+
+<h4><i>Q: Will UTF-16 ever be extended to more than a million characters?</i></h4>
+
+<p>As stated, the goal of Unicode is not to encode glyphs, but characters. Over
+
+a million possible codes is far more than enough for this goal. Unicode is *not*
+
+designed to encode arbitrary data. If you wanted, for example, to give each
+
+&quot;instance of a character on paper throughout history&quot; its own code,
+
+you might need trillions or quadrillions of such codes; noble as this effort
+
+might be, you would not use Unicode for such an encoding. No proposed extensions
+
+of UTF-16 to more than 2 surrogates has a chance of being accepted into the
+
+Unicode Standard or ISO/IEC 10646.</p>
+
+<h4><i>Q: What about special-purpose implementations that need many code points?</i></h4>
+
+<p>For a particular implementation, if someone really, really wanted a
+
+representation that encoded more characters in a series of 16-bit code units
+
+then a series of private-use characters would work. For example, suppose you use
+
+a representation that consisted one BMP private-use character followed by one
+
+private-use surrogate pair (e.g. three 16-bit units). With such a
+
+representation, you can encode 6400 x 131,072 ( = 838,860,800) private use code
+
+points.</p>
+
+<h4><i>Q: Could you provide some sample code for handling surrogates?</i></h4>
+
+<p>Sure, see <a
+
+href="http://www.unicode.org/unicode/faq/SampleCode.html#Sample Indexing Code">Sample
+
+Indexing Code</a></p>
+
+<hr align="left">
+
+<h2><a name="BOM"></a>BOM</h2>
+
+<h4><i>Q: What is a BOM?</i></h4>
+
+<p>The special characteristics of U+FEFF ZERO WIDTH NON-BREAKING SPACE have been
+
+provided for use by higher level protocols as a signature at the beginning of
+
+certain data streams (primarily unmarked plaintext files). (When used as a
+
+signature, it is referred to as the BOM character, for Byte Order Mark.) Under
+
+those protocols, the BOM may be mandatory in those Unicode data streams.</p>
+
+<p>In the absence of such protocols and when not at the beginning of a text
+
+stream, U+FEFF is given its normal interpretation, as ZERO WIDTH NON-BREAKING
+
+SPACE, and is part of the content of the file or string.</p>
+
+<h4><i>Q: Where is a BOM useful?</i></h4>
+
+<p>Where a BOM is useful is with files that are typed as text, but not known to
+
+be in either big or little endian format--it also serves in that situation to be
+
+a hint that the text is Unicode, and not a legacy encoding.</p>
+
+<h4><i>Q: I am using a protocol that has BOM at the start of text. How do I
+
+represent an initial ZWNBSP?</i></h4>
+
+<p>Use the sequence FEFF FEFF.</p>
+
+<h4><i>Q: When a BOM is used, is it only in 16-bit Unicode text?</i></h4>
+
+<p>No, a BOM can be used as a signature no matter how the Unicode text is
+
+transformed: UTF-16, UTF-8, UTF-7, etc. The exact bytes comprising the BOM will
+
+be whatever the Unicode character FEFF is converted into by that transformation
+
+format. In that form, the BOM serves to indicate both that it is a Unicode file,
+
+and which of the formats it is in. Examples:</p>
+
+<div align="center">
+
+  <center>
+
+  <table border="1" cellpadding="2" cellspacing="2">
+
+    <tbody>
+
+      <tr>
+
+        <th width="50%">Bytes</th>
+
+        <th width="50%">Encoding Form</th>
+
+      </tr>
+
+      <tr>
+
+        <td width="50%">00 00 FE FF</td>
+
+        <td width="50%">UTF-32, big-endian</td>
+
+      </tr>
+
+      <tr>
+
+        <td width="50%">FF FE 00 00</td>
+
+        <td width="50%">UTF-32, little-endian</td>
+
+      </tr>
+
+      <tr>
+
+        <td width="50%">FE FF</td>
+
+        <td width="50%">UTF-16, big-endian</td>
+
+      </tr>
+
+      <tr>
+
+        <td width="50%">FF FE</td>
+
+        <td width="50%">UTF-16, little-endian</td>
+
+      </tr>
+
+      <tr>
+
+        <td width="50%">EF BB BF</td>
+
+        <td width="50%">UTF-8</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  </center>
+
+</div>
+
+<h4><i>Q: How do I tag data that does not interpret FEFF as a BOM?</i></h4>
+
+<p>Use the tag <tt>UTF-16BE</tt> to indicate big-endian UTF-16 text, and <tt>UTF-16LE</tt>
+
+to indicate little-endian UTF-16 text. If you do use a BOM, tag the text as
+
+simply <tt>UTF-16</tt>.</p>
+
+<h4><i>Q: Why wouldn't I always use a protocol that requires a BOM?</i></h4>
+
+<p>Where the data is typed, such as a field in a database, a BOM is unnecessary.
+
+For example, if a text data stream is marked as UTF-16BE, it is unnecessary to
+
+have a BOM. In fact, it is very undesirable to tag every string in a database or
+
+set of fields with a BOM, since if the strings are concatenated without removing
+
+the BOM you get into trouble. Moreover, it also means two data fields may have
+
+precisely the same content, but not be binary-equal (where one is prefaced by a
+
+BOM).</p>
+
+<h4><i>Q: Can you summarize how I should deal with BOMs?</i></h4>
+
+<p>Here are some guidelines to follow:
+
+<ol>
+
+  <li>A particular protocol (e.g. Microsoft conventions for .txt files) may
+
+    require use of the BOM on certain Unicode data streams, such as files. When
+
+    you need to conform to such a protocol, use a BOM.
+
+  <li>Some protocols allow optional BOMs in the case of untagged text. In those
+
+    cases,
+
+    <ul>
+
+      <li>Where a text data stream is known to be plain text, but of unknown
+
+        encoding, BOM can be used as a signature. If there is no BOM, the
+
+        encoding could be anything.
+
+      <li>Where a text data stream is known to be plain Unicode text (but not
+
+        which endian), then BOM can be used as a signature. If there is no BOM,
+
+        the text should be interpreted as big-endian.</li>
+
+    </ul>
+
+  <li>Where the precise type of the data stream is known (e.g. Unicode big-endian
+
+    or Unicode little-endian), the BOM should not be used.</li>
+
+</ol>
+
+<hr align="left">
+
+<h2><a name="Unicode_and_ISO_10646"></a>Unicode and ISO 10646</h2>
+
+<h4><i>Q: What is the relation between ISO-10646 and Unicode?</i></h4>
+
+<p>In 1991, the ISO Working Group responsible for ISO/IEC 10646 (JTC 1/SC 2/WG
+
+2) and the Unicode Consortium decided to create one universal standard for
+
+coding multilingual text. Since then, the ISO 10646 Working Group (SC 2/WG 2)
+
+and the Unicode Consortium have worked together very closely to extend the
+
+standard and to keep their respective versions synchronized.</p>
+
+<p align="right"><i>[Ed Hart, Ken Whistler]</i></p>
+
+<h4><i>Q: So are they the same thing?</i></h4>
+
+<p>No. Although the character codes are synchronized between Unicode and ISO/IEC
+
+10646, the Unicode Standard imposes additional constraints on implementations to
+
+ensure that they treat characters uniformly across platforms and applications.
+
+To this end, it supplies an extensive set of functional character
+
+specifications, character data, algorithms and substantial background material
+
+that is <i>not</i> in ISO/IEC 10646.</p>
+
+<h4>Q: How do I get a copy of ISO 10646 that is equivalent to Unicode 3.0?</h4>
+
+<p>Unicode 3.0 has the same character repertoire as ISO/IEC 10646-1:2000. When
+
+it becomes available, you can order it through <a
+
+href="http://webstore.ansi.org/">http://webstore.ansi.org</a> or <a
+
+href="http://www.iso.ch">http://www.iso.ch</a>.</p>
+
+<h4>Q: How do I get a copy of ISO 10646 that is equivalent to Unicode 2.1?</h4>
+
+<p>Unicode 2.1 has the same character repertoire as ISO/IEC 10646-1:1993, and
+
+and already incorporates all the Amendments through Amendment 7 to 10646-1, plus
+
+any relevant information from Technical Corrigenda #1 and #2 to 10646-1.</p>
+
+<p>You can order direct from ISO Central Secretariat (at <a
+
+href="http://www.iso.ch">http://www.iso.ch</a>) for a total of 648,50 CHF, or in
+
+the U.S. from ANSI (at <a href="http://webstore.ansi.org/">http://webstore.ansi.org</a>)
+
+for a total of $585 USD for the standard plus Amendments 1-7. Then download
+
+Technical Corrigenda #1 and #2 off the SC2 website by contacting the SC2/WG2
+
+convener at the address provided via <a
+
+href="http://www.iso.ch/meme/JTC1SC2.html">http://www.iso.ch/meme/JTC1SC2.html</a>.</p>
+
+<p align="right"><i>[Ed Hart, Ken Whistler]</i></p>
+
+<hr align="left">
+
+<h2>Copyright<a
+
+href="http://member.linkexchange.com/cgi-bin/fc/fastcounter-login?989724"
+
+target="_top"><img align="bottom" border="0" height="1" src
+
+http://fastcounter.linkexchange.com/fastcounter?989724+1979455"" width="1"
+
+naturalsizeflag="0"></a></h2>
+
+<p><font size="2">Copyright ©1998-2000 Unicode, Inc.. All Rights Reserved. The
+
+Unicode Consortium makes no expressed or implied warranty of any kind, and
+
+assumes no liability for errors or omissions. No liability is assumed for
+
+incidental and consequential damages in connection with or arising out of the
+
+use of the information or programs contained or accompanying this technical
+
+report.</font></p>
+
+<p><font size="2">Unicode and the Unicode logo are trademarks of Unicode, Inc.,
+
+and are registered in some jurisdictions.</font></p>
+
+
+
+</body>
+
+
+
+</html>
+

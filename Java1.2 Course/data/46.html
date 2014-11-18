@@ -1,0 +1,282 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 46</h2>
+
+<h3>Sunday, July 1st, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Another Servlet Example: </b>
+
+Example:
+<i>import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.util.*;
+
+public class ShowParameters extends HttpServlet {
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+      throws ServletException, IOException {
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    String title = "Reading All Request Parameters";
+    out.println("&lt;html&gt;");
+    out.println("&lt;head&gt;&lt;title&gt;Reading All Request Parameters&lt;/title&gt;&lt;/head&gt;"+
+                "&lt;BODY BGCOLOR=\"#FDF5E6\"&gt;\n" +
+                "&lt;H1 ALIGN=CENTER&gt;" + title + "&lt;/H1&gt;\n" +
+                "&lt;TABLE BORDER=1 ALIGN=CENTER&gt;\n" +
+                "&lt;TR BGCOLOR=\"#FFAD00\"&gt;\n" +
+                "&lt;TH&gt;Parameter Name&lt;TH&gt;Parameter Value(s)");
+    Enumeration paramNames = request.getParameterNames();
+    while(paramNames.hasMoreElements()) {
+      String paramName = (String)paramNames.nextElement();
+      out.print("&lt;TR&gt;&lt;TD&gt;" + paramName + "\n&lt;TD&gt;");
+      String[] paramValues =
+        request.getParameterValues(paramName);
+      if (paramValues.length == 1) {
+        String paramValue = paramValues[0];
+        if (paramValue.length() == 0)
+          out.println("&lt;I&gt;No Value&lt;/I&gt;");
+        else
+          out.println(paramValue);
+      } else {
+        out.println("&lt;UL&gt;");
+        for(int i=0; i&lt;paramValues.length; i++) {
+          out.println("&lt;LI&gt;" + paramValues[i]);
+        }
+        out.println("&lt;/UL&gt;");
+      }
+    }
+    out.println("&lt;/TABLE&gt;\n&lt;/BODY&gt;&lt;/HTML&gt;");
+  }
+
+  public void doPost(HttpServletRequest request,
+                     HttpServletResponse response)
+      throws ServletException, IOException {
+    doGet(request, response);
+  }
+}</i>
+
+
+To run the above code <a href=files/46_1.html>click here</a>.
+
+Output:
+<img src=images/46_1.gif>
+
+<img src=images/46_2.gif>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Servlet Chaining: </b>
+
+<img src=images/46_4.gif>
+
+This when input is passed through multiple servlets for proccessing before the final
+response is sent to the client.
+
+Example:
+
+Set up the Servlet files that will act in a chain:
+
+<img src=images/46_5.gif>
+
+Enable Servlet chains on the web server:
+
+<img src=images/46_6.gif>
+
+Now if you run http://localhost:8080/simplechain you will get Hello World in upper case.
+
+Make sure that the two compiled java files reside in the servlet folder.
+Coding for the two files is as follows:
+
+<i>
+------------------------------------------------------------------------
+SimpleTextServlet.java
+======================
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+
+// this is a set of HTML specifications being maitained by a third party company so that
+// servlet programmers don't need to program the html tag coding. Using the classes defined
+// in this specification you will be able to generate the html coding automatically
+import HTML.*;  
+
+public class SimpleTextServlet extends HttpServlet {
+
+  public void init(ServletConfig config)
+    throws ServletException {
+
+    super.init(config);
+  }
+
+  //Process the HTTP Get request
+  public void doGet(HttpServletRequest request,
+    HttpServletResponse response)
+    throws ServletException, IOException {
+
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+
+    HTMLDocument document = new HTMLDocument("SimpleTextServlet");
+
+    // Simple text string, can be anything
+    document.addObject(new HTMLText("Hello World!"));
+
+    out.println(document.toHTML());
+    out.close();
+  }
+
+  //Get Servlet information
+  public String getServletInfo() {
+
+    return "SimpleTextServlet Information";
+  }
+}
+
+
+------------------------------------------------------------------------
+UpperCaseServlet.java
+=====================
+
+import java.io.*;
+import java.util.Enumeration;
+
+import javax.servlet.http.*;
+import javax.servlet.*;
+
+public class UpperCaseServlet extends HttpServlet {
+
+  public void service(HttpServletRequest request,
+    HttpServletResponse response)
+    throws ServletException, IOException {
+
+    Enumeration e = request.getHeaderNames();
+
+    while (e.hasMoreElements()) {
+
+      // The first step is to copy and set all header
+      // information passed by the previous servlet
+      String header = (String)e.nextElement();
+      String value = request.getHeader(header);
+      response.setHeader(header, value);
+    }
+
+    // Set the responses Content-Type before getting the Writer
+    response.setContentType(request.getContentType());
+
+    PrintWriter out = response.getWriter();
+
+    // Make sure we have the write mime type
+    if (request.getContentType().startsWith("text/html")) {
+
+      BufferedReader reader = request.getReader();
+      String s;
+
+      while ( (s = reader.readLine()) != null) {
+
+        // Convert everything to Upper Case
+        String u = s.toUpperCase();
+        out.println(u);
+      }
+    }
+    // If not write data directly to response without change
+    else {
+
+      ServletInputStream in = request.getInputStream();
+      int b;
+
+      while ( (b = in.read()) != -1 ) {
+
+        out.write(b);
+      }
+    }
+    out.close();
+  }
+
+  public String getServletInfo() {
+
+    return "UpperCaseServlet";
+  }
+}</i>
+
+
+Output:
+
+When you run the SimpleTextServlet directly:
+
+<img src=images/46_7.gif>
+
+
+When you run the SimpleTextServlet using the chain:
+
+<img src=images/46_8.gif>
+
+NOTE: The HTML.* specification java files are located <a href=files/46_HTML/>here</a>.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+</body>
+</html>

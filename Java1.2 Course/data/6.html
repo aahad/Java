@@ -1,0 +1,249 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 6</h2>
+
+<h3>Saturday, March 10th, 2001</h3>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Ternary Operator: </b>
+
+<i>x = a ? b : c</i>
+
+The above line means:
+<i>if a is true then x=b;
+if a is false then x=c;</i>
+
+b and c have to be primitives.
+
+Example:
+  double i=5, j;
+  j = (i>5) ? 6.0 : 4;
+
+In this case j turns out to be 4.0, because j is upgraded to a double due
+to the 6.0. Therefore, when the 4 is moved into j it becomes a double.
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Assignment Operator: </b>
+
+ie. the '=' operator
+
+Example:
+<i>int i=2;
+int j,k,l;
+j = k = l = i; </i>
+
+The above is completely legal because i has been assigned already.
+So now we move from right to left, ie i --> l --> k --> j
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Operator Precedence: </b>
+
+Example:
+d = a * b + c;
+versus --> d = a * (b + c);
+
+Unary operators have the most precedence, ++ -- ! ~
+Arithmatic  * / % + -
+Shift Operators << >> >>>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Variables: </b>
+
+Local variable (or automatic variable):
+* Defined within a method
+* Has to be initialised explicitly (ie by user)
+* Exists only for the duration of the method
+
+Field Variable (or member variable):
+* Declared in a class
+* Is initialized automatically
+
+
+<i>class c {
+ int var1;		// Field  or member variable
+ int var2;
+ void method() {
+   int var3 = 0;	// automatic or local variable
+   int var4 = 0;
+   -----
+ }
+}</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Constructor: </b>
+
+When making an object, you will need a constructor to create it.
+
+Example:
+C myObj = new C();
+String st = new String();
+
+If a constructor is not provided by the programmer, JVM provides
+it by itself.
+
+The name of the constructor and the class is always the same.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>this and super: </b>
+
+NOTE: this and super are never used in the main method
+non-static variable 'this' cannot be referenced from a static context
+
+Keywords:
+'this', 'super'
+
+	Parent1
+        /    \
+       /      \
+    Child1   Child2
+
+If you are currently in Child1 and you are trying to access a variable defined
+in Parent1, eg. var1, then you use the keyword 'super'
+If you are trying to access something within Child1 and you are in Child1, then
+you use the keyword 'this'.
+
+
+Example:
+<i>class ThisSuper extends SuperClass {  // **1**
+ String s = "this";
+ public static void main(String[] args) {
+  new ThisSuper();
+ }
+ ThisSuper() {  // **2**
+  display(this.s);
+  display(super.s);
+  this.display(s);
+  super.display(s);
+ }
+ void display(String s) {
+  System.out.println("this: "+s);
+ }
+}
+
+class SuperClass {  // **3**
+ String s = "super";
+ void display(String s) {
+  System.out.println("super: "+s);
+ }
+}</i>
+
+Output:
+this: this
+this: super
+this: this
+super: this
+
+
+**1** You are defining the class ThisSuper and saying that 
+it is the child of SuperClass
+
+**2** ThisSuper seams to be also the name of a method inside the class,
+its actually a constructor. The job done by this constructor can also
+be achieved by a method.
+
+**3** ThisSuper is the parent class
+
+
+NOTE: For applications, there is only one MAIN method. 
+Since the main method for the above program is defined 
+in the ThisSuper class, you will compile it as ThisSuper.java
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Method Definition: </b>
+
+modifiers returnvalue methodname (paramlist)     throws exception
+
+Example:
+public    void        method     (String args[]) throws ToException
+
+returnvalue --> defines the format of the value that is returned by 
+                the method, eg. String. It can be a primitive or Object
+
+modifiers --> public is an access modifier. All methods by default are
+              encapsulated, so that it cannot be accessed at will, only 
+ 	      when allowed. Other examples are static
+
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Static vs Non-static</b>
+
+class temp {
+
+ public static void main(String args[]) {
+   temp obj1 = new temp();
+   obj1.method1();
+   method2();
+ }
+
+ void method1(){
+   System.out.println("This is Method 1 which is a non-static method");
+   System.out.println("To call non-static method from static, we used an object");
+ }
+
+ static void method2(){
+   System.out.println("This is Method 2 which is a static method");
+ }
+
+}
+
+</pre>
+
+
+
+</body>
+</html>

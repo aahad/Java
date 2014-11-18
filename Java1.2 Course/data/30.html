@@ -1,0 +1,637 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 30</h2>
+
+<h3>Saturday, May 12th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Multiple Listeners: </b>
+
+bt.addActionListener(new MyHandler());
+bt.addActionListener(new YourHandler());
+bt.addActionListener(new TheirHandler());
+
+class MyHandler implements ActionListener {
+  -----
+  -----
+}
+
+class YourHandler implements ActionListener {
+  -----
+  -----
+}
+
+class TheirHandler implements ActionListener {
+  -----
+  -----
+}
+
+
+Therefore, just make sure that all of them implement the respective listener.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>List: </b>
+
+<img src=images/30_1.gif>
+
+Constructors:
+1) List() 
+   Creates a new scrolling list. 
+2) List(int rows) 
+   Creates a new scrolling list initialized with the specified number of visible lines. 
+3) List(int rows, boolean multipleMode) 
+   Creates a new scrolling list initialized to display the specified number of rows. 
+
+Methods:
+
+void add(String item) 
+Adds the specified item to the end of scrolling list. 
+
+void add(String item, int index) 
+Adds the specified item to the the scrolling list at the position indicated by the index. 
+
+void addActionListener(ActionListener l) 
+Adds the specified action listener to receive action events from this list. 
+
+void addItemListener(ItemListener l) 
+Adds the specified item listener to receive item events from this list. 
+
+int getSelectedIndex() 
+Gets the index of the selected item on the list. Index is index in the list.
+
+int[] getSelectedIndexes() 
+Gets the selected indexes on the list. 
+
+String getSelectedItem() 
+Get the selected item on this scrolling list. The label is returned.
+
+String[] getSelectedItems() 
+Get the selected items on this scrolling list. 
+
+
+NOTE: It has both addActionListener and addItemListener.
+
+Example:
+<i>// Demonstrate Lists. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="ListDemo" width=300 height=180&gt
+  &lt/applet&gt
+*/
+
+public class ListDemo extends Applet implements ActionListener {
+  List os, browser;
+  String msg = "";
+
+  public void init() {
+    os = new List(4, true);
+    browser = new List(4, false);
+
+    // add items to os list
+    os.add("Windows 98");
+    os.add("Windows NT");
+    os.add("Solaris");
+    os.add("MacOS");
+
+    // add items to browser list
+    browser.add("Netscape 1.1");
+    browser.add("Netscape 2.x");
+    browser.add("Netscape 3.x");
+    browser.add("Netscape 4.x");
+
+    browser.add("Internet Explorer 2.0");
+    browser.add("Internet Explorer 3.0");
+    browser.add("Internet Explorer 4.0");
+
+    browser.add("Lynx 2.4");
+
+    browser.select(1);
+
+    // add lists to window
+    add(os);
+    add(browser);
+
+    // register to receive action events
+    os.addActionListener(this);
+    browser.addActionListener(this);
+  }
+
+  public void actionPerformed(ActionEvent ae) {
+    repaint();
+  }
+
+  // Display current selections.
+  public void paint(Graphics g) {
+    int idx[];
+
+    msg = "Current OS: ";
+    idx = os.getSelectedIndexes();
+    for(int i=0; i&ltidx.length; i++)
+      msg += os.getItem(idx[i]) + "  ";
+    g.drawString(msg, 6, 120);
+    msg = "Current Browser: ";
+    msg += browser.getSelectedItem();
+    g.drawString(msg, 6, 140);
+  }
+}</i>
+
+Output:
+<applet code="ListDemo" width=300 height=180></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>TextComponent: </b>
+
+public class TextComponent extends Component
+
+void addTextListener(TextListener l) 
+Adds the specified text event listener to receive text events from this text component. 
+
+String getSelectedText() 
+Gets the selected text from the text that is presented by this text component. 
+
+String getText() 
+Gets the text that is presented by this text component. 
+
+boolean isEditable() 
+Indicates whether or not this text component is editable. 
+
+void setEditable(boolean b) 
+Sets the flag that determines whether or not this text component is editable. 
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>TextField: </b>
+
+<img src=images/30_2.gif>
+
+Here is the code that produces these four text fields: 
+
+ TextField tf1, tf2, tf3, tf4;
+ // a blank text field
+ tf1 = new TextField();
+ // blank field of 20 columns
+ tf2 = new TextField("", 20);
+ // predefined text displayed
+ tf3 = new TextField("Hello!");
+ // predefined text in 30 columns
+ tf4 = new TextField("Hello", 30);
+
+
+Constructors:
+
+TextField() 
+Constructs a new text field. 
+
+TextField(int columns) 
+Constructs a new empty text field with the specified number of columns. 
+
+TextField(String text) 
+Constructs a new text field initialized with the specified text. 
+
+TextField(String text, int columns) 
+Constructs a new text field initialized with the specified text to be displayed, and wide 
+enough to hold the specified number of columns. 
+
+
+Methods:
+
+void addActionListener(ActionListener l) 
+Adds the specified action listener to receive action events from this text field. 
+
+boolean echoCharIsSet() 
+Indicates whether or not this text field has a character set for echoing. 
+
+void setEchoChar(char c) 
+Sets the echo character for this text field. Like for password it will return '*'.
+An echo character is useful for text fields where user input should not be echoed 
+to the screen, as in the case of a text field for entering a password. Setting 
+echoChar = 0 allows user input to be echoed to the screen again.
+
+
+Example:
+<i>// Demonstrate text field. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="TextFieldDemo" width=380 height=150&gt
+  &lt/applet&gt
+*/
+
+public class TextFieldDemo extends Applet
+  implements ActionListener {
+
+  TextField name, pass;
+
+  public void init() {
+    Label namep = new Label("Name: ", Label.RIGHT);
+    Label passp = new Label("Password: ", Label.RIGHT);
+    name = new TextField(12);
+    pass = new TextField(8);
+    pass.setEchoChar('?');
+
+    add(namep);
+    add(name);
+    add(passp);
+    add(pass);
+
+    // register to receive action events
+    name.addActionListener(this);
+    pass.addActionListener(this);
+  }
+
+  // User pressed Enter.
+  public void actionPerformed(ActionEvent ae) {
+    repaint();
+  }
+
+  public void paint(Graphics g) {
+     g.drawString("Name: " + name.getText(), 6, 60);  // get.Text() belongs to TextComponent
+     g.drawString("Selected text in name: "
+                  + name.getSelectedText(), 6, 80); //getSelectedText() also in TextComponent
+     g.drawString("Password: " + pass.getText(), 6, 100);
+  }
+}</i>
+
+Output:
+<applet code="TextFieldDemo" width=380 height=150></applet>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>TextArea: </b>
+
+<img src=images/30_3.gif>
+
+One major difference b/w TextArea and TextField is that TextArea has the following fields:
+
+static int SCROLLBARS_BOTH 
+Create and display both vertical and horizontal scrollbars. 
+
+static int SCROLLBARS_HORIZONTAL_ONLY 
+Create and display horizontal scrollbar only. 
+
+static int SCROLLBARS_NONE 
+Do not create or display any scrollbars for the text area. 
+
+static int SCROLLBARS_VERTICAL_ONLY 
+Create and display vertical scrollbar only. 
+
+
+To use these we will do the following:
+TextArea ta = new TextArea("string to print", 10, 20, TextArea.SCROLLBARS_BOTH);
+
+
+
+Constructors:
+
+TextArea() 
+Constructs a new text area. 
+
+TextArea(int rows, int columns) 
+Constructs a new empty text area with the specified number of rows and columns. 
+
+TextArea(String text) 
+Constructs a new text area with the specified text. 
+
+TextArea(String text, int rows, int columns) 
+Constructs a new text area with the specified text, and with the specified number of rows 
+and columns. 
+
+TextArea(String text, int rows, int columns, int scrollbars) 
+Constructs a new text area with the specified text, and with the rows, columns, and scroll 
+bar visibility as specified. 
+
+
+Example:
+<i>// Demonstrate TextArea.
+import java.awt.*;
+import java.applet.*;
+/*
+&ltapplet code="TextAreaDemo" width=300 height=250&gt
+&lt/applet&gt
+*/
+
+public class TextAreaDemo extends Applet {
+  public void init() {
+    String val = "There are two ways of constructing " +
+      "a software design.\n" +
+      "One way is to make it so simple\n" +
+      "that there are obviously no deficiencies.\n" +
+      "And the other way is to make it so complicated\n" +
+      "that there are no obvious deficiencies.\n\n" +
+      "        -C.A.R. Hoare\n\n" +
+      "There's an old story about the person who wished\n" +
+      "his computer were as easy to use as his telephone.\n" +
+      "That wish has come true,\n" +
+      "since I no longer know how to use my telephone.\n\n" +
+      "        -Bjarne Stroustrup, AT&T, (inventor of C++)";
+
+    TextArea text = new TextArea(val, 10, 30);
+    add(text);
+  }
+}</i>
+
+Output:
+<applet code="TextAreaDemo.class" width=300 height=250></applet>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>LayoutManager interface: </b>
+
+public interface LayoutManager
+
+Defines the interface for classes that know how to layout Containers. 
+
+Some of the major layouts are:
+GridLayout, FlowLayout, ViewportLayout, ScrollPaneLayout (there are others)
+
+The LayoutManager checks the policies of the chosen layout and forces that policy on
+the programmer's coding. For example, programmer codes a button to be 200 by 200
+but the layout does not permit that, the LayoutManager will force the layout's policy
+and the button will not be 200 by 200. 
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>FlowLayout: </b>
+
+NOTE: Applets uses FlowLayout by default.
+
+public class FlowLayout extends Object implements LayoutManager, Serializable
+
+A flow layout arranges components in a left-to-right flow, much like lines of text in 
+a paragraph. Flow layouts are typically used to arrange buttons in a panel. It will 
+arrange buttons left to right until no more buttons fit on the same line. Each line is 
+centered. 
+
+For example, the following picture shows an applet using the flow layout manager (its 
+default layout manager) to position three buttons: 
+
+<img src=images/30_4.gif>
+
+Here is the code for this applet: 
+
+ import java.awt.*;
+ import java.applet.Applet;
+
+ public class myButtons extends Applet {
+     Button button1, button2, button3;
+     public void init() {
+         button1 = new Button("Ok");
+         button2 = new Button("Open");
+         button3 = new Button("Close");
+         add(button1);
+         add(button2);
+         add(button3);
+     }
+ }
+
+
+Field Summary:
+
+static int CENTER 
+This value indicates that each row of components should be centered. 
+
+static int LEADING 
+This value indicates that each row of components should be justified to the leading edge 
+of the container's orientation, e.g. 
+
+static int LEFT 
+This value indicates that each row of components should be left-justified. 
+
+static int RIGHT 
+This value indicates that each row of components should be right-justified. 
+
+static int TRAILING 
+This value indicates that each row of components should be justified to the leading edge 
+of the container's orientation 
+
+
+Constructor Summary:
+
+FlowLayout() 
+Constructs a new Flow Layout with a centered alignment and a default 5-unit horizontal 
+and vertical gap. 
+
+FlowLayout(int align) 
+Constructs a new Flow Layout with the specified alignment and a default 5-unit horizontal 
+and vertical gap. 
+
+FlowLayout(int align, int hgap, int vgap) 
+Creates a new flow layout manager with the indicated alignment and the indicated horizontal 
+and vertical gaps. 
+
+
+Example:
+<i>// Use left-aligned flow layout. 
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+/*
+  &ltapplet code="FlowLayoutDemo" width=250 height=200&gt
+  &lt/applet&gt
+*/
+
+public class FlowLayoutDemo extends Applet
+  implements ItemListener {
+
+  String msg = "";
+  Checkbox Win98, winNT, solaris, mac;
+
+  public void init() {
+    // set left-aligned flow layout
+    setLayout(new FlowLayout(FlowLayout.LEFT));
+
+    Win98 = new Checkbox("Windows 98", null, true);
+    winNT = new Checkbox("Windows NT");
+    solaris = new Checkbox("Solaris");
+    mac = new Checkbox("MacOS");
+
+    add(Win98);
+    add(winNT);
+    add(solaris);
+    add(mac);
+
+    // register to receive item events
+    Win98.addItemListener(this);
+    winNT.addItemListener(this);
+    solaris.addItemListener(this);
+    mac.addItemListener(this);
+  }
+
+  // Repaint when status of a check box changes.
+  public void itemStateChanged(ItemEvent ie) {
+    repaint();
+  }
+
+  // Display current state of the checkboxes.
+  public void paint(Graphics g) {
+    msg = "Current state: ";
+    g.drawString(msg, 6, 80);
+    msg = "  Windows 98: " + Win98.getState();
+    g.drawString(msg, 6, 100);
+    msg = "  Windows NT: " + winNT.getState();
+    g.drawString(msg, 6, 120);
+    msg = "  Solaris: " + solaris.getState();
+    g.drawString(msg, 6, 140);
+    msg = "  Mac: " + mac.getState();
+    g.drawString(msg, 6, 160);
+  }
+}</i>
+
+Output:
+<applet code="FlowLayoutDemo" width=250 height=200></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>BorderLayout: </b>
+
+public class BorderLayout extends Object implements LayoutManager2, Serializable
+
+A border layout lays out a container, arranging and resizing its components to fit in 
+five regions: north, south, east, west, and center. Each region is identified by a 
+corresponding constant: NORTH, SOUTH, EAST, WEST, and CENTER. When adding a component 
+to a container with a border layout, use one of these five constants
+
+<img src=images/30_5.gif>
+
+The code for this applet is as follows: 
+
+ import java.awt.*;
+ import java.applet.Applet;
+
+ public class buttonDir extends Applet {
+   public void init() {
+     setLayout(new BorderLayout());
+     add(new Button("North"), BorderLayout.NORTH);
+     add(new Button("South"), BorderLayout.SOUTH);
+     add(new Button("East"), BorderLayout.EAST);
+     add(new Button("West"), BorderLayout.WEST);
+     add(new Button("Center"), BorderLayout.CENTER);
+   }
+ }
+
+
+Field Summary:
+static String AFTER_LAST_LINE 
+          The component comes after the last line of the layout's content. 
+static String AFTER_LINE_ENDS 
+          The component goes at the end of the line direction for the layout. 
+static String BEFORE_FIRST_LINE 
+          The component comes before the first line of the layout's content. 
+static String BEFORE_LINE_BEGINS 
+          The component goes at the beginning of the line direction for the layout. 
+static String CENTER 
+          The center layout constraint (middle of container). 
+static String EAST 
+          The east layout constraint (right side of container). 
+static String NORTH 
+          The north layout constraint (top of container). 
+static String SOUTH 
+          The south layout constraint (bottom of container). 
+static String WEST 
+          The west layout constraint (left side of container). 
+
+
+Constructor Summary:
+BorderLayout() 
+          Constructs a new border layout with no gaps between components. 
+BorderLayout(int hgap, int vgap) 
+          Constructs a border layout with the specified gaps between components. 
+
+NOTE: hgap and vgap are like hspace and vspace in html, they are spaces around the areas.
+
+
+Example:
+<i>// Demonstrate BorderLayout.
+import java.awt.*;
+import java.applet.*;
+import java.util.*;
+/*
+&ltapplet code="BorderLayoutDemo" width=400 height=200&gt
+&lt/applet&gt
+*/
+
+public class BorderLayoutDemo extends Applet {
+  public void init() {
+    setLayout(new BorderLayout());
+
+    add(new Button("This is across the top."),
+        BorderLayout.NORTH);
+    add(new Label("The footer message might go here."),
+        BorderLayout.SOUTH);
+    add(new Button("Right"), BorderLayout.EAST);
+    add(new Button("Left"), BorderLayout.WEST);
+
+    String msg = "The reasonable man adapts " +
+      "himself to the world;\n" +
+      "the unreasonable one persists in " +
+      "trying to adapt the world to himself.\n" +
+      "Therefore all progress depends " +
+      "on the unreasonable man.\n\n" +
+      "        - George Bernard Shaw\n\n";
+
+    add(new TextArea(msg), BorderLayout.CENTER);
+  }
+}</i>
+
+Output:
+<applet code="BorderLayoutDemo" width=400 height=200></applet>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+</body>
+</html>

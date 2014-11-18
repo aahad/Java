@@ -1,0 +1,538 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 42</h2>
+
+<h3>Thursday, June 21st, 2001 </h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>java.net - The Networking package: </b>
+
+Provides the classes for implementing networking applications.
+
+
+<b>URL Class:</b>
+
+Constructor Summary:
+
+URL(String spec) 
+Creates a URL object from the String representation 
+
+URL(URL context, String spec) 
+Creates a URL by parsing the specification spec within a specified context
+
+Example:
+URL myconnection = new URL("http://www.google.com/");
+URL thedoc = new URL(myconnection, "index.html");
+
+Other methods that are usually used are listed below:
+* boolean equals(Object obj)
+* Object getContent()			-- rich text, html
+* String getFile()			-- get a file
+* String getHost()
+* String getProtocol()			-- http, ftp etc.
+* String getRef()
+* URLConnection openConnection()
+* InputStream openStream()
+
+NOTE: Factory methods are those methods that have a return type of another class rather than
+the one they belong to, eg. the openConnection() method returns a URLConnection object.
+
+Some methods from URLConnection class are as follows:
+* void connect()
+* Object getContent()
+* String getContentEncoding()
+* int getContentLength()
+* String getContentType()
+* Date getLastModified()
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Networking using URL: </b>
+
+Example:
+<i>// Using the URL class to connect to a site and read a document
+import java.net.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.Date;
+
+public class URLConnector extends Frame implements ActionListener, WindowListener
+{
+    TextField theLocation = new TextField("", 40);
+    TextArea  theDoc      = new TextArea();    
+    Button    fetchButton = new Button("Fetch");
+    Button    quitButton  = new Button("Quit");
+    
+    public static void main(String args[])
+    {
+        URLConnector theApp = new URLConnector();
+    }
+    
+    public URLConnector()
+    {
+        setTitle( "The URLConnector Example" );
+        theLocation.setFont(new Font("Courier", Font.BOLD, 12));
+
+        Panel p1 = new Panel();
+        p1.add( new Label( "Enter a URL: " )); 
+        p1.add( theLocation );
+        add( p1, "North" );                   
+
+        add( theDoc, "Center" );
+
+        Panel p2 = new Panel();
+        p2.add( fetchButton );
+        p2.add( quitButton );
+        add( p2, "South" );
+        
+        theLocation.addActionListener(this);
+        fetchButton.addActionListener(this);
+        quitButton.addActionListener(this);
+        addWindowListener(this);
+        
+        setSize( 400, 300 );
+        setVisible(true);
+        theLocation.requestFocus();
+    }
+    
+    public void actionPerformed(ActionEvent theEvent)
+    {
+        if (theEvent.getSource( ) == fetchButton || theEvent.getSource( ) == theLocation)
+        {
+            try
+            {
+                // Open the URL
+                URL theURL = new URL( theLocation.getText() );
+                theDoc.setText( "\nFetching: " + theURL + '\n' );
+ 
+                // Open a URLConnection
+                URLConnection con = theURL.openConnection();
+
+                // Retrieve info about the document
+                String  encoding = con.getContentEncoding();
+                int     length   = con.getContentLength();
+                String  type     = con.getContentType();
+                long    expires  = con.getExpiration();
+                Date    modified = new Date( con.getLastModified() );
+                
+                // Display document info
+                theDoc.append("Content encoding: " + encoding + '\n');
+                theDoc.append("Content length  : " + length   + '\n');
+                theDoc.append("Content type    : " + type     + '\n');
+                theDoc.append("Expires         : " + expires  + '\n');
+                theDoc.append("Last modified   : " + modified + '\n');
+   
+                // Display the document if possible
+                Object urlContent = theURL.getContent();
+
+                String objectType = urlContent.getClass().getName();
+                theDoc.append( "\nFetched a " + objectType + "\n\n" );
+
+                if ( urlContent instanceof String )            // Plain text
+                {
+                    theDoc.append( (String) urlContent );
+                }
+                else if ( urlContent instanceof InputStream )  // Text/html file
+                {
+                    String s = "";
+                    int b = 0;
+                    while ( (b =((InputStream) urlContent).read()) != -1 )
+                        s += (char) b;
+                    
+                    theDoc.append(s);                        
+                }
+                else
+                {
+                    theDoc.append("Sorry, cannot show that type of object");
+                }
+            }
+
+            // Handle badly formed URLs
+            catch (MalformedURLException badURL)
+            {
+                theDoc.append( "\nSorry, cannot interpret your URL\n" );
+                theDoc.append( badURL.toString() );
+            }
+            // Handle I/O errors, etc
+            catch (IOException io)
+            {
+                theDoc.append( "Sorry, URL contents are not available\n");            
+                theDoc.append( io.toString() );                
+            }
+            catch (NullPointerException n)
+            {
+                theDoc.append( "Sorry, URL contents are not available\n");            
+            }
+        }
+        else if (theEvent.getSource( ) == quitButton) quitApplication( );
+    }
+    
+    public void windowClosed     (WindowEvent theEvent) {  }
+    public void windowClosing    (WindowEvent theEvent) { quitApplication( ); }
+    public void windowDeiconified(WindowEvent theEvent) { }
+    public void windowIconified  (WindowEvent theEvent) { }
+    public void windowOpened     (WindowEvent theEvent) { }
+    public void windowActivated  (WindowEvent theEvent) { }
+    public void windowDeactivated(WindowEvent theEvent) { }
+
+    public void quitApplication( )
+    {
+        setVisible(false);
+        dispose();
+        System.exit(0);
+    }
+}</i>
+
+Output:
+<img src=images/42_1.gif>
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Socket Programming: </b>
+
+The problem with the URL class is that it goes through DNS to connect to a server. What if
+the server exists on an intranet or does not have a URL, only an IP address. The URL class
+does not have support for this.
+
+For this we use the Socket class. 
+
+Two of the constructors are as follows:
+* Socket(String host, int port) 
+  Creates a stream socket and connects it to the specified port number on the named host
+* Socket(InetAddress address, int port) 
+  Creates a stream socket and connects it to the specified port number at the specified IP
+  address.
+
+
+Some of the methods that are used (belonging to the ServerSocket class) are as follows:
+* Socket accept() 
+  Listens for a connection to be made to this socket and accepts it. 
+* void close() 
+  Closes this socket. 
+* InetAddress getInetAddress() 
+  Returns the local address of this server socket, ie. the IP address
+* int getLocalPort() 
+  Returns the port on which this socket is listening. 
+
+
+NOTE: The reason why we have a Socket class and ServerSocket class is because the server has 
+to keep checking occasionally for new clients trying to connect to it, whereas a client
+can connect and disconnect as it pleases.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Networking using Socket: </b>
+
+Example:
+<i>There are 2 files:
+
+----------------------------------------------------------------------
+EchoClient.java
+
+// A client applet (works with EchoServer.java)
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+import java.net.*;
+import java.io.*;
+
+public class EchoClient extends Applet implements ActionListener
+{
+    final static int thePort = 1234;
+
+    Socket          theSocket;
+    BufferedReader  in;
+    PrintWriter     out;
+    TextField       theField = new TextField();
+    TextArea        theArea  = new TextArea();
+    
+    public void init()
+    {
+        try
+        {
+            setLayout(new BorderLayout());
+
+            add( theField, "North" );
+            add( theArea, "Center" );
+            theArea.setEditable(false);
+
+            setVisible(true);   
+                         
+            String host = getCodeBase().getHost();
+            theSocket   = new Socket( host, thePort );    
+
+            in  = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
+            out = new PrintWriter(new OutputStreamWriter(theSocket.getOutputStream()), true);
+            
+            theField.addActionListener(this);
+        }
+        catch (IOException io)
+        {
+            System.err.println("IOException:\n" + io);
+        }
+    }
+    
+    public void start()
+    {
+        try
+        {
+            while (true)
+            {
+                String s = in.readLine();
+                if ( s != null ) theArea.append( s + '\n' );
+            }
+        }
+        catch (IOException io)
+        {
+            System.err.println( "IOException:\n" + io );
+        }
+    }
+    
+    public void actionPerformed(ActionEvent theEvent)
+    {
+        out.println( theField.getText() );
+        theField.setText( "" );
+    }
+}
+
+----------------------------------------------------------------------
+EchoServer.java
+
+// A server written in Java
+import java.net.*;
+import java.io.*;
+
+public class EchoServer
+{
+    final static int thePort = 1234;
+    ServerSocket theServerSocket;
+    
+    public static void main(String args[])
+    {
+        EchoServer theApp = new EchoServer();
+        theApp.run();
+    }
+    
+    public EchoServer()
+    {
+        try
+        {
+            theServerSocket  = new ServerSocket(thePort);        
+        }
+        catch (IOException io)
+        {
+            System.err.println("Socket error:  terminating");
+            System.exit(1);
+        }
+    }
+    
+    public void run()
+    {
+        try
+        {
+            System.out.println( "Server ready." );
+
+            Socket theSocket = theServerSocket.accept();
+            System.out.println( "Client connected." );
+
+            BufferedReader in = 
+                new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
+            PrintWriter out = 
+                new PrintWriter(new OutputStreamWriter(theSocket.getOutputStream()), true);
+	        // The true option is to turn flush mode on for the output stream
+
+            while (true)
+            {
+                String line = in.readLine();
+                if (line == null)
+                    break;
+                System.out.println("Read:  " + line);
+                line = line.toUpperCase() + "!";
+                out.println(line);            
+                System.out.println("Wrote: " + line);
+            }
+            in.close();
+            out.close();
+            theSocket.close();
+            theServerSocket.close();
+            System.exit(0);
+        }
+        catch (IOException io)
+        {
+            System.err.println("Socket error:  terminating");
+            System.exit(1);
+        }
+    }
+}</i>
+
+Output:
+<img src=images/42_2.gif>
+
+<img src=images/42_3.gif>
+
+NOTE: This code is only good for connecting one client at a time.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Another Socket example: </b>
+
+<i>// A Server that can handles multiple connections
+import java.net.*;
+import java.io.*;
+
+public class JTTServer
+{
+    final static int thePort = 1234;
+    ServerSocket theServerSocket;
+    
+    public static void main(String args[])
+    {
+        JTTServer theApp = new JTTServer();
+        theApp.run();
+    }
+    
+    public JTTServer()
+    {
+        try
+        {
+            theServerSocket  = new ServerSocket(thePort);        
+        }
+        catch (IOException io)
+        {
+            System.err.println("Socket error:  terminating");
+            System.exit(1);
+        }
+    }
+    
+    public void run()
+    {
+        try
+        {
+            System.out.println("JT&T is open for business.");
+
+            while (true)
+            {
+                Socket theSocket = theServerSocket.accept();
+		// accept() WAITS for a new client to connect, its like getch() in C++
+
+                System.out.println("A customer has requested a table.");
+                Connection connection = new Connection(theSocket);
+            }
+        }
+        catch (IOException io)
+        {
+            System.err.println("Socket error:  terminating");
+            System.exit(1);
+        }
+        
+    }
+}
+
+class Connection extends Thread
+{
+    Socket theSocket;
+    BufferedReader in;
+    PrintWriter out;
+    
+    public Connection(Socket socket)
+    {
+        try
+        {
+            theSocket = socket;
+            in = new BufferedReader(new InputStreamReader(theSocket.getInputStream()));
+            out = new PrintWriter(new OutputStreamWriter(theSocket.getOutputStream()), true);
+            start();
+        }
+        catch (IOException io)
+        {
+            System.err.println("Socket error:  terminating");
+            System.exit(1);
+        }
+    }
+    
+    public void run()
+    {
+        int table = 0;
+        try
+        {
+            table = theSocket.getPort();
+            System.out.println("Customer seated at table " + table + ".");
+            out.println("Hello, table " + table + ", what can I get you?");
+            while (true)
+            {
+                String line = in.readLine();
+                if (line == null)
+                    break;
+                System.out.println("Table " + table + " wants " + line + ".");
+                out.println("I'm sorry, we're out of " + line + " right now.");
+                out.println("Is there something else you'd like instead?");
+            }
+            in.close();
+            out.close();
+            theSocket.close();
+        }
+        catch (IOException io)
+        {
+            System.err.println("Table " + table + " has abruptly left.");
+        }
+    }
+}</i>
+
+Output:
+<img src=images/42_4.gif>
+
+<img src=images/42_5.gif>
+
+To run the client use the following code:
+&ltAPPLET CODE=EchoClient HEIGHT=100 WIDTH=200&gt
+&lt/APPLET&gt
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+</body>
+</html>

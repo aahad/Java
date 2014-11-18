@@ -1,0 +1,385 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 38</h2>
+
+<h3>Sunday, June 3rd, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Database Connectivity: </b>
+
+Database Drivers:
+free on the Javasoft.com site for Java connectivity to databases from various 
+
+Data Definition Language:
+insert, update, delete
+
+Data Manipulation Language:
+select statement, once the data has been entered and user wants to see it
+
+
+The JDBC or ODBC structure is what we call a 3-tier structure:
+Java talks to JDBC which talks to the Database
+JDBC acts as a bridge between Java and the Database. Work is currently being done on a 
+2-tier solution using Java, by Sun and Oracle.
+
+
+Driver Manager  -->  Connection  -->  Statement  -->  Result Set
+			  |		  |		   |
+			  |		 SQL		   |
+			  |		  |		   |
+			  +--------    Driver    ----------+
+				    |	         |
+				Query In       Query Out
+				    |	         |
+				    +- Database -+
+
+1) class forName("Driver.name");
+2) String sourceURL = "   ";
+3) Connection.con = DriverManager.getConnection("source URL");
+4) Statement 	statement = con.createStatement();
+5) ResultSet   	record = statement.executeQuery("select ... ");
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Using JDBC: </b>
+
+Example:
+<i>import java.sql.*;
+
+public class MakingAStatement
+{
+  public static void main(String[] args)
+  {
+    // Load the driver
+    try
+    {
+      // Load the driver class
+      Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");  // method in the Class class in lang
+
+      // Define the data source for the driver
+      String sourceURL = new String("jdbc:odbc:technical_library");
+
+      // Create a connection through the DriverManager 
+      Connection databaseConnection = 
+                                DriverManager.getConnection(sourceURL);
+      Statement statement = databaseConnection.createStatement();
+      ResultSet authorNames = statement.executeQuery("SELECT * FROM authors");
+     // Output the resultset data
+     while(authorNames.next())
+        System.out.println(authorNames.getString("lastname") + " " 
+                           + authorNames.getString("firstname") );
+        
+    }
+    catch(ClassNotFoundException cnfe)  // if driver is not found
+    {
+      System.err.println(cnfe);
+    }
+    catch(SQLException sqle)  // if sql statement causes error, does not exist
+    {
+      System.err.println(sqle);
+    }
+  }
+}</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Interactive SQL program: </b>
+
+The following program provides an interface to enter an sql statement and see the result.
+
+Example:
+<i>import java.awt.*;
+import java.awt.event.*;                 // For event classes
+import javax.swing.*;                    // For Swing components
+import javax.swing.table.*;              // For the table classes
+import java.sql.*;                       // For JDBC classes
+
+public class InteractiveSQL extends JFrame implements ActionListener
+{
+  public static void main(String[] args)
+  { // Create the application object
+    // Set default values for the command line args
+    String user     = "guest";
+    String password = "guest";
+    String url      = "jdbc:odbc:technical_library";
+    String driver   = "sun.jdbc.odbc.JdbcOdbcDriver";
+
+    // Up to 4 arguments in the sequence database url,driver url, user ID, password
+    switch(args.length)
+    {
+      case 4:                                 // Start here for four arguments
+        password = args[3];
+        // Fall through to the next case
+      case 3:                                 // Start here for three arguments
+        user = args[2];
+        // Fall through to the next case
+      case 2:                                 // Start here for two arguments
+        driver = args[1];
+        // Fall through to the next case
+      case 1:                                 // Start here for one argument
+        url = args[0];
+    }
+
+    InteractiveSQL theApp = new InteractiveSQL(driver, url, user, password);
+
+    /*InteractiveSQL theApp = new InteractiveSQL("sun.jdbc.odbc.JdbcOdbcDriver",
+                                               "jdbc:odbc:technical_library", 
+                                               "guest", 
+                                               "guest"); */
+  }
+
+  public InteractiveSQL(String driver, String url, 
+                        String user , String password)
+  {
+    super("InteractiveSQL");                           // Call base constructor
+    setBounds(0, 0, 400, 300);                         // Set window bounds
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);        // Close window operation
+    addWindowListener(new WindowHandler());            // Listener for window close
+
+    // Add the input for SQL statements at the top
+    command.setToolTipText("Key SQL commmand and press Enter");
+    command.addActionListener(this);
+    getContentPane().add(command, BorderLayout.NORTH);
+
+    // Add the status reporting area at the bottom
+    status.setLineWrap(true);
+    status.setWrapStyleWord(true);
+    getContentPane().add(status, BorderLayout.SOUTH);
+
+    // Create the menubar from the menu items
+    JMenu fileMenu = new JMenu("File");                // Create File menu
+    fileMenu.setMnemonic('F');                         // Create shortcut
+    clearQueryItem.addActionListener(this);
+    exitItem.addActionListener(this);
+    fileMenu.add(clearQueryItem);                      // Add clear query item
+    fileMenu.add(exitItem);                            // Add exit item
+    menuBar.add(fileMenu);                             // Add menu to the menubar
+    setJMenuBar(menuBar);                              // Add menubar to the window
+
+    // Establish a database connection and set up the table
+    try
+    {
+      Class.forName(driver);                           // Load the driver
+      connection = DriverManager.getConnection(url, user, password);
+      statement = connection.createStatement();
+
+      model = new ResultsModel();                  // Create a table model
+      JTable table = new JTable(model);            // Create a table from the model
+      table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);   // Use scrollbars
+  
+      resultsPane = new JScrollPane(table);        // Create scrollpane for table
+      getContentPane().add(resultsPane, BorderLayout.CENTER);
+
+    }
+    catch(ClassNotFoundException cnfe)
+    {
+      System.err.println(cnfe);                    // Driver not found
+    }
+    catch(SQLException sqle)
+    {
+      System.err.println(sqle);                    // error connection to database
+    }
+
+    pack();
+
+    setVisible(true);
+  }
+  
+  public void actionPerformed(ActionEvent e)
+  {
+    Object source = e.getSource();
+    if(source == command)                       // Enter key for text field input
+      executeSQL();
+
+    else if(source == clearQueryItem)           // Clear query menu item
+      command.setText("");                      // Clear SQL entry
+
+    else if(source == exitItem)                 // Exit menu item
+    {
+      dispose();                                 // Release the window resources
+      System.exit(0);                            // End the application
+    }    
+  }
+
+
+  public void executeSQL()
+  {
+    String query = command.getText();      // Get the SQL statement
+    if(query == null)                      // If there's nothing we are done
+      return;
+    try
+    {
+      model.setResultSet(statement.executeQuery(query));
+      status.setText("Resultset has " + model.getRowCount() + " rows.");
+    }
+    catch (SQLException sqle)
+    {
+      status.setText(sqle.getMessage());        // Display error message
+    }
+  }
+
+
+  class WindowHandler extends WindowAdapter
+  {
+    // Handler for window closing event
+    public void windowClosing(WindowEvent e)
+    {
+      dispose();                                 // Release the window resources
+      System.exit(0);                            // End the application
+    }
+  }
+
+  JTextField command = new JTextField();       // Input area for SQL
+  JTextArea status = new JTextArea(3,1);       // Output area for status and errors
+  JScrollPane resultsPane;
+
+  JMenuBar menuBar = new JMenuBar();                        // The menu bar
+  JMenuItem clearQueryItem = new JMenuItem("Clear query");  // Clear SQL item
+  JMenuItem exitItem = new JMenuItem("Exit");               // Exit item
+
+  Connection connection;                       // Connection to the database
+  Statement statement;                         // Statement object for queries
+  ResultsModel model;                          // Table model for resultset
+}
+
+
+The above program is linked to the following external class ResultsModel.java:
+
+import java.sql.*;
+import javax.swing.table.*;
+import java.util.Vector;
+
+class ResultsModel extends AbstractTableModel 
+{
+
+  String[] columnNames = new String[0]; 
+  Vector dataRows;              // Empty vector of rows 
+
+  
+  public void setResultSet(ResultSet results)
+  {
+    try
+    {
+      ResultSetMetaData metadata = results.getMetaData();
+
+      int columns =  metadata.getColumnCount();    // Get number of columns
+      columnNames = new String[columns];           // Array to hold names
+      
+      // Get the column names
+      for(int i = 0; i < columns; i++)
+        columnNames[i] = metadata.getColumnLabel(i+1);
+
+
+      // Get all rows.
+      dataRows = new Vector();                     // New Vector to store the data
+      String[] rowData;                            // Stores one row
+      while(results.next())                        // For each row...
+      {
+        rowData = new String[columns];             // create array to hold the data
+        for(int i = 0; i < columns; i++)           // For each column
+           rowData[i] = results.getString(i+1);    // retrieve the data item
+
+        dataRows.addElement(rowData);              // Store the row in the vector
+      }
+
+      fireTableChanged(null);           // Signal the table there is new model data
+    }
+    catch (SQLException sqle)
+    {
+      System.err.println(sqle);
+    }
+
+  }
+
+  public int getColumnCount()
+  {
+    return columnNames.length; 
+  }
+
+  public int getRowCount()
+  {
+    if(dataRows == null)
+      return 0;
+    else
+      return dataRows.size();
+  }
+
+  public Object getValueAt(int row, int column)
+  {
+    return ((String[])(dataRows.elementAt(row)))[column]; 
+  }
+
+  public String getColumnName(int column)
+  {
+    return columnNames[column] == null ? "No Name" : columnNames[column];
+  }
+
+  
+}</i>
+
+Output:
+<img src=images/38_1.gif>
+
+</pre>
+
+
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b> : </b>
+
+
+</pre>
+
+</body>
+</html>

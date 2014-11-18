@@ -1,0 +1,217 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 11</h2>
+
+<h3>Saturday, March 24th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Nested Loops: </b>
+
+NOTE: There is no limit on the number of nested loops you can have.
+
+Example1:
+<i>class Nested {
+  public static void main(String args[]) {
+    int i, j;
+
+    for(i=0; i<10; i++) {
+      for(j=i; j<10; j++)
+        System.out.print(".");
+      System.out.println();
+    }
+  }
+}</i>
+
+Output1:
+..........
+.........
+........
+.......
+......
+.....
+....
+...
+..
+.
+
+
+Example2:
+<i>class temp {
+ public static void main(String args[]) {
+	for (int i=0; i<10; i++) {
+	  for (int j=0; j<10; j++){
+		System.out.print(i + " " + j + " ");
+		if (i==6) {
+		  break; // Breaks the current loop
+		}
+	  }
+	System.out.println(" ");
+	}
+ }
+}</i>
+
+Output2:
+0 0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9
+1 0 1 1 1 2 1 3 1 4 1 5 1 6 1 7 1 8 1 9
+2 0 2 1 2 2 2 3 2 4 2 5 2 6 2 7 2 8 2 9
+3 0 3 1 3 2 3 3 3 4 3 5 3 6 3 7 3 8 3 9
+4 0 4 1 4 2 4 3 4 4 4 5 4 6 4 7 4 8 4 9
+5 0 5 1 5 2 5 3 5 4 5 5 5 6 5 7 5 8 5 9
+6 0
+7 0 7 1 7 2 7 3 7 4 7 5 7 6 7 7 7 8 7 9
+8 0 8 1 8 2 8 3 8 4 8 5 8 6 8 7 8 8 8 9
+9 0 9 1 9 2 9 3 9 4 9 5 9 6 9 7 9 8 9 9
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>continue statement: </b>
+
+for (int i=0; i<10; i++) {
+  ---------
+  ---------
+  if (i==6) continue;
+  ---------
+  ---------
+}
+
+If i is 6, then code after this line is not executed, and the loop goes to its
+next increment. A break statement takes you out of the loop, but continue keeps
+you inside the loop.
+
+
+Example1:
+<i>class Continue {
+  public static void main(String args[]) {
+    for(int i=0; i<10; i++) {
+      System.out.print(i + " ");
+      if (i%2 == 0) continue; // when this is false then the next line is executed
+      System.out.println("");
+    }
+  }
+}</i>
+
+Output1:
+0 1   <--- 1%2 is not zero thus the line System.out.println(""); is executed
+2 3
+4 5
+6 7
+8 9
+
+
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Labels (flow controls): </b>
+
+Its like an alias given to a block of statements.
+
+first: {  
+	------
+	------
+	second: {  <-- nested block label
+		 ------
+		 ------
+	}
+	------
+}
+
+
+Example1:
+<i>class Break {
+  public static void main(String args[]) {
+    boolean t = true;
+
+    first: {
+      second: {
+        third: {
+          System.out.println("Before the break.");
+          if(t) break second; // break out of second block
+          System.out.println("This won't execute");
+        }
+        System.out.println("This won't execute");
+      }
+      System.out.println("This is after second block.");
+    }
+  }
+}</i>
+
+Output1:
+Before the break.
+This is after second block.
+
+
+<b>NOTE: This kind of break can only be applied to the current block/loop or its
+outer block/loop. If you tried to break a block which is not a part of the current
+block, it will give the error 'Undefined label' at compile time. 
+Labels can also be given to loop blocks.</b>
+
+Example2:
+<i>class ContinueLabel {
+  public static void main(String args[]) {
+outer: for (int i=0; i<10; i++) {
+         for(int j=0; j<10; j++) {
+           if(j > i) {
+             System.out.println();
+             continue outer;
+           }
+           System.out.print(" " + (i * j));
+         }
+       }
+       System.out.println();
+  }
+}</i>
+
+Output2:
+ 0
+ 0 1
+ 0 2 4
+ 0 3 6 9
+ 0 4 8 12 16
+ 0 5 10 15 20 25
+ 0 6 12 18 24 30 36
+ 0 7 14 21 28 35 42 49
+ 0 8 16 24 32 40 48 56 64
+ 0 9 18 27 36 45 54 63 72 81
+
+
+Example3:
+<i>class BreakLoop4 {
+  public static void main(String args[]) {
+    outer: for(int i=0; i<3; i++) {
+      System.out.print("Pass " + i + ": ");
+      for(int j=0; j<100; j++) {
+        if(j == 10) break outer; // exit both loops
+        System.out.print(j + " ");
+      }
+      System.out.println("This will not print");
+    }
+    System.out.println("Loops complete.");
+  }
+}</i>
+
+Output3:
+Pass 0: 0 1 2 3 4 5 6 7 8 9 Loops complete.
+
+</pre>
+
+
+
+</body>
+</html>

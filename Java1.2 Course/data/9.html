@@ -1,0 +1,131 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 9</h2>
+
+<h3>Tuesday , March 20th, 2001</h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>final keyword: </b>
+
+final class Myclass --  {  }
+
+This means that this class is the last class in the hierarchy. Therefore,
+it cannot be extended (the smallest child).
+
+sqrt(16);  <-- will return 4
+This is part of the Math class (that is automatically imported, lang package).
+If we think of it as a class, then to use its sqrt method we should have needed 
+to extend it, but we don't do that because it is a final class.
+
+A final method is one that the programmer does not want to change. 
+final void meth() {----}
+
+You can have a final method in an abstract class but you cannot have
+an abstract method in a final class.
+
+Example:
+<i>abstract class livingthing {
+  abstract void eat();
+  abstract void move();
+  static final void eyes(){  // final method in an abstract class, has to be static
+	System.out.println("I can see");
+  }
+}
+
+class Animal extends livingthing{
+
+  void eat(){ 
+	System.out.println("Living things eat.");
+  }
+
+  void move(){
+	System.out.println("Living things move.");
+  }
+
+  public static void main(String args[]){
+	Animal obj1 = new Animal(); 
+	obj1.eat();
+	obj1.move();
+	livingthing.eyes();
+  }
+
+}</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>native keyword: </b>
+
+Java Native Inteface (JNI):
+These are METHODS (not classes) used when you need a Java app to talk to
+code written in another language (eg. C++)
+
+native void meth();
+This will make Java call the JNI and it will look for the method definition.
+
+Even methods like are considered native.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>transient: </b>
+
+Can never be serialized, ie. to be sent in a stream like the print stream.
+The print stream sends data from the memory to the screen.
+
+transient int i = 9;
+So now you will not be able to print i. 
+
+This is used when user does not want the data to be hacked for any reason.
+This is io (input/output) thing.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>syncronized: </b>
+
+When you need harmony, continuity.
+
+When you are performing multi-threading. Eg. one thread wants to print and another
+is trying to delete some of that data. Both of these cannot be done at the same time.
+The 2 threads have to be syncronized. 
+
+Every object/thread in Java has a built-in lock. When more than one thread trys to
+access a method that has the syncronized keyword, Java asks the thread whether
+it has the lock for this method or not. If the method is currently being used
+then the lock is being used by the current thread. Once the current thread is done
+using the method, the lock is passed over to the next thread. If there are more than
+one thread waiting, then the lock goes to the thread with the most priority.
+
+syncronized void update {
+  -----
+  -----
+}
+
+syncronized can be used with a method and when calling an object.
+
+</pre>
+
+</body>
+</html>

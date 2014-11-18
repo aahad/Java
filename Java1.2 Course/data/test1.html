@@ -1,0 +1,895 @@
+<html>
+
+<head>
+<title>Java Test 1</title>
+</head>
+
+<body bgcolor=white text=black>
+
+<h2>Java Test 1</h2>
+
+<pre>
+
+Total Questions: 56
+30 Correct - 53.6 %
+
+
+Start -- 6:55pm
+End   -- 7:55pm
+
+              1. Which of these are legal identifiers. Select all the correct answers. 
+                  A.  number_1 
+                  B.  number_a 
+                  C.  $1234 
+                  D.  -volatile 
+
+		A and B
+Ans: A, B, C
+
+              2. Which of these are not legal identifiers. Select all the correct answers. 
+                  A. 1alpha 
+                  B._ abcd 
+                  C.  xy+abc 
+                  D.  transient 
+                  E.  account-num 
+                  F.  very_long_name 
+
+		A, C, D and E
+Ans: A, C, D, E
+
+              3. Which of the following are keywords in Java. Select all the correct answers. 
+                  A.  friend 
+                  B.  NULL 
+                  C.  implement 
+                  D.  synchronized 
+                  E.  throws 
+
+		B, C and E
+Ans: D and E
+
+              4. Which of the following are Java keywords. Select all the correct answers. 
+                  A.  super 
+                  B.  implement
+                  C.  void 
+                  D.  synchronize 
+                  E.  instanceof 
+
+		A, B and C
+Ans: A, C, E
+
+              5. Which of these are Java keywords. Select all the correct answers 
+                  A.  TRUE 
+                  B.  volatile 
+                  C.  transient 
+                  D.  native 
+                  E.  interface 
+                  F.  then 
+                  G.  new 
+
+		G only
+Ans: B, C, D, E, G
+
+              6. Using up to four characters, write the Java representation of octal literal 13. 
+Ans: 013 -- Base 8
+		
+
+              7. Using up to four characters, write the Java representation of integer literal 31  
+                   in hexadecimal. 
+Ans: 0X1F -- 31 divided by 16 = 1 15/16, 15 is F so you get 1F and in Java you put 0X
+		
+
+              8. Using up to four characters, write the Java representation of integer literal 10 
+                   in hexadecimal. 
+Ans: 0XA or 0X0A        
+
+
+
+
+
+              9. What is the minimum value of char type. Select the one correct answer. 
+                  A.  0 
+                  B.  -2^15
+                  C.  -2^16
+                  D. -2^15 - 1 
+                  E.  -2^16 -1 
+                  F.  None of the above
+
+		F only
+Ans: A thats zero
+
+             10. How many bytes are used to represent the primitive data type int in Java.         
+                   Select the one correct answer. 
+                  A.  2 
+                  B.  4 
+                  C.  8 
+                  D.  1 
+                  E.  The number of bytes to represent an int is compiler dependent. 
+
+		D only.
+Ans: B -- 32 divided by 8 ie. 4
+
+             11. What is the legal range of values for a variable declared as a byte. Select the 
+                   one correct answer. 
+                  A.  0 to 256 
+                  B.  0 to 255 
+                  C.  -128 to 127 
+                  D.  -128 to 128 
+                  E.  -127 to 128 
+                  F.  -215 to 215 - 1 
+
+		C only
+Ans: C
+
+             12. The width in bits of double primitive type in Java is ----. Select the one correct answer. 
+                  A.  The width of double is platform dependent 
+                  B.  64 
+                  C.  128 
+                  D.  8 
+                  E. 4 
+
+		B only.
+Ans: B
+
+             13. What would happen when the following is compiled and executed. Select the 
+                  one correct answer. 
+
+                    public class Compare { 
+                          public static void main(String args[]) {
+                                int x = 10, y;
+                                if(x < 10) 
+                                        y = 1;
+                                if(x>= 10) y = 2;
+                                System.out.println("y is " + y);
+                        }
+                }
+
+                  A.  The program compiles and prints y is 0 when executed. 
+                  B.  The program compiles and prints y is 1 when executed. 
+                  C.  The program compiles and prints y is 2 when executed. 
+                  D.  The program does not compile complaining about y not being initialized. 
+                  E.  The program throws a runtime exception. 
+
+		C only
+Ans: D
+
+            14. What would happen when the following is compiled and executed. Select the  
+                  one correct answer. 
+
+                class example {
+                        int x;
+                        int y;
+                        String name;
+                        public static void main(String args[]) {
+                                example pnt = new example();
+                                System.out.println("pnt is " + pnt.name + 
+                                        " " + pnt.x + " " + pnt.y);             
+                        }
+                }
+
+                  A.  The program does not compile because x, y and name are not initialized. 
+                  B.  The program throws a runtime exception as x, y, and name are used before  
+                        initialization. 
+                  C.  The program prints pnt is 0 0. 
+                  D.  The program prints pnt is null 0 0. 
+                  E.  The program prints pnt is NULL false false 
+
+		D only
+Ans: D
+
+            15. The initial value of an instance variable of type String which is not explicitly  
+                  initialized in the program is --. Select the one correct answer. 
+                  A.  null 
+                  B.  "" 
+                  C.  NULL 
+                  D.  0 
+                  E. The instance variable must be explicitly assigned. 
+
+		E only.
+Ans: A		
+
+            16. The initial value of a local variable of type String which is not explicitly 
+                  initialized and which is defined in a member function of a class. Select all  
+                  the correct answer. 
+                  A.  null 
+                  B.   "" 
+                  C.  NULL 
+                  D.  0 
+                  E.  The local variable must be explicitly assigned. 
+
+		E only.
+Ans: E
+
+             17. Which of the following are legal Java programs. Select all the correct answer. 
+                  A.  // The comments come before the package
+                        package pkg;
+                        import java.awt.*;
+                        class C{};
+                  B.  package pkg;
+                        import java.awt.*;
+                        class C{};
+                  C.  package pkg1;
+                        package pkg2;
+                        import java.awt.*;
+                        class C{};
+                  D.   package pkg;
+                         import java.awt.*;
+                  E.    import java.awt.*;
+                         class C{};
+                  F.    import java.awt.*;
+                          package pkg;
+                          class C {};
+
+		B, C and E
+Ans: 
+
+             18. Which of the following statements are correct. Select all correct answers. 
+                  A.  A Java program must have a package statement. 
+                  B. A package statement if present must be the first statement of the program  
+                      (barring any comments). 
+                  C. If a Java program defines both a package and import statement, then the  
+                      import statement must come before the package statement. 
+                  D.  An empty file is a valid source file. 
+                  E.  A Java file without any class or interface definitions can also be compiled. 
+                  F. If an import statement is present, it must appear before any class or 
+                      interface definitions. 
+
+		B and F
+Ans: 
+
+             19. What would be the results of compiling and running the following class.  
+                    Select the one correct answer. 
+
+                class test {
+                        public static void main() {
+                                System.out.println("test");
+                        }
+                }
+
+                  A.  The program does not compile as there is no main method defined. 
+                  B.  The program compiles and runs generating an output of "test" 
+                  C.  The program compiles and runs but does not generate any output. 
+                  D.  The program compiles but does not run. 
+
+		A only.
+Ans: D
+
+             20. Which of these are valid declarations for the main method? Select all correct 
+                    answers. 
+                  A.  public void main( )
+                  B.  public static void main(String args[]) 
+                  C.  static public void main(String)
+                  D.  public static void main(String ) 
+                  E.  public static int main(String args[]) 
+
+		B only.
+Ans: B
+
+             21. Which of the following are valid declarations for the main method. Select all 
+                    correct answers. 
+                  A.  public static void main(String args[])
+                  B.  public static void main(String []args) 
+                  C.  public static int main(String args[])
+                  D.  public static abstract void main(String args[]) 
+
+		A and C.
+Ans: A, B
+
+             22. What happens when the following program is compiled and executed with the 
+                    arguments.   - java test. Select the one correct answer. 
+
+                class test {
+                        public static void main(String args[]) {
+                                if(args.length > 0)
+                                       System.out.println(args.length);
+                        }
+                }
+
+                  A.   The program compiles and runs but does not print anything. 
+                  B.   The program compiles and runs and prints 0 
+                  C.   The program compiles and runs and prints 1 
+                  D. The program compiles and runs and prints 2 
+                  E. The program does not compile. 
+
+		A only
+Ans: A
+
+             23. What gets printed on the standard output when the class below is compiled  
+                    and executed by entering "java test lets see what happens". Select the one  
+                    correct answer. 
+
+                   public class test {
+                        public static void main(String args[]) {
+                                System.out.println(args[0] + " " + args[args.length - 1]);
+                        }
+                   }
+
+                  A.  The program will throw an ArrayIndexOutOfBounds exception. 
+                  B.  The program will print "java test" 
+                  C.  The program will print "java hapens"; 
+                  D.  The program will print "test happens" 
+                  E.  The program will print "lets happens" 
+
+		E only.
+Ans: E
+
+             24. What gets printed on the standard output when the class below is compiled  
+                   and executed by entering "java test lets see what happens". Select the one  
+                   correct answer. 
+
+                public class test {
+                        public static void main(String args[]) {
+                                System.out.println(args[0] + " " + args[args.length]);
+                        }
+                }
+
+                  A.  The program will throw an ArrayIndexOutOfBounds exception. 
+                  B.  The program will print "java test" 
+                  C.  The program will print "java hapens"; 
+                  D.  The program will print "test happens" 
+                  E.  The program will print "lets happens" 
+
+		A only.
+Ans: A
+
+             27. What all gets printed on the standard output when the class below is compiled  
+                    and executed by entering "java test lets see what happens". Select all correct             
+                    answers. 
+
+                public class test {
+                        public static void main(String args[]) {
+                                System.out.println(args[0] + " " + args.length);
+                        }
+                }
+                  A.  java 
+                  B.  test 
+                  C.  lets 
+                  D.  3 
+                  E.  4 
+                  F.  5 
+          
+		C and E.
+Ans: c, E
+
+           28. Which of the following are valid double literals?
+             
+                A. 1D
+                B. 1E-5D
+                C.  e2D
+                D. 1ed
+
+		C only.
+Ans: A, B		
+
+          29. What is the output of the following program when it is invoked using the command line:  
+                java Test this is a test   ?
+
+               class Test  {
+                   public static void main(String[] args)  {
+                   System.out.println(args[1]);
+                   }
+                }
+
+               A. this
+               B. is
+               C. a
+               D. test
+
+		B only.
+Ans: B		
+
+         30. What is the output of the following program?
+       
+                public class Question  {
+                  public static void main(String[] args)  {
+                    Object[] Q = new Object[2];
+                    byte[] b = new byte[2];
+                    System.out.print(Q[0]);
+                    System.out.println(b[1]);
+                  }
+               }
+
+        A. 0
+        B. 00
+        C. A NullPointerException is thrown
+        D. null0
+
+	C only.
+Ans: D
+
+        31.  In the following class definition, which is the first line (if any) that causes a
+               compilation error. Select the one correct answer. 
+                     public class test {
+                        public static void main(String args[ ] ) {
+                                 char c;
+                                 int i;
+                                 c = 'A';                // 1
+                                 i = c;          //2
+                                 c = i + 1;      //3
+                                 c++;            //4
+                         }
+                 }
+                   A. The line labeled 1. 
+                   B. The line labeled 2. 
+                   C. The line labeled 3. 
+                   D. The line labeled 4. 
+                   E. All the lines are correct and the program compiles. 
+        
+	C only.
+Ans: C
+
+      32. Which of these assignments are valid. Select all correct answers. 
+             A. short s = 28; 
+             B. float f = 2.3; 
+             C. double d = 2.3; 
+             D. int I = '1'; 
+             E. byte b = 12; 
+
+	A, C and E.
+Ans: A, C, D, E
+
+      33.What gets printed when the following program is compiled and run. Select
+                 the one correct answer. 
+                 class test {
+                         public static void main(String args[]) {
+                                 int i,j,k,l=0;
+                                 k = l++;
+                                 j = ++k;
+                                 i = j++;
+                                 System.out.println(i);          
+                         }
+                 }
+                   A. 0 
+                   B. 1 
+                   C. 2 
+                   D. 3 
+
+	B only.
+Ans: B
+
+             34. Which of these lines will compile? Select all correct answers. 
+                   A. short s = 20; 
+                   B. byte b = 128; 
+                   C. char c = 32; 
+                   D. double d = 1.4;
+                   E. float f = 1.4; 
+                   F. byte e = 0; 
+
+		A, D and F.
+Ans: A, C, D, F
+
+              35. The signed right shift operator in Java is --. Select the one correct answer. 
+                   A .<<; 
+                   B. >> 
+                   C. >>>; 
+                   D. None of these. 
+
+		B only.
+Ans: B
+
+              36. What gets printed on the standard output when the class below is compiled
+                  and executed. Select the one correct answer. 
+
+                 public class ShortCkt {
+                         public static void main(String args[ ]) {
+                                 int i = 0;
+                                 boolean t = true;
+                                 boolean f = false, b;
+                                 b = (t && ((i++) == 0));
+                                 b = (f && ((i+=2) > 0));
+                                 System.out.println(i);          
+                         }
+                 }
+
+                   A. 0 
+                   B. 1 
+                   C. 2 
+                   D. 3 
+
+		B only.
+Ans: B
+
+              37. What gets printed on the standard output when the class below is compiled
+                   and executed. Select the one correct answer. 
+
+                    public class ShortCkt {
+                         public static void main(String args[ ]) {
+                                 int i = 0;
+                                 boolean t = true;
+                                 boolean f = false, b;
+                                 b = (t & ((i++) == 0));
+                                 b = (f & ((i+=2) > 0));
+                                 System.out.println(i);          
+                         }
+                     }
+ 
+                   A .0 
+                   B. 1 
+                   C. 2 
+                   D. 3 
+
+		D only.
+Ans: D
+
+              38. What gets printed on the standard output when the class below is compiled
+                   and executed. Select the one correct answer. 
+                   public class ShortCkt {
+                         public static void main(String args[ ]) {
+                                 int i = 0;
+                                 boolean t = true;
+                                 boolean f = false, b;
+                                 b = (t || ((i++) == 0));
+                                 b = (f || ((i+=2) > 0));
+                                 System.out.println(i);          
+                         }
+                   }
+                   A. 0 
+                   B. 1 
+                   C. 2 
+                   D. 3 
+               
+		C only.
+Ans: C		
+
+                 39. What gets printed on the standard output when the class below is compiled
+                     and executed. Select the one correct answer. 
+
+                     public class ShortCkt {
+                        public static void main(String args[ ]) {
+                                 int i = 0;
+                                 boolean t = true;
+                                 boolean f = false, b;
+                                 b = (t | ((i++) == 0));
+                                 b = (f | ((i+=2) > 0));
+                                 System.out.println(i);          
+                          }
+                      }
+
+                   A. 0 
+                   B. 1 
+                   C. 2 
+                   D. 3 
+
+		D only.
+Ans: D
+
+              40. Which operator is used to perform bit -wise inversion in Java. Select the one
+                    correct answer. 
+                     A. ~ 
+                     B. ! 
+                     C. & 
+                     D. | 
+                     E. ^ 
+
+		A only.
+Ans: A
+
+              41. What gets printed when the following program is compiled and run. Select
+                    the one correct answer. 
+
+                    public class test {
+                         public static void main(String args[ ]) {
+                                 byte x = 3;
+                                 x = (byte)~x;
+                                 System.out.println(x);
+                         }
+                    }
+
+                   A. 3 
+                   B. 0 
+                   C. 1 
+                   D. 11 
+                   E. 252 
+                   F. 214 
+                   G. 124 
+                   H. -4 
+
+		H only.
+Ans: H
+76543210		
+00000011
+11111100
+
+              42.What gets displayed on the screen when the following program is compiled
+                 and run. Select the one correct answer. 
+                 public class test {
+                         public static void main(String args[ ]) {
+                                 int x,y;
+                                 x = 3 & 5;
+                                 y = 3 | 5;
+                                 System.out.println(x + " " + y);
+                         }
+                 }
+                    
+                   A. 7 1 
+                   B. 3 7 
+                   C. 1 7 
+                   D. 3 1 
+                   E. 1 3 
+                   F. 7 3 
+                   G. 7 5 
+
+		C only.
+Ans: C		
+00000011
+00000101
+00000001 <-- & ie. 1
+00000111 <-- | ie. 7
+
+              43. What gets displayed on the screen when the following program is compiled
+                    and run. Select the one correct answer. 
+
+                    public class test {
+                          public static void main(String args[ ]) {
+                                 int x,y;
+                                 x = 1 & 7;
+                                 y = 3 ^ 6;
+                                 System.out.println(x + " " + y);
+                         }
+                 }
+
+                   A. 1 3 
+                   B. 3 5 
+                   C. 5 1 
+                   D. 3 6 
+                   E. 1 7 
+                   F. 1 5 
+
+		E only.
+Ans: F
+00000001
+00000111
+00000001 <-- 1 & 7 ie. 1
+00000011
+00000110
+00000101 <-- ie. 5
+
+
+              44. Which operator is used to perform bit-wise Exclusive OR. 
+                   A. & 
+                   B. ^ 
+                   C. | 
+                   D. ! 
+                   E .~ 
+
+		D only.
+Ans: B
+
+              45. Which of the expressions are legal ?
+                   A. int x = 6; x = !x ;
+                   B. int x = 6; x &= 3 ;
+                   C. int x = 5; x = ~x;
+
+		C only.
+Ans: C
+
+              46. What gets displayed on the screen when the following program is compiled
+                    and run. Select the one correct answer. 
+                 public class test {
+                         public static void main(String args[ ]) {
+                                 boolean x = false;
+                                 int a;
+                                 if(x) a = x ? 1: 2;
+                                 else a = x ? 3: 4;
+                                 System.out.println(a);
+                         }
+                 }
+                   A. 1 
+                   B. 2 
+                   C. 3 
+                   D. 4 
+
+		D only.
+Ans: D
+
+              47. What gets displayed on the screen when the following program is compiled
+                    and run. Select the one correct answer. 
+
+                 public class test {
+                         public static void main(String args[]) {
+                                 int x, y;
+                                 x = 5 >> 2;
+                                 y = x >>> 2;
+                                 System.out.println(y);
+                         }
+                   }
+
+                   A. 5 
+                   B. 2 
+                   C. 80 
+                   D. 0 
+                   E. 64 
+
+		D  only.
+Ans: D		
+00000101
+00000001 <-- x
+
+
+              48. What gets displayed on the screen when the following program is compiled
+                    and run. Select the one correct answer. 
+
+                    public class test {
+                         public static void main(String args[]) {
+                                 int x;
+                                 x = -3 >> 1;
+                                 x = x >>> 2;
+                                 x = x << 1;
+                                 System.out.println(x);
+                         }
+                   }
+
+                   A. 1 
+                   B. 0 
+                   C. 7 
+                   D. 5 
+                   E. 23 
+                   F. 2147483646 
+              
+		F only.
+Ans: F
+
+                    49. Which of the following are correct. Select all correct answers. 
+                    A.  Java provides two operators to do left shift - << and <<<. 
+                    B.  >> is the zero fill right shift operator. 
+                    C.  >>> is the signed right shift operator. 
+                    D. For positive numbers, results of operators >> and >>> are same. 
+              
+		D only.
+Ans: D
+		
+                   50. What is the result of compiling and running the following program. Select one
+                         correct answer. 
+                       public class test {
+                         public static void main(String args[ ]) {
+                                 int i = -1;
+                                 i = i >> 1;      
+                                 System.out.println(i);
+                         }
+                 }
+
+
+                   A. 63 
+                   B. -1 
+                   C. 0 
+                   D. 1 
+                   E. 127 
+                   F. 128 
+                   G. 255 
+                   
+		C only.
+Ans: B
+
+              51. What result from attempting to compile and run the following code.
+
+                    public class Ternary {
+                       public static void main(String[ ]  args)  {
+                         int num =  20 ;
+                         System.out.println("Value is " + ((num > 20) ? 33.33 : 3 ));
+                       }
+                    }
+
+            A. Value is 33.33
+            B. Value is 3
+            C. Value is 3.0
+            D. A compiler error at line 4                  
+             
+	C only.
+Ans: C
+
+            52. In which all cases does an exception gets generated. Select all correct answers
+                  int i = 0, j = 1;
+               A. if((i == 0 ) || (j/i == 1))
+               B. if((i == 0 ) | (j/i == 1))
+               C. if((i != 0 ) && (j/i == 1))
+               D. if((i != 0 ) & (j/i == 1))
+    
+		B, C and D.
+Ans: B, D
+
+
+
+
+           53. Which of the following expression results in a positive value in x ?(Any one)
+                 A. int x = -1; x = x >>> 5 ;
+                 B. int x = -1; x = x >>> 32 ;
+                 C. byte x = -1; x = x >>> 5 ;
+                 D. int x = -1; x = x >> 5 ;                  
+
+	D only.
+Ans: A
+
+           54. After execution of the code fragment below, hat are the values of the 
+                 variables x, a and b ? 
+       
+                  int x = 6, a = 6, b = 7;
+                  x = a++ +  b++ ;
+                 A. x = 15, a = 7, b = 8
+                 B. x = 15, a = 6, b = 7
+                 C. x = 13, a = 7, b = 8
+                 D. x = 13, a = 6, b = 7    
+
+		C only.
+Ans: C 
+
+          55. What is the value of  8 | 9 & 10 ^ 11 ?
+          A. 8
+          B. 9
+          C. 10
+          D. 11
+Ans: 
+		
+
+         56. What is the value of  -31 >>> 5 >> 5 >>> 5 >> 5 >>>5 >> 5  ?
+          A. NaN
+          B. -1
+          C. 3
+          D. 1024
+Ans: C -- NaN is only for float/double
+
+         57. What is the output of the following program ?
+             class Cast {
+                public static void main(String arguments[ ] ) {
+                  byte b = 0 ;
+                  b = b + 3 ;
+                System.out.println(b);
+                }
+              }
+          A. Program will not compile .
+          B. Program will not run due to incorrect main method.
+          C. Output of  3.
+
+	C only.
+Ans: A
+
+        58.  What line of output is displayed by the following program?
+        class Logical {
+            static boolean sideEffect(boolean b) {
+               System.out.print("Side effect! ");
+               return b;
+             }
+            public static void main(String args[]) {
+              boolean t = true;
+              boolean f = false;
+              if (f & sideEffect(t))   
+                System.out.println(1);
+             else if(t | sideEffect(f))
+                System.out.println(2);
+             }
+         }
+                  
+A. 1
+B. 2
+C. side effect 1
+D. side effect 2
+E. side effect side effect 1
+F. side effect side effect 2
+
+B only.
+Ans: F
+
+59. What is the result of the following expression 6.7 + "2.3"  ?
+A. The double value 9.0
+B. The String "9.0"
+C. The long value 8
+D. The String "6.72.3"
+
+D only.
+Ans: D
+
+60. What is the value returned by "abcd" instanceof  Object ?
+A. "abcd"
+B. true
+C. false
+D. String
+
+B only.
+Ans: B
+
+
+Prepared By:  Muhammad Asif Khan Aman
+
+</pre>
+
+</body>
+
+</html>

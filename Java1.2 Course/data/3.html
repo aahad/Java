@@ -1,0 +1,349 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 3</h2>
+
+<h3>Tuesday, Feb 27th, 2001</h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Variables</b>
+
+Static String type;
+All static variables are related to class
+
+String type;
+This is non-static, which is related to an object
+
+<i>
+class c {
+ var1;		<--- Field  or member variable
+ var2;
+ void method() {
+   var3;	<--- automatic or local variable
+   var4;
+   -----
+ }
+}</i>
+
+Field variables can be initialised without assigning them a value.
+eg. int i;
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Default Values:</b>
+
+byte, short, int, long ---> 0 ie zero
+
+Object, String ---> null
+
+float, double ---> 0.0
+
+char ---> blank space
+
+
+<b>Example:</b>
+<i>
+class Initialization {
+ boolean bo;
+ byte by;
+ char c;
+ short s;
+ int i;
+ long l;
+ float f;
+ double d;
+ Object o;
+ public static void main(String[] args) {
+  Initialization app = new Initialization();
+  app.run();
+ }
+ void run() {
+  int[] intArray = new int[2];
+  Object[] objectArray = new Object[2];
+  System.out.println("boolean: "+bo);
+  System.out.println("byte: "+by);
+  System.out.println("char: "+c);
+  System.out.println("short: "+s);
+  System.out.println("int: "+i);
+  System.out.println("long: "+l);
+  System.out.println("float: "+f);
+  System.out.println("double: "+d);
+  System.out.println("Object: "+o);
+  System.out.println("int[2]: "+intArray[0]+" "+intArray[1]);
+  System.out.println("Object[2]: "+objectArray[0]+" "+objectArray[1]);
+ }
+}</i>
+
+The above code shows output as: <i>
+boolean: false
+byte: 0
+char:
+short: 0
+int: 0
+long: 0
+float: 0.0
+double: 0.0
+Object: null
+int[2]: 0 0
+Object[2]: null null
+</i>
+
+NOTE: If the variables are initialized inside a method, and then you 
+try to print them, it will not work. You will get the following error:
+<i>
+Initialization.java:32: cannot resol
+symbol  : variable var1
+location: class Initialization
+  System.out.println("var1: "+var1);
+                              ^
+</i>
+
+To fix this you will have to assign them values:
+<i>
+ public static void main(String[] args) {
+  int var1=1;
+  boolean var2=false;
+  String var3="Welcome";
+  System.out.println("var1: "+var1);
+  System.out.println("var2: "+var2);
+  System.out.println("var3: "+var3);
+  Initialization app = new Initialization();
+  app.run();
+ }</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Implicit Conversion</b>
+
+Also called Automatic Promotion
+
+byte b = 4;	<-- 8 bit
+int i = 10;	<-- 32 bit
+int c = b + i;	<-- upgraded to 32 bit, so that no info is lost
+
+double b = 4.0;	<-- 64 bit
+int i = 10;	<-- 32 bit
+double c;
+c = b + i;	<-- 64 bit
+
+
+Example:
+<i>class conversion {
+ public static void main(String[] args) {
+  byte var1=4;
+  int var2=10;
+  int var3 = var1 + var2;
+  System.out.println("var1: "+var1);
+  System.out.println("var2: "+var2);
+  System.out.println("var3: "+var3);
+ }
+}</i>
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Explicit Conversion</b>
+
+Also called Conversion Casting
+
+<b>Boolean is never casted</b>
+
+double b = 4.0;		<-- 64 bit
+int i = 10;		<-- 32 bit
+int c;
+c = (int)(b + i);	<-- 32 bit
+
+Example:
+<i>class conversion {
+ public static void main(String[] args) {
+  double var1=1.4;
+  int var2 = 2;
+  int var3;
+  var3 = (int)(var1+var2);
+  System.out.println("var1: "+var1);
+  System.out.println("var2: "+var2);
+  System.out.println("var3: "+var3);
+ }
+}</i>
+
+Output:
+<i>var1: 1.4
+var2: 2
+var3: 3</i>
+
+As you can see, precision is lost as we convert the value from a double
+to an integer. Answer should have been 3.4
+
+
+Example 2;
+<i>// Demonstrate casts.
+class conversion2 {
+  public static void main(String args[]) {
+    byte b;
+    int i = 257;
+    double d = 323.142;
+    
+    System.out.println("\nConversion of int to byte.");
+    b = (byte) i;
+    System.out.println("i and b " + i + " " + b);
+
+    System.out.println("\nConversion of double to int.");
+    i = (int) d;
+    System.out.println("d and i " + d + " " + i);
+
+    System.out.println("\nConversion of double to byte.");
+    b = (byte) d;
+    System.out.println("d and b " + d + " " + b);
+  }
+}</i>
+
+Output 2:
+<i>Conversion of int to byte.
+i and b 257 1
+
+Conversion of double to int.
+d and i 323.142 323
+
+Conversion of double to byte.
+d and b 323.142 67
+</i>
+
+Case 1: Now we do know that data is being lost from int to byte
+Now why is 257 being converted to 1, here you need knowledge of binary numbers
+257 in binary is 100000001 which is 9 bit, int is 8 bit so you get 00000001
+which when converted from binary back to a number becomes 1
+
+Case 2: From double to int the float data (decimal data) is lost, and since
+int can handle 323, the output becomes 323
+
+Case 3: From double to byte float data is lost first
+323 in binary form is 101000011 which is 9 bit, byte has 8 bit
+so remainder is 01000011 which in normal number is 67
+
+<b>Moral of the story:</b>
+try not to cast in long jumps, like 64 bit to 8 bit
+Its better to jump in small steps 64 bit to 32 bit or 32 bit to 16 bit etc.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Priority Table</b>
+
+double	<-- 64 bit
+float	<-- 32 bit
+---------
+long	<-- 64 bit
+int	<-- 32 bit
+short	<-- 16 bit
+char	<-- 16 bit
+byte	<-- 8 bit
+
+
+When you go up this list -- Automatic promotion (Implicit conversion)
+
+When you go down the list -- Casting ( explicit Conversion)
+
+Example:
+<i>class Promote {
+  public static void main(String args[]) {
+    byte b = 42;
+    char c = 'a';
+    short s = 1024;
+    int i = 50000;
+    float f = 5.67f;
+    double d = .1234;
+    double result = (f * b) + (i / c) - (d * s);
+    System.out.println((f * b) + " + " + (i / c) + " - " + (d * s));
+    System.out.println("result = " + result);
+  }
+}</i>
+
+Output:
+<i>238.14 + 515 - 126.3616
+result = 626.7784146484375</i>
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Arrays</b>
+
+Collection of Objects
+Arrays are always created at run-time
+
+NOTE: Arrays are not static or non-static, ie. whether they are in the class
+or method, they will always be initialized.
+
+
+<b>Declaration</b>
+int i[];	<-- array has not been created at this point
+double dd[];
+String ss[];
+Vector[] vv;
+
+
+<b>Construction</b>
+new int[10];	<-- this is when the array is actually created
+{10,20,30,40};	<-- instead of new you can just define the elements
+		    and JAVA automatically knows what the array size should be
+{"welcome", "to", "the", "jungle"};	<-- for String
+
+
+<b>Initialization</b>
+The array initializes itself automatically using the new command or
+when the elements are defined.
+
+Example 1:
+
+int i[] = new int[10];
+
+The elements for the above array are:
+int[0], int[1], int[2], int[3], int[4], int[5], int[6], int[7], int[9]
+
+All the elements are by default zero as the default for int is zero
+
+i[0] = 10;
+i[1] = 20;
+------
+
+i.length <-- gives the length of array i ie. 10
+
+
+Example 2:
+int i[] = {10,20,30,40};
+
+
+</pre>
+
+</body>
+</html>

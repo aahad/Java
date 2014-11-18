@@ -1,0 +1,14 @@
+<HTML>
+<HEAD>
+<TITLE>
+InitParameterServlet
+</TITLE>
+</HEAD>
+<BODY>
+
+<SERVLET CODE=InitParameterServlet
+  Company="Sams Publishing">
+</SERVLET>
+
+</BODY>
+</HTML>

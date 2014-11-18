@@ -1,0 +1,172 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 15</h2>
+
+<h3>Tuesday, April 3rd, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Hierarchy rules: </b>
+		 __constructor__
+		|		|
+Classname obj1 = new Classname();
+
+You can have more than one reference for the same object address.
+(Object reference is also known as a handle)
+
+So after the above command now you can also write:
+Classname obj2 = obj1;
+So now obj2 == obj1
+
+	Object -- serializable
+	  |
+	  |
+	Vector
+	  |
+	  |
+	Stack
+
+Looking at the above child/parent relationship, you can do the following:
+
+Stack st = new Stack();
+Vector vv;
+vv = st;   <--- the parent is now also acting as a reference to the same
+		address as the child st.
+Vector vv = new Stack();
+Object oo = st;	  <--- Parent can use child's constructor for object creation
+Serializable sz;  <--- all objects are serializable
+sz = st;	  <--- so you can assign child to it
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Conversion: </b>
+
+OldType X = new OldType();
+NewType Y = X;  <-- we are moving object X into object Y
+
+OldType and NewType can be either class, array or interface. Therefore there 
+are 9 possible situations.
+
+	Object -- implements serializable & clonable
+	/ | \ 
+       /  |  \
+    array |  Interface
+	  |
+	class
+	  |
+	  |
+	class
+
+When you are moving child to parent, it is completely legal, but when you want to
+move from parent to child there are problems.
+
+Now if we say that we are moving OldType into NewType (ie. NewType = OldType) then:
+</pre>
+<table border=1 cellspacing=5 cellpadding=5>
+
+<tr>
+<td></td>
+<td>OldType is a class</td>
+<td>OldType is an interface</td>
+<td>OldType is an array</td>
+</tr>
+
+<tr>
+<td>NewType is a class</td>
+<td>OldType extends NewType</td>
+<td>NewType must be Object</td>
+<td>NewType must be Object</td>
+</tr>
+
+<tr>
+<td>NewType is an interface</td>
+<td>OldType implements NewType</td>
+<td>(Interface can extend another interface) <br><br> OldType extends NewType</td>
+<td>NewType has to be serializable or clonable <br> <br>
+    Object implements serializable and clonable by default</td>
+</tr>
+
+<tr>
+<td>NewType is an array</td>
+<td>Compilation error</td>
+<td>Compilation error</td>
+<td>OldType datatype extends NewType datatype <br>
+    Vector[] OldType = new Vector[10]; <br>
+    Object[] NewType = OldType;</td>
+</tr>
+
+</table>
+<pre>
+In all cases OldType has to act as a child to NewType, ie. OldType one
+way or another extends NewType.
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>First Conversion example: </b>
+
+		Object
+		  |
+		  |
+		Fruit
+		  |
+		  |
+		Citrus
+	implements squeezable
+	      /	  |   \
+	     /	  |    \
+	 lemon Tangelo  Grapefruit
+
+
+class fruit {}
+class citrus extends fruit implements squeezable {}
+interface squeezable {}
+
+class lemon extends citrus {}
+class tangelo extends citrus {}
+class grapefruit extends citrus {}
+
+public class demo {
+  public static void main (String [] args) {
+	lemon lm = new lemon();
+	tangelo tg = new tangelo();
+	grapefruit gf = new grapefruit();
+	citrus ct = lm;  // moving child to parent
+	ct = new tangelo();
+	ct = gf;
+
+	squeezable sq = gf;
+	// gf = sq; does not work as you are moving parent to child
+
+	Object oo = sq; // oo is parent of all, ie. an object
+
+	// Arrays
+	citrus[] ctarray = new citrus[10];
+	fruit[] frarray;
+	lemon[] lmarray;
+	frarray = ctarray;
+	// lmarray = ctarray; does not work, parent cannot move into child
+  }
+}
+
+</pre>
+
+</body>
+</html>

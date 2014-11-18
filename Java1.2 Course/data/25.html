@@ -1,0 +1,170 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 25</h2>
+
+<h3>Saturday, April 28th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Modifying a String: </b>
+
+<b>subString()</b>
+String subString(int StartIndex)
+String subString(int StartIndex, int endIndex)
+
+Example:
+String st = "Amir Khan";
+String ss1 = st.subString(5);  <-- this returns "Khan"
+String ss2 = st.subString(2,6);  <-- this returns "ir k"
+
+
+<b>concat()</b>
+In order to concatenate 2 strings we just put the + sign between them. When we do this 
+the concat method is called by Java:
+String ss3 = st.concat("cd");  <-- returns "Amir Khancd"
+
+
+<b>trim()</b>
+String st = "   Asif  Aman  ";
+String ss1 = st.trim();  <-- this returns "Asif  Aman", we got rid of spaces before & after
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>StringBuffer class methods: </b>
+
+Example:
+String st = "abc";  <-- new String Object is created
+String st = st.toUpperCase();  <-- new String Object is created and "ABC" is moved into it
+				   Previous st Object is collected by the GC
+String st  = st + "de"; <-- new String Object created and "ABCde" moved in
+This can also be written as: String st = new StringBuffer().append(st).append("de").toString();
+
+
+<b>void ensureCapacity(int minimumCapacity) </b>
+Ensures that the capacity of the buffer is at least equal to the specified minimum.
+
+<b>StringBuffer append()</b>
+Appends the string representation to the string buffer.
+
+
+Example1:
+<i>// StringBuffer length vs. capacity.
+class StringBufferDemo {
+  public static void main(String args[]) {
+    StringBuffer sb1 = new StringBuffer("Hello");
+    System.out.println("buffer = " + sb1);
+    System.out.println("length = " + sb1.length());
+    System.out.println("capacity = " + sb1.capacity());
+
+    sb1.append("1234567890123456");
+    System.out.println("buffer = " + sb1);
+    System.out.println("length = " + sb1.length());
+    System.out.println("capacity = " + sb1.capacity());
+
+
+    sb1.append("7");
+    System.out.println("buffer = " + sb1);
+    System.out.println("length = " + sb1.length());
+    System.out.println("capacity = " + sb1.capacity());
+
+    sb1.append("1234567890123456789012");
+    System.out.println("buffer = " + sb1);
+    System.out.println("length = " + sb1.length());
+    System.out.println("capacity = " + sb1.capacity());
+
+    sb1.append("3");
+    System.out.println("buffer = " + sb1);
+    System.out.println("length = " + sb1.length());
+    System.out.println("capacity = " + sb1.capacity());
+  }
+}</i>
+
+Output1:
+buffer = Hello
+length = 5
+capacity = 21
+buffer = Hello1234567890123456
+length = 21
+capacity = 21
+buffer = Hello12345678901234567
+length = 22
+capacity = 44
+buffer = Hello123456789012345671234567890123456789012
+length = 44
+capacity = 44
+buffer = Hello1234567890123456712345678901234567890123
+length = 45
+capacity = 90
+
+
+Example2:
+<i>// Demonstrate delete() and deleteCharAt()
+class deleteDemo {
+  public static void main(String args[]) {
+    StringBuffer sb = new StringBuffer("This is a test.");
+
+    sb.delete(4, 7);
+    System.out.println("After delete: " + sb);
+
+    sb.deleteCharAt(0);
+    System.out.println("After deleteCharAt: " + sb);
+  }
+}</i>
+
+Output2:
+After delete: This a test.
+After deleteCharAt: his a test.
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Math class: </b>
+
+Example:
+<i>public class MathApp {
+ public static void main(String args[]) {
+  System.out.println(Math.E);
+  System.out.println(Math.PI);
+  System.out.println(Math.abs(-1234));
+  System.out.println(Math.cos(Math.PI/4));
+  System.out.println(Math.sin(Math.PI/2));
+  System.out.println(Math.tan(Math.PI/4));
+  System.out.println(Math.log(1));
+  System.out.println(Math.exp(Math.PI));
+  for(int i=0;i<3;++i)
+   System.out.print(Math.random()+" ");
+  System.out.println();
+ }
+}
+</i>
+
+Output:
+2.718281828459045
+3.141592653589793
+1234
+0.7071067811865476
+1.0
+0.9999999999999999
+0.0
+23.140692632779267
+0.4641347276283935 0.42517462068877476 0.30506045883757305
+
+</pre>
+
+</body>
+</html>

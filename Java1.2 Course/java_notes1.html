@@ -1,0 +1,147 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes</h2>
+
+
+<h3>Thursday, Feb 2nd, 2001</h3>
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Terminology of JAVA</b>
+
+     ** P - Polymorphism
+     *  The ability to change with different types of input,
+     *  eg. the 'println' command in Java will print integers, strings
+     *  This because the println command evaluates differently with different inputs.
+     *  eg2. How a person changes his style of speaking as he talks to different people
+     *
+PIE *** I - Inheritence
+     *  When there is a Parent - child relation
+     *  The child is more powerful than the parent, the child has the parent's atributes,
+     *  as well as its own attributes.
+     *
+     ** E - Encapsulation
+        To be able to use something without understanding all the details of the process
+        EG. driver does not know the details of how a car runs.
+        A coder hides some of his code so that a regular user does not mess the program.
+
+Class is a combination of methods & variables.
+
+An object is an instance of the Class.
+
+attribute - variables, functions
+behavior
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Writing your first JAVA program</b>
+<i>
+class MyClass {
+        public static void main (String args[]){
+                system.out.println("This is my first program");
+        }
+}</i>
+
+main - this is the main method
+void - this class has no returning values
+(String args[]) - This is an argument to give additional information about the method
+[] - used for an array
+args - its the name of the array, it can have any name besides args
+
+String & system are classes defined in the java.lang package
+<i>import java.lang.*</i> means <i>"import all the classes in the lang package inside java"</i>
+The lang package is automatically imported in all java programs
+
+system.out.println
+system 	- class
+out 	- object
+println - method
+
+The main method of any program will always have:
+<i>public static void main (String args[])</i>
+You cannot change anything in the above line except for the <i>args</i> array name
+If you did change anything else then you will get the error:
+<i>Exception in thread "main" java.lang.NoSuchMethodError: main</i>
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Syntax for a Java program</b>
+<i>
+package mypackage;
+import ------;
+class MyClass{
+	-----------
+	-----------
+}
+</i>
+The filename has to be exactly the same as the class name described in the code.
+Java is case-sensitive. Therefore the filename will be MyClass.java
+
+javac - Java Compiler
+
+So now type in <i>javac MyClass.java</i>
+A new file Myclass.class will be created in the your current folder.
+
+To run this .class file type <i>java MyClass</i>
+
+<b>NOTE:</b> Do not type <strike>java MyClass.class</strike> 
+Java understands it as <i>"look for class in the folder MyClass"</i> as in Unix.
+
+Some very common errors:
+* Java is case-sensitive, this causes problems
+* Filename of the .java file and the class name defined inside the code is not the same
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Primitives Types</b>
+
+Boolean 	- True or False ... Please keep in mind that the "T" and "F" are capital
+
+Character	- char a = '65';
+
+Integer		- Complete numbers
+  byte	
+  short
+  int
+  long
+
+Floating	- decimal numbers
+  float
+  double
+
+
+This the only thing in JAVA that is not OOP, these are not objects.
+These are kept temporarily in memory and are used in fast calculation purposes.
+
+In order for these primitives to survive when we deal with objects, we have to
+convert them into objects using WRAPPER classes.
+
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 12</h2>
+
+<h3>Tuesday, March 27th, 2001 </h3>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Exception Handling: </b>
+
+Its an object created by Java when a program produces an error. A thread 
+is created by Java that keeps an eye on the flow of your program. If the
+flow is disrupted, Java creates the exception object.
+
+Local Exception Handler: Created by Java in case if programmer has not 
+provided a handler. It shows the user why the error occured. It also 
+stops the program.
+
+Example1:
+<i>class temp {
+  public static void main(String args[]) {
+    int d = 0;
+    int a = 42 / d;
+  }
+}</i>
+
+Output1:
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+        at temp.main(temp.java:4)
+
+java.lang.Throwable
+* Exceptions
+* Errors
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>try and catch blocks: </b>
+
+To control an exception by yourself, you will have to define 2 blocks:
+try {
+  ----
+}
+catch(Exceptionclass e) {   <---- this is like defining an object name
+  ----
+}
+
+NOTE: An exception is usally denoted as 'e' or 'ee'. This is not required
+but is a common practice. Also every try block requires a catch (or finally)
+block, or else there will be a compilation error.
+
+When an exception occurs, we say that an exception is thrown and Java goes
+to the catch block and looks for the catch defined for that exception.
+
+Example1:
+<i>import java.util.Random;
+
+class HandleError {
+  public static void main(String args[]) {
+    int a=0, b=0, c=0;
+    Random r = new Random();
+
+    for(int i=0; i<10; i++) {
+      try {   // The try block has code that you fear might generate exceptions
+        b = r.nextInt();
+        c = r.nextInt();
+        a = 12345 / (b/c);
+      } catch (ArithmeticException e) {
+        System.out.println("Division by zero. " + e);
+        a = 0; // set a to zero and continue
+      }
+      System.out.println("a: " + a);
+    }
+  }
+}</i>
+
+Output1:
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+a: 12345
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+Division by zero. java.lang.ArithmeticException: / by zero
+a: 0
+a: 2469
+a: -12345
+a: 1234
+
+NOTE: We are using random numbers, so the result will be different every time.
+
+Also keep in mind that Java cannot print an object as such. It uses the toString 
+class described in the Object class to be able to print. Since Exceptions are
+also objects, they use the toString method is used in the background and thus
+you are able to use the System.out.println to print the Exception.
+
+
+Example2:
+<i>class MultiCatch {
+  public static void main(String args[]) {
+    try {
+      int a = args.length;
+      System.out.println("a = " + a);
+      int b = 42 / a; 	// ArithmeticException
+      int c[] = { 1 };
+      c[42] = 99;	// ArrayIndexOutOfBoundsException, c only has one element
+    } catch(ArithmeticException e) {
+      System.out.println("Divide by 0: " + e);
+    } catch(ArrayIndexOutOfBoundsException e) {
+      System.out.println("Array index oob: " + e);
+    }
+    System.out.println("After try/catch blocks.");
+  }
+}</i>
+
+Output 2a:
+C:\WINDOWS\Desktop\Abdul\programs>java MultiCatch
+a = 0
+Divide by 0: java.lang.ArithmeticException: / by zero
+After try/catch blocks.
+
+Output 2b:
+C:\WINDOWS\Desktop\Abdul\programs>java MultiCatch dodo
+a = 1
+Array index oob: java.lang.ArrayIndexOutOfBoundsException
+After try/catch blocks.
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Exception Hirarchy: </b>
+
+The child exception is described first and the parent exception is 
+defined in the end.
+
+	A
+       / \
+      C   B
+     / \
+    D	E
+
+So D's catch will be defined first and then C and then A.
+
+Example1:
+<i>/*  This program contains an error.
+ 
+   A subclass must come before its superclass in 
+   a series of catch statements. If not, 
+   unreachable code will be created and a
+   compile-time error will result.
+*/
+class temp {
+  public static void main(String args[]) {
+    try {
+      int a = 0;
+      int b = 42 / a;
+    } catch(Exception e) { 	// This is the parent object and should have been last
+      System.out.println("Generic Exception catch.");
+    }
+    /* This catch is never reached because
+       ArithmeticException is a subclass of Exception. */
+    catch(ArithmeticException e) { // ERROR - unreachable
+      System.out.println("This is never reached.");
+    }
+  }
+}</i>
+
+Output1:
+temp.java:18: exception java.lang.ArithmeticException has already been caught
+    catch(ArithmeticException e) { // ERROR - unreachable
+    ^
+1 error
+
+NOTE: This occurs at compilation.
+The unreachable error means that this line of code can never be executed.
+Exception is the parent class in the Object class and all other exceptions
+are its children.
+
+</pre>
+
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Nested Exception Handlers: </b>
+
+try {			<-- try1
+  ----
+  ----
+  try { 		<-- try2
+    ----
+    ----
+  }
+  catch (----) {   	<-- catch2
+    ----
+  }
+  ----
+  ----
+}
+catch(----) {		<-- catch1
+  ----
+}
+
+If an exception occurs in try2 for which a handle is not provided in catch2, 
+Java goes to catch1 to look for a handler there and so on, until it reaches the
+most outer try/catch block. If no handler is found then Java uses its default 
+handler.
+
+But this does not work the other way around. If an exception occurs in try1 for
+which there is no defined catch in catch1, Java will not access catch2. This is
+because the scope of the try2/catch2 has not been entered.
+
+NOTE: The nested try does not need a catch, it will be fulfilled by the outer
+catch block.
+
+Example:
+<i>class NestTry {
+  public static void main(String lala[]) {
+    try {
+      int a = lala.length;
+
+      /* If no command line arguments are present,
+         the following statement will generate
+         a divide-by-zero exception. */
+      int b = 42 / a;
+
+      System.out.println("a = " + a);
+
+      try { // nested try block
+        /* If one command line arg is used,
+           then an divide-by-zero exception 
+           will be generated by the following code. */
+        if(a==1) a = a/(a-a); // division by zero
+
+        /* If two command line args are used
+           then generate an out-of-bounds exception. */
+        if(a==2) {
+          int c[] = { 1 };
+          c[42] = 99; // generate an out-of-bounds exception
+        }
+      } catch(ArrayIndexOutOfBoundsException e) {
+        System.out.println("Array index out-of-bounds: " + e);
+      }
+
+    } catch(ArithmeticException e) {
+      System.out.println("Divide by 0: " + e);
+    }
+  }
+}</i>
+
+Output:
+When lala.length=1:
+a = 1
+Divide by 0: java.lang.ArithmeticException: / by zero   <-- read from outer catch block
+
+When lala.length=2:
+a = 2
+Array index out-of-bounds: java.lang.ArrayIndexOutOfBoundsException
+
+When lala.length=3:
+a = 3
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Method called from within a try block: </b>
+
+If while within a try block if the program jumps to another method where there is
+a try/catch block, this new try/catch block can access the catch block of the first
+try/catch block.
+
+Example:
+<i>/* Try statements can be implicitly nested via
+   calls to methods. */
+class MethNestTry {
+  static void nesttry(int a) {
+    try { // nested try block
+      /* If one command line arg is used,
+         then an divide-by-zero exception 
+         will be generated by the following code. */
+      if(a==1) a = a/(a-a); // division by zero
+      // This will call the catch 
+
+      /* If two command line args are used
+         then generate an out-of-bounds exception. */     
+      if(a==2) {
+        int c[] = { 1 };
+        c[42] = 99; // generate an out-of-bounds exception
+      }
+    } catch(ArrayIndexOutOfBoundsException e) {
+      System.out.println("Array index out-of-bounds: " + e);
+    }
+  }
+
+  public static void main(String args[]) {
+    try {
+      int a = args.length;
+
+      /* If no command line args are present,
+         the following statement will generate
+         a divide-by-zero exception. */
+      int b = 42 / a;
+
+      System.out.println("a = " + a);
+
+      nesttry(a);
+    } catch(ArithmeticException e) {
+      System.out.println("Divide by 0: " + e);
+    }
+  }
+}</i>
+
+</pre>
+
+
+
+
+</body>
+</html>

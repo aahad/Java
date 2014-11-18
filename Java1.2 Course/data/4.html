@@ -1,0 +1,252 @@
+<html>
+
+<head>
+<title>JAVA Notes</title>
+</head>
+
+<body text=black bgcolor=white>
+
+<h2 align=center>JAVA Notes 4</h2>
+
+<h3>Thursday, March 1st, 2001</h3>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>2 Dimensional Arrays: </b>
+
+1	2	3
+
+4	5	6
+
+7	8	9
+
+To construct the above 2D array:
+int[] [] i = {
+		{1,2,3};
+		{4,5,6};
+		{7,8,9};
+	     };
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Operators:  </b>
+
+<b>Priority</b>
+Unary		++ -- + - ! ~ ()
+Arithmatic	* / % + -
+Shift		<< >> >>>
+Comparision	< <= > >= instance of
+Bitwise		& | ^
+short-circuit	&& ||
+Ternary		? :
+Assignment	= 'op='
+
+
+! <-- negation
+Works with boolean only
+Example:
+boolean t = true;
+boolean f;
+f = !t; 	<-- This makes f = false
+
+~ <-- bit inversion operator
+6 in binary is 00000110
+~6 in binary will be 11111001 ie. all zeros become 1 and vice-versa
+
+() <-- casting
+
+% <-- Modulus Operator, Mod operator, remainder operator
+42%5 is actually the leftover from 42 divided by 5 ie. 2
+-42%5 = -2   whereas   42%-5 = 2   and   -42%-5 = -2
+Basically the remainder takes the sign of the numerator
+
+</pre>
+
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Increment / Decrement Operators:  </b>
+
+i++  <==> i+1
+
+i++ <-- increment operator, post-increment operator
+i-- <-- decrement operator
+++i <-- pre-increment operator, different than i++
+
+Example 1:
+i = 3;
+j = ++i;
+This first adds 1 to i and then moves the value of i to j
+Therefore, i=4 and j=4
+
+Example 2:
+i = 3;
+j = i++;
+This first moves the value of i to j and then adds 1 to i
+Therefore, j=3 and i=4
+
+Example 3:
+x = 5
+	<b>y	x</b>
+y=x++	5	6
+y=++x	6	6
+y=x--	5	4
+y=--x	4	4
+
+Example 4:
+class increment {
+  public static void main(String args[]) {
+    byte b=3;
+    b = b + 2;			<--- This will cause an error
+    System.out.println(b);
+  }
+}
+The error is because byte is 8 bit and to JAVA places the 1 as 32 bit
+To fix this you can write 'b = (byte)(b+2);' or you can see Example 5
+
+Example 5:
+class increment {
+  public static void main(String args[]) {
+    byte b=3;
+    b++;
+    System.out.println(b);
+  }
+}
+There is no error here because 'b++;' means 'b = (byte)(b+1);'
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Wrapper Classes:  </b>
+
+" " + (2+2)  	--> prints 4
+2 + "2"		--> prints 22
+
+The interger 2 is being converted to a string.
+Now integer is a primitive and a string is an object,
+so what you see here is a primitive being converted to an object
+
+To do this JAVA uses the Wrapper class "to string"
+
+Wrapper classes are used to convert primitives to objects
+Every primitive has a Wrapper class that converts it to an object,
+a small list is given below:
+
+<b>Primitive	    Object Class</b>
+int 		<-- Integer
+byte 		<-- Byte
+float 		<-- Float
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Arithmatic Error handling:  </b>
+
+Now 13/0 in math is inifinity, but in programming its not that simple.
+
+2 types of primitives: floating and non-floating
+
+<b>For Floats:</b>
++Infinity	<-- Positive-Inifinity, eg. 16/0
+-Infinity 	<-- Negative-Infinity, eg. -16/0
+NaN  		<-- 'N'ot 'a' 'N'umber, eg. -16 under root
+
+<b>Non-Floating:</b>
+In case of a strange number, JAVA will return an exception error
++Infinity, -Infinity and NaN are not defined for Non-floats
+
+</pre>
+
+
+<!-- **************************** NEW TOPIC **************************************** -->
+<hr width=100%>
+<pre>
+<b>Bitwise Operators:  </b>
+
+Also called logical operator
+
+& <-- And logical operator
+| <-- OR operator
+^ <-- Exclusive OR
+
+
+<b>a	b	*	a&b	a|b	a^b</b>
+0	0	*	0	0	0
+0	1	*	0	1	1
+1	0	*	0	1	1
+1	1	*	1	1	0
+
+If the number of ones are odd, then result for a^b is 1,
+and when there are even number of 1s, a^b is 0
+
+Example Program:
+<i>class temp {
+  public static void main(String args[]) {
+    System.out.println(15&16);
+    System.out.println(15|16);
+    System.out.println(15^16);
+  }
+}</i>
+
+15&16;	<-- 0
+15|16;	<-- 31
+15^16;	<-- 31
+
+15 in binary is -----00001111
+16 in binary is -----00010000
+
+Now 15&16 is:
+-----00001111
+&&&&&&&&&&&&&
+-----00010000
+_____________
+0000000000000	<-- which is zero
+
+Now 15|16 is:
+-----00001111
+|||||||||||||
+-----00010000
+_____________
+0000000011111	<-- which is 31
+
+Now 15^16 is:
+-----00001111
+^^^^^^^^^^^^^
+-----00010000
+_____________
+0000000011111	<-- which is 31
+
+
+NOTE: Bitwise means that the comparison is done at the bit level
+
+
+This also works in boolean values:
+<b>a	b	*	a&b	a|b	a^b</b>
+false	false	*	false	f	f <-- no. of t is odd or not
+f	true	*	f	t	t
+t	f	*	f	t	t
+t	t	*	t	t	f
+
+NOTE: Think of true as 1 and false as 0
+
+</pre>
+
+
+</body>
+</html>
